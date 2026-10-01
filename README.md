@@ -6,1777 +6,2540 @@
 
 <style>
 * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+    box-sizing: border-box;
 }
 
 :root {
-  --pink: #f4a9c4;
-  --light-pink: #ffe6ef;
-  --dark-pink: #b94d73;
-  --deep: #321c29;
-  --cream: #fff9fb;
-  --gold: #d8aa55;
-  --white: #ffffff;
+    --pink: #ff72ad;
+    --hot-pink: #ff3f91;
+    --soft-pink: #ffd6e8;
+    --light-pink: #fff0f7;
+    --burgundy: #5b1635;
+    --deep: #160812;
+    --panel: rgba(255,255,255,.09);
+    --gold: #ffd36a;
+    --text: #fff7fb;
+    --muted: #dcb8c9;
 }
 
 body {
-  font-family: Georgia, "Times New Roman", serif;
-  background:
-    radial-gradient(circle at top, #5a3046 0%, #261722 45%, #160e14 100%);
-  color: white;
-  min-height: 100vh;
-  overflow-x: hidden;
-}
-
-body::before {
-  content: "♠ ♥ ♣ ♦";
-  position: fixed;
-  inset: 0;
-  font-size: 70px;
-  opacity: .035;
-  letter-spacing: 80px;
-  line-height: 180px;
-  pointer-events: none;
-  transform: rotate(-15deg);
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--text);
+    background:
+        radial-gradient(circle at 20% 10%, rgba(255,114,173,.18), transparent 25%),
+        radial-gradient(circle at 80% 20%, rgba(255,211,106,.12), transparent 22%),
+        linear-gradient(135deg, #180914, #42132d 45%, #160812);
+    min-height: 100vh;
 }
 
 button {
-  font: inherit;
+    font: inherit;
 }
 
-#app {
-  width: min(1100px, 94%);
-  margin: auto;
-  padding: 20px 0 50px;
+button:focus,
+select:focus,
+input:focus,
+textarea:focus {
+    outline: 3px solid rgba(255,211,106,.65);
+    outline-offset: 2px;
 }
 
-/* ---------------- HEADER ---------------- */
+.hidden {
+    display: none !important;
+}
+
+.app {
+    width: min(1200px, 94%);
+    margin: auto;
+    padding: 18px 0 50px;
+}
+
+/* HEADER */
 
 .header {
-  text-align: center;
-  padding: 30px 15px;
+    text-align: center;
+    padding: 24px 10px;
 }
 
-.crown {
-  font-size: 35px;
-  margin-bottom: 8px;
+.logo {
+    font-size: clamp(28px, 7vw, 58px);
+    font-weight: 900;
+    letter-spacing: 2px;
+    color: var(--soft-pink);
+    text-shadow: 0 0 20px rgba(255,114,173,.45);
 }
 
-.header h1 {
-  font-size: clamp(42px, 9vw, 80px);
-  color: var(--light-pink);
-  text-shadow: 0 5px 25px rgba(244,169,196,.3);
-  letter-spacing: 3px;
-}
-
-.header h2 {
-  color: var(--pink);
-  font-size: clamp(18px, 4vw, 28px);
-  margin-top: 8px;
-}
-
-.header p {
-  max-width: 650px;
-  margin: 15px auto;
-  color: #eadce2;
-  line-height: 1.7;
-}
-
-/* ---------------- CASINO BOARD ---------------- */
-
-.board {
-  background: rgba(255,255,255,.07);
-  border: 1px solid rgba(255,255,255,.15);
-  border-radius: 30px;
-  padding: 20px;
-  backdrop-filter: blur(10px);
+.subtitle {
+    margin-top: 8px;
+    color: var(--muted);
+    letter-spacing: 2px;
+    font-size: 13px;
 }
 
 .balance {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
-  flex-wrap: wrap;
-  background: linear-gradient(135deg,#f7cad9,#e99ab8);
-  color: var(--deep);
-  padding: 16px 20px;
-  border-radius: 18px;
-  margin-bottom: 20px;
-  font-weight: bold;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 18px;
+    padding: 12px 20px;
+    border: 1px solid rgba(255,255,255,.16);
+    border-radius: 999px;
+    background: rgba(0,0,0,.25);
+    font-weight: bold;
 }
 
-.tokens {
-  font-size: 25px;
+.coin {
+    color: var(--gold);
+    font-size: 20px;
 }
 
-/* ---------------- NAV ---------------- */
+/* NAV */
 
 .nav {
-  display: grid;
-  grid-template-columns: repeat(4,1fr);
-  gap: 9px;
-  margin-bottom: 20px;
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding: 8px 2px 15px;
+    scrollbar-width: thin;
 }
 
 .nav button {
-  border: 1px solid rgba(255,255,255,.15);
-  background: #432638;
-  color: white;
-  padding: 13px 8px;
-  border-radius: 13px;
-  cursor: pointer;
-  min-height: 48px;
-  transition: .2s;
+    flex: 0 0 auto;
+    border: 1px solid rgba(255,255,255,.15);
+    background: rgba(255,255,255,.06);
+    color: white;
+    padding: 11px 15px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: .2s;
 }
 
 .nav button:hover,
 .nav button.active {
-  background: var(--pink);
-  color: var(--deep);
-  transform: translateY(-2px);
+    background: var(--pink);
+    color: #240b18;
 }
 
-.page {
-  display: none;
-}
-
-.page.active {
-  display: block;
-}
-
-/* ---------------- SECTIONS ---------------- */
+/* SECTIONS */
 
 .section {
-  background: var(--cream);
-  color: var(--deep);
-  border-radius: 25px;
-  padding: 25px;
-  margin-bottom: 20px;
+    display: none;
 }
 
-.section h2 {
-  color: var(--dark-pink);
-  margin-bottom: 10px;
-  font-size: 30px;
+.section.active {
+    display: block;
 }
 
-.subtitle {
-  color: #765363;
-  line-height: 1.6;
-  margin-bottom: 20px;
+.panel {
+    background: var(--panel);
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 22px;
+    padding: 22px;
+    margin-bottom: 18px;
+    backdrop-filter: blur(12px);
 }
 
-/* ---------------- SLOT MACHINE ---------------- */
-
-.machine {
-  max-width: 700px;
-  margin: auto;
-  background: linear-gradient(145deg,#6d304b,#351725);
-  border: 6px solid var(--gold);
-  border-radius: 30px;
-  padding: 25px;
-  text-align: center;
-  box-shadow: 0 15px 50px rgba(0,0,0,.35);
+.section-title {
+    font-size: 27px;
+    margin: 0 0 6px;
 }
 
-.machine-title {
-  color: #ffe9a8;
-  letter-spacing: 3px;
-  font-weight: bold;
-  margin-bottom: 20px;
+.section-subtitle {
+    color: var(--muted);
+    margin: 0 0 22px;
+}
+
+/* HOME */
+
+.game-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 15px;
+}
+
+.game-card {
+    border: 1px solid rgba(255,255,255,.13);
+    background: rgba(0,0,0,.18);
+    border-radius: 18px;
+    padding: 20px;
+    cursor: pointer;
+    transition: transform .2s, background .2s;
+}
+
+.game-card:hover {
+    transform: translateY(-4px);
+    background: rgba(255,114,173,.13);
+}
+
+.game-icon {
+    font-size: 38px;
+}
+
+.game-card h3 {
+    margin: 12px 0 7px;
+}
+
+.game-card p {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+/* BUTTONS */
+
+.btn {
+    border: 0;
+    border-radius: 12px;
+    padding: 12px 17px;
+    background: var(--pink);
+    color: #280a18;
+    font-weight: 800;
+    cursor: pointer;
+    min-height: 44px;
+    transition: .18s;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    background: #ff9ac5;
+}
+
+.btn.secondary {
+    background: rgba(255,255,255,.1);
+    color: white;
+}
+
+.btn.gold {
+    background: var(--gold);
+}
+
+.btn.danger {
+    background: #c83d6f;
+    color: white;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.message {
+    min-height: 28px;
+    margin-top: 16px;
+    color: var(--soft-pink);
+    font-weight: bold;
+}
+
+/* SLOT */
+
+.slot-machine {
+    max-width: 720px;
+    margin: auto;
+    text-align: center;
 }
 
 .reels {
-  display: grid;
-  grid-template-columns: repeat(3,1fr);
-  gap: 10px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin: 25px 0;
 }
 
 .reel {
-  background: white;
-  color: var(--deep);
-  border-radius: 15px;
-  height: 125px;
-  display: grid;
-  place-items: center;
-  font-size: 65px;
-  border: 5px solid #e8d4b2;
-  overflow: hidden;
+    background: #fff7fb;
+    color: #30101f;
+    border-radius: 18px;
+    min-height: 105px;
+    display: grid;
+    place-items: center;
+    font-size: 48px;
+    border: 5px solid #e9a3bf;
+    box-shadow: inset 0 0 15px rgba(0,0,0,.15);
 }
 
 .reel.spin {
-  animation: spin .12s linear infinite;
+    animation: spin .11s infinite linear;
 }
 
 @keyframes spin {
-  0% { transform: translateY(-5px); }
-  50% { transform: translateY(5px); }
-  100% { transform: translateY(-5px); }
+    0% { transform: translateY(-4px); }
+    50% { transform: translateY(4px); }
+    100% { transform: translateY(-4px); }
 }
 
-.pull {
-  margin-top: 20px;
-  padding: 17px 35px;
-  border-radius: 50px;
-  border: 3px solid #ffe7a5;
-  background: var(--pink);
-  color: var(--deep);
-  font-weight: bold;
-  cursor: pointer;
-  font-size: 18px;
+.slot-info {
+    display: flex;
+    justify-content: center;
+    gap: 18px;
+    flex-wrap: wrap;
+    color: var(--muted);
 }
 
-.pull:hover {
-  transform: scale(1.05);
+/* CARDS */
+
+.playing-card {
+    width: 78px;
+    height: 110px;
+    border-radius: 12px;
+    background: #fff;
+    color: #24101a;
+    display: grid;
+    place-items: center;
+    font-size: 29px;
+    font-weight: bold;
+    box-shadow: 0 7px 20px rgba(0,0,0,.3);
+    user-select: none;
 }
 
-.slot-result {
-  min-height: 60px;
-  padding-top: 18px;
-  color: #ffe9a8;
-  font-weight: bold;
-  line-height: 1.5;
+.playing-card.red {
+    color: #d83264;
 }
 
-/* ---------------- STATS ---------------- */
-
-.stats {
-  display: grid;
-  grid-template-columns: repeat(auto-fit,minmax(140px,1fr));
-  gap: 12px;
-  margin-top: 20px;
+.card-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 20px 0;
 }
 
-.stat {
-  background: #fff0f5;
-  border-radius: 16px;
-  padding: 17px;
-  text-align: center;
+.card-choice {
+    cursor: pointer;
+    transition: transform .2s;
 }
 
-.stat strong {
-  display: block;
-  font-size: 27px;
-  color: var(--dark-pink);
+.card-choice:hover {
+    transform: translateY(-7px);
 }
 
-.stat span {
-  font-size: 13px;
-  color: #775564;
+.card-back {
+    background:
+        repeating-linear-gradient(
+            45deg,
+            #ff72ad 0,
+            #ff72ad 5px,
+            #8d2452 5px,
+            #8d2452 10px
+        );
+    color: white;
+    border: 4px solid white;
 }
 
-/* ---------------- POKER ---------------- */
+/* POKER */
 
-.poker-table {
-  background: radial-gradient(circle,#46704e,#163a27);
-  border: 6px solid var(--gold);
-  border-radius: 40px;
-  padding: 30px 20px;
-  text-align: center;
+.player-area {
+    text-align: center;
+    margin: 18px 0 28px;
 }
 
-.cards {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin: 20px 0;
+.player-label {
+    color: var(--muted);
+    margin-bottom: 10px;
+    font-weight: bold;
 }
 
-.card {
-  width: 90px;
-  height: 125px;
-  background: white;
-  color: #21151b;
-  border-radius: 12px;
-  border: 3px solid #eee;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 9px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: .2s;
+.hold-card {
+    cursor: pointer;
+    position: relative;
 }
 
-.card:hover {
-  transform: translateY(-8px);
+.hold-card.held {
+    transform: translateY(-14px);
+    box-shadow: 0 0 0 3px var(--gold);
 }
 
-.card.red {
-  color: #bd3e5b;
+.hold-tag {
+    position: absolute;
+    bottom: -22px;
+    font-size: 11px;
+    color: var(--gold);
 }
 
-.card .symbol {
-  font-size: 34px;
+/* BLACKJACK */
+
+.scoreboard {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin: 15px 0;
 }
 
-.poker-message {
-  min-height: 55px;
-  color: #ffe9a8;
-  font-weight: bold;
-  line-height: 1.5;
+.score {
+    font-size: 24px;
+    font-weight: bold;
 }
 
-/* ---------------- PICK A CARD ---------------- */
+/* WHEEL */
 
-.pick-cards {
-  display: grid;
-  grid-template-columns: repeat(3,1fr);
-  gap: 15px;
-  max-width: 650px;
-  margin: 25px auto;
+.wheel-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
 }
 
-.mystery {
-  min-height: 190px;
-  border: 3px solid var(--gold);
-  border-radius: 18px;
-  background: linear-gradient(145deg,#7c3e58,#351725);
-  color: white;
-  cursor: pointer;
-  font-size: 55px;
-  transition: .25s;
+.wheel {
+    width: min(300px, 75vw);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 10px solid #ffd6e8;
+    background:
+        conic-gradient(
+            #ff72ad 0deg 45deg,
+            #8c2d57 45deg 90deg,
+            #ffd36a 90deg 135deg,
+            #d95487 135deg 180deg,
+            #ff9ac5 180deg 225deg,
+            #6d1c40 225deg 270deg,
+            #ffd36a 270deg 315deg,
+            #ff4d99 315deg 360deg
+        );
+    position: relative;
+    transition: transform 3s cubic-bezier(.15,.75,.15,1);
 }
 
-.mystery:hover {
-  transform: translateY(-7px) rotate(1deg);
+.wheel::after {
+    content: "♡";
+    position: absolute;
+    inset: 35%;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: #fff0f7;
+    color: #8b2451;
+    font-size: 34px;
+    border: 5px solid #8b2451;
 }
 
-/* ---------------- PRIZES ---------------- */
-
-.prizes {
-  display: grid;
-  grid-template-columns: repeat(auto-fit,minmax(210px,1fr));
-  gap: 14px;
+.pointer {
+    font-size: 34px;
+    transform: rotate(180deg);
 }
 
-.prize {
-  background: white;
-  border: 2px solid #f1cedb;
-  border-radius: 18px;
-  padding: 18px;
+/* DICE */
+
+.dice-row {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 25px 0;
 }
 
-.prize.locked {
-  opacity: .5;
+.die {
+    width: 80px;
+    height: 80px;
+    background: white;
+    color: #4a122b;
+    border-radius: 15px;
+    display: grid;
+    place-items: center;
+    font-size: 36px;
+    font-weight: bold;
 }
 
-.prize h3 {
-  color: var(--dark-pink);
-  margin-bottom: 7px;
+.rolling {
+    animation: diceRoll .3s infinite;
 }
 
-.prize button {
-  margin-top: 12px;
-  border: none;
-  background: var(--dark-pink);
-  color: white;
-  padding: 10px 14px;
-  border-radius: 10px;
-  cursor: pointer;
+@keyframes diceRoll {
+    0% { transform: rotate(0deg); }
+    50% { transform: rotate(12deg) scale(1.08); }
+    100% { transform: rotate(-12deg); }
 }
 
-/* ---------------- LILIANA FILE ---------------- */
+/* DOLPHIN */
+
+.race {
+    background: rgba(0,0,0,.2);
+    border-radius: 16px;
+    padding: 15px;
+    overflow: hidden;
+}
+
+.track {
+    position: relative;
+    height: 52px;
+    border-bottom: 1px dashed rgba(255,255,255,.25);
+}
+
+.dolphin {
+    position: absolute;
+    left: 0;
+    top: 8px;
+    font-size: 30px;
+    transition: left 3s cubic-bezier(.15,.7,.2,1);
+}
+
+/* VAULT */
+
+.vault {
+    max-width: 650px;
+    margin: auto;
+    text-align: center;
+}
+
+.locks {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 25px 0;
+}
+
+.lock {
+    width: 75px;
+    height: 75px;
+    display: grid;
+    place-items: center;
+    border-radius: 15px;
+    background: rgba(0,0,0,.3);
+    font-size: 35px;
+    border: 1px solid rgba(255,255,255,.15);
+}
+
+/* PROFILE */
 
 .profile {
-  display: grid;
-  grid-template-columns: repeat(auto-fit,minmax(150px,1fr));
-  gap: 12px;
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    gap: 25px;
+    align-items: center;
+}
+
+.profile-avatar {
+    width: 150px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ffb7d5, #ff5a9f);
+    display: grid;
+    place-items: center;
+    font-size: 70px;
+}
+
+.facts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 10px;
+    margin-top: 18px;
 }
 
 .fact {
-  background: #fff0f5;
-  border-radius: 17px;
-  padding: 17px;
-  text-align: center;
+    background: rgba(255,255,255,.06);
+    border-radius: 13px;
+    padding: 13px;
 }
 
-.fact .emoji {
-  font-size: 30px;
+.fact strong {
+    display: block;
+    color: var(--soft-pink);
+    margin-bottom: 4px;
 }
 
-.fact small {
-  display: block;
-  color: #80616f;
-  margin-top: 5px;
+/* ACHIEVEMENTS */
+
+.achievements {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
 }
 
-/* ---------------- SIX YEARS ---------------- */
-
-.timeline {
-  position: relative;
-  display: grid;
-  gap: 13px;
+.achievement {
+    padding: 18px;
+    border-radius: 15px;
+    background: rgba(255,255,255,.05);
+    border: 1px solid rgba(255,255,255,.08);
+    opacity: .45;
 }
 
-.memory {
-  border-left: 6px solid var(--pink);
-  background: white;
-  padding: 18px;
-  border-radius: 0 16px 16px 0;
+.achievement.unlocked {
+    opacity: 1;
+    border-color: var(--gold);
+    background: rgba(255,211,106,.08);
 }
 
-.memory strong {
-  color: var(--dark-pink);
-  font-size: 21px;
+.achievement-icon {
+    font-size: 32px;
 }
 
-.memory p {
-  margin-top: 7px;
-  line-height: 1.5;
+/* QUIZ */
+
+.quiz-option {
+    display: block;
+    width: 100%;
+    text-align: left;
+    margin: 8px 0;
+    border: 1px solid rgba(255,255,255,.12);
+    background: rgba(255,255,255,.06);
+    color: white;
+    padding: 14px;
+    border-radius: 12px;
+    cursor: pointer;
 }
 
-textarea {
-  width: 100%;
-  min-height: 120px;
-  margin-top: 15px;
-  padding: 15px;
-  border: 2px solid #edc7d4;
-  border-radius: 15px;
-  resize: vertical;
-  font: inherit;
+.quiz-option:hover {
+    background: rgba(255,114,173,.18);
 }
 
-.action {
-  border: none;
-  background: var(--dark-pink);
-  color: white;
-  padding: 13px 18px;
-  border-radius: 12px;
-  cursor: pointer;
-  margin-top: 10px;
-}
-
-.action.secondary {
-  background: #ead3dc;
-  color: var(--deep);
-}
-
-/* ---------------- QUIZ ---------------- */
-
-.quiz-question {
-  font-size: 23px;
-  font-weight: bold;
-  margin: 15px 0;
-}
-
-.quiz-options {
-  display: grid;
-  gap: 10px;
-}
-
-.quiz-options button {
-  border: 2px solid #efd1dc;
-  background: white;
-  padding: 14px;
-  border-radius: 13px;
-  text-align: left;
-  cursor: pointer;
-}
-
-.quiz-options button:hover {
-  background: var(--light-pink);
-}
-
-.quiz-result {
-  margin-top: 18px;
-  font-size: 22px;
-  font-weight: bold;
-  color: var(--dark-pink);
-}
-
-/* ---------------- LETTER ---------------- */
+/* LETTER */
 
 .letter {
-  background: linear-gradient(145deg,#fff5f9,#ffe2ec);
-  padding: 30px;
-  border-radius: 20px;
-  line-height: 2;
-  font-size: 18px;
+    background: #fff0f7;
+    color: #3b1227;
+    padding: 30px;
+    border-radius: 16px;
+    line-height: 1.8;
+    font-family: Georgia, serif;
 }
 
-.signature {
-  margin-top: 20px;
-  font-size: 24px;
-  color: var(--dark-pink);
-}
+/* RESPONSIVE */
 
-/* ---------------- RESPONSIVE ---------------- */
+@media (max-width: 650px) {
+    .app {
+        width: 94%;
+    }
 
-@media(max-width:650px) {
+    .panel {
+        padding: 16px;
+    }
 
-  .nav {
-    grid-template-columns: repeat(2,1fr);
-  }
+    .profile {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
 
-  .reel {
-    height: 95px;
-    font-size: 48px;
-  }
+    .profile-avatar {
+        margin: auto;
+    }
 
-  .card {
-    width: 75px;
-    height: 110px;
-  }
+    .playing-card {
+        width: 58px;
+        height: 84px;
+        font-size: 22px;
+    }
 
-  .pick-cards {
-    gap: 8px;
-  }
-
-  .mystery {
-    min-height: 145px;
-  }
-
-  .section {
-    padding: 18px;
-  }
+    .reel {
+        min-height: 80px;
+        font-size: 36px;
+    }
 }
 </style>
 </head>
 
 <body>
 
-<div id="app">
+<div class="app">
 
 <header class="header">
-  <div class="crown">👑</div>
+    <div class="logo">LILIANA'S FRIENDSHIP CASINO ♡</div>
+    <div class="subtitle">SIX YEARS OF FRIENDSHIP • ZERO REAL MONEY • JUST LUCK & MEMORIES</div>
 
-  <h1>LILIANA'S</h1>
-  <h2>FRIENDSHIP CASINO ♡</h2>
-
-  <p>
-    Six years. Thousands of memories.
-    One ridiculously sweet, caring, charismatic and slightly dangerous bestie.
-  </p>
+    <div class="balance">
+        <span class="coin">🪙</span>
+        <span id="tokenBalance">6000</span>
+        <span>Friendship Tokens</span>
+    </div>
 </header>
 
-<div class="board">
-
-<div class="balance">
-  <div>
-    ♡ BESTIE BANK
-    <div class="tokens">
-      <span id="tokens">6000</span> 💗
-    </div>
-  </div>
-
-  <div>
-    🎂 July 22nd<br>
-    <small>Lucky number: 3</small>
-  </div>
-</div>
-
 <nav class="nav">
-
-<button class="active" data-page="casino">🎰 Casino</button>
-<button data-page="poker">♠️ Poker</button>
-<button data-page="cards">🃏 Cards</button>
-<button data-page="prizes">🎟️ Prizes</button>
-<button data-page="liliana">🎀 Liliana</button>
-<button data-page="years">🕰️ Six Years</button>
-<button data-page="quiz">🧠 Quiz</button>
-<button data-page="letter">💌 Letter</button>
-
+    <button class="active" data-section="home">🎰 Casino</button>
+    <button data-section="slots">🎰 Slots</button>
+    <button data-section="poker">🃏 Poker</button>
+    <button data-section="blackjack">♠️ Blackjack</button>
+    <button data-section="wheel">🎡 Wheel</button>
+    <button data-section="dice">🎲 Dice</button>
+    <button data-section="dolphin">🐬 Derby</button>
+    <button data-section="roulette">🎴 Roulette</button>
+    <button data-section="highlow">🔴 High/Low</button>
+    <button data-section="vault">🔐 Vault</button>
+    <button data-section="achievements">🏆 Awards</button>
+    <button data-section="liliana">🌸 Liliana</button>
+    <button data-section="quiz">❓ Quiz</button>
+    <button data-section="letter">💌 Letter</button>
 </nav>
 
+<!-- HOME -->
 
-<!-- ================= CASINO ================= -->
+<section id="home" class="section active">
 
-<div id="casino" class="page active">
+<div class="panel">
+    <h1 class="section-title">Welcome to Liliana's Casino ♡</h1>
+    <p class="section-subtitle">
+        Six years of friendship deserve a ridiculous amount of games.
+        Every token is fictional. Every prize is friendship.
+    </p>
 
-<section class="section">
+    <div class="game-grid">
 
-<h2>🎰 The Friendship Slot Machine</h2>
+        <div class="game-card" data-go="slots">
+            <div class="game-icon">🎰</div>
+            <h3>Lucky Three Slots</h3>
+            <p>Spin the reels and hunt for Liliana's legendary 3️⃣ 3️⃣ 3️⃣ jackpot.</p>
+        </div>
 
-<p class="subtitle">
-No real money. Just friendship tokens, ridiculous luck and six years
-of memories waiting to be unlocked.
-</p>
+        <div class="game-card" data-go="poker">
+            <div class="game-icon">🃏</div>
+            <h3>Bestie Poker</h3>
+            <p>Play an actual poker hand against the computer.</p>
+        </div>
 
-<div class="machine">
+        <div class="game-card" data-go="blackjack">
+            <div class="game-icon">♠️</div>
+            <h3>Blackjack</h3>
+            <p>Beat the dealer without going over 21.</p>
+        </div>
 
-<div class="machine-title">
-♠ LILIANA'S LUCKY MACHINE ♠
+        <div class="game-card" data-go="wheel">
+            <div class="game-icon">🎡</div>
+            <h3>Lucky Wheel</h3>
+            <p>Spin for random friendship rewards.</p>
+        </div>
+
+        <div class="game-card" data-go="dice">
+            <div class="game-icon">🎲</div>
+            <h3>Dice Duel</h3>
+            <p>You versus the computer. Highest roll wins.</p>
+        </div>
+
+        <div class="game-card" data-go="dolphin">
+            <div class="game-icon">🐬</div>
+            <h3>Dolphin Derby</h3>
+            <p>Pick a dolphin and watch the race.</p>
+        </div>
+
+        <div class="game-card" data-go="roulette">
+            <div class="game-icon">🎴</div>
+            <h3>Friendship Roulette</h3>
+            <p>Pick chambers and survive the suspense.</p>
+        </div>
+
+        <div class="game-card" data-go="highlow">
+            <div class="game-icon">🔴</div>
+            <h3>Red or Black</h3>
+            <p>Build a streak and cash out whenever you want.</p>
+        </div>
+
+        <div class="game-card" data-go="vault">
+            <div class="game-icon">🔐</div>
+            <h3>Friendship Vault</h3>
+            <p>Collect clues from the casino and crack the vault.</p>
+        </div>
+
+    </div>
 </div>
 
-<div class="reels">
+<div class="panel">
+    <h2>Casino Progress</h2>
+    <p>Friendship XP: <strong id="xp">0</strong></p>
+    <p>Current Level: <strong id="level">Newbie</strong></p>
+</div>
 
-<div class="reel" id="reel1">🌹</div>
-<div class="reel" id="reel2">🐬</div>
-<div class="reel" id="reel3">3️⃣</div>
+</section>
+
+<!-- SLOTS -->
+
+<section id="slots" class="section">
+
+<div class="panel slot-machine">
+
+    <h2 class="section-title">🎰 Lucky Three Slots</h2>
+    <p class="section-subtitle">
+        Cost: 100 Friendship Tokens • Triple 3 = massive jackpot
+    </p>
+
+    <div class="reels">
+        <div class="reel" id="reel1">🌹</div>
+        <div class="reel" id="reel2">🐬</div>
+        <div class="reel" id="reel3">3️⃣</div>
+    </div>
+
+    <div class="slot-info">
+        <span>🌹 🌹 🌹 = 500</span>
+        <span>🐬 🐬 🐬 = 750</span>
+        <span>3️⃣ 3️⃣ 3️⃣ = 3000</span>
+    </div>
+
+    <br>
+
+    <button class="btn gold" id="spinSlots">SPIN • 100 🪙</button>
+
+    <div class="message" id="slotMessage"></div>
 
 </div>
 
-<button class="pull" id="spinButton">
-🎰 PULL THE LEVER
-</button>
+</section>
 
-<div class="slot-result" id="slotResult">
-Your luck awaits...
+<!-- POKER -->
+
+<section id="poker" class="section">
+
+<div class="panel">
+
+    <h2 class="section-title">🃏 Bestie Poker</h2>
+    <p class="section-subtitle">
+        You are playing against the Friendship Computer. Cost: 200 tokens.
+        Tap cards to hold them, then draw.
+    </p>
+
+    <div class="player-area">
+        <div class="player-label">COMPUTER</div>
+        <div class="card-row" id="computerCards"></div>
+        <div id="computerMessage" class="message"></div>
+    </div>
+
+    <div class="player-area">
+        <div class="player-label">YOU</div>
+        <div class="card-row" id="playerCards"></div>
+
+        <div class="actions">
+            <button class="btn" id="pokerDeal">DEAL • 200 🪙</button>
+            <button class="btn gold hidden" id="pokerDraw">DRAW</button>
+        </div>
+    </div>
+
+    <div class="message" id="pokerMessage"></div>
+
 </div>
 
+</section>
+
+<!-- BLACKJACK -->
+
+<section id="blackjack" class="section">
+
+<div class="panel">
+
+    <h2 class="section-title">♠️ Blackjack</h2>
+    <p class="section-subtitle">
+        Beat the computer by getting as close to 21 as possible without going over.
+    </p>
+
+    <div class="scoreboard">
+        <div>Computer: <span class="score" id="dealerScore">?</span></div>
+        <div>You: <span class="score" id="playerScore">0</span></div>
+    </div>
+
+    <div class="player-area">
+        <div class="player-label">COMPUTER</div>
+        <div class="card-row" id="dealerCards"></div>
+    </div>
+
+    <div class="player-area">
+        <div class="player-label">YOU</div>
+        <div class="card-row" id="bjPlayerCards"></div>
+    </div>
+
+    <div class="actions" style="justify-content:center">
+        <button class="btn gold" id="bjDeal">DEAL • 150 🪙</button>
+        <button class="btn hidden" id="bjHit">HIT</button>
+        <button class="btn secondary hidden" id="bjStand">STAND</button>
+    </div>
+
+    <div class="message" id="bjMessage"></div>
+
 </div>
 
-<div class="stats">
+</section>
 
-<div class="stat">
-<strong>6</strong>
-<span>Years Besties</span>
+<!-- WHEEL -->
+
+<section id="wheel" class="section">
+
+<div class="panel">
+
+    <h2 class="section-title">🎡 Lucky Wheel</h2>
+    <p class="section-subtitle">Spin for a random Friendship Token reward.</p>
+
+    <div class="wheel-wrap">
+        <div class="pointer">🔻</div>
+        <div class="wheel" id="wheelGraphic"></div>
+
+        <button class="btn gold" id="spinWheel">SPIN • 100 🪙</button>
+
+        <div class="message" id="wheelMessage"></div>
+    </div>
+
 </div>
 
-<div class="stat">
-<strong>3</strong>
-<span>Lucky Number</span>
+</section>
+
+<!-- DICE -->
+
+<section id="dice" class="section">
+
+<div class="panel" style="text-align:center">
+
+    <h2 class="section-title">🎲 Dice Duel</h2>
+    <p class="section-subtitle">You and the computer roll two dice. Highest total wins.</p>
+
+    <div class="dice-row">
+        <div>
+            <div class="die" id="yourDie1">?</div>
+            <small>Your die</small>
+        </div>
+
+        <div>
+            <div class="die" id="yourDie2">?</div>
+            <small>Your die</small>
+        </div>
+    </div>
+
+    <div class="dice-row">
+        <div>
+            <div class="die" id="cpuDie1">?</div>
+            <small>Computer</small>
+        </div>
+
+        <div>
+            <div class="die" id="cpuDie2">?</div>
+            <small>Computer</small>
+        </div>
+    </div>
+
+    <button class="btn gold" id="rollDice">ROLL • 100 🪙</button>
+
+    <div class="message" id="diceMessage"></div>
+
 </div>
 
-<div class="stat">
-<strong>♡</strong>
-<span>Best Friend</span>
+</section>
+
+<!-- DOLPHIN -->
+
+<section id="dolphin" class="section">
+
+<div class="panel">
+
+    <h2 class="section-title">🐬 Dolphin Derby</h2>
+    <p class="section-subtitle">Pick your dolphin before the race begins.</p>
+
+    <div class="actions" style="justify-content:center">
+        <button class="btn secondary dolphinPick" data-dolphin="0">🐬 Pinky</button>
+        <button class="btn secondary dolphinPick" data-dolphin="1">🐬 Sunny</button>
+        <button class="btn secondary dolphinPick" data-dolphin="2">🐬 Rosie</button>
+        <button class="btn secondary dolphinPick" data-dolphin="3">🐬 Lucky</button>
+        <button class="btn secondary dolphinPick" data-dolphin="4">🐬 Bubbles</button>
+    </div>
+
+    <br>
+
+    <div class="race">
+        <div class="track"><span class="dolphin" id="dolphin0">🐬</span></div>
+        <div class="track"><span class="dolphin" id="dolphin1">🐬</span></div>
+        <div class="track"><span class="dolphin" id="dolphin2">🐬</span></div>
+        <div class="track"><span class="dolphin" id="dolphin3">🐬</span></div>
+        <div class="track"><span class="dolphin" id="dolphin4">🐬</span></div>
+    </div>
+
+    <br>
+
+    <button class="btn gold" id="startRace">START RACE • 150 🪙</button>
+
+    <div class="message" id="raceMessage"></div>
+
 </div>
 
-<div class="stat">
-<strong>∞</strong>
-<span>Memories</span>
+</section>
+
+<!-- FRIENDSHIP ROULETTE -->
+
+<section id="roulette" class="section">
+
+<div class="panel" style="text-align:center">
+
+    <h2 class="section-title">🎴 Friendship Roulette</h2>
+
+    <p class="section-subtitle">
+        Six mystery chambers. One causes a harmless “BOOM!” and ends the round.
+        No weapons, no real danger, just dramatic casino suspense.
+    </p>
+
+    <div class="card-row" id="rouletteCards"></div>
+
+    <button class="btn gold" id="rouletteStart">START ROUND • 100 🪙</button>
+
+    <div class="message" id="rouletteMessage"></div>
+
 </div>
+
+</section>
+
+<!-- HIGH LOW -->
+
+<section id="highlow" class="section">
+
+<div class="panel" style="text-align:center">
+
+    <h2 class="section-title">🔴 High or Low</h2>
+
+    <p class="section-subtitle">
+        Guess whether the next card is higher or lower. Keep your streak alive,
+        then cash out your multiplier.
+    </p>
+
+    <div class="card-row">
+        <div class="playing-card" id="hlCurrent">?</div>
+        <div style="font-size:30px;display:grid;place-items:center">→</div>
+        <div class="playing-card" id="hlNext">?</div>
+    </div>
+
+    <div>
+        <strong>Streak:</strong> <span id="hlStreak">0</span>
+        &nbsp; • &nbsp;
+        <strong>Multiplier:</strong> <span id="hlMultiplier">1x</span>
+    </div>
+
+    <br>
+
+    <div class="actions" style="justify-content:center">
+        <button class="btn" id="hlStart">START • 100 🪙</button>
+        <button class="btn secondary hidden" id="hlHigh">HIGH</button>
+        <button class="btn secondary hidden" id="hlLow">LOW</button>
+        <button class="btn gold hidden" id="hlCash">CASH OUT</button>
+    </div>
+
+    <div class="message" id="hlMessage"></div>
+
+</div>
+
+</section>
+
+<!-- VAULT -->
+
+<section id="vault" class="section">
+
+<div class="panel vault">
+
+    <h2 class="section-title">🔐 Friendship Vault</h2>
+
+    <p class="section-subtitle">
+        Find the secret three-number combination hidden throughout the casino.
+    </p>
+
+    <div class="locks">
+        <div class="lock" id="lock1">?</div>
+        <div class="lock" id="lock2">?</div>
+        <div class="lock" id="lock3">?</div>
+    </div>
+
+    <p>
+        Hint: Liliana's favourite number appears more than once.
+    </p>
+
+    <input
+        id="vaultCode"
+        maxlength="3"
+        inputmode="numeric"
+        placeholder="3 3 3"
+        style="padding:13px;border-radius:10px;border:0;text-align:center;font-size:20px;width:130px"
+    >
+
+    <br><br>
+
+    <button class="btn gold" id="openVault">OPEN VAULT</button>
+
+    <div class="message" id="vaultMessage"></div>
+
+</div>
+
+</section>
+
+<!-- ACHIEVEMENTS -->
+
+<section id="achievements" class="section">
+
+<div class="panel">
+
+    <h2 class="section-title">🏆 Friendship Awards</h2>
+    <p class="section-subtitle">Collect achievements as you play.</p>
+
+    <div class="achievements">
+
+        <div class="achievement" id="achFirst">
+            <div class="achievement-icon">🌸</div>
+            <strong>First Win</strong>
+            <p>Win your first casino game.</p>
+        </div>
+
+        <div class="achievement" id="achThree">
+            <div class="achievement-icon">3️⃣</div>
+            <strong>Lucky Three</strong>
+            <p>Hit three 3s on the slots.</p>
+        </div>
+
+        <div class="achievement" id="achPoker">
+            <div class="achievement-icon">🃏</div>
+            <strong>Poker Face</strong>
+            <p>Win a poker match.</p>
+        </div>
+
+        <div class="achievement" id="achBlackjack">
+            <div class="achievement-icon">♠️</div>
+            <strong>21</strong>
+            <p>Win at blackjack.</p>
+        </div>
+
+        <div class="achievement" id="achDolphin">
+            <div class="achievement-icon">🐬</div>
+            <strong>Dolphin Luck</strong>
+            <p>Win the dolphin derby.</p>
+        </div>
+
+        <div class="achievement" id="achVault">
+            <div class="achievement-icon">🔐</div>
+            <strong>Vault Cracker</strong>
+            <p>Open the Friendship Vault.</p>
+        </div>
+
+        <div class="achievement" id="achSix">
+            <div class="achievement-icon">6️⃣</div>
+            <strong>Six Years Strong</strong>
+            <p>Reach 6000 Friendship XP.</p>
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+<!-- LILIANA -->
+
+<section id="liliana" class="section">
+
+<div class="panel">
+
+    <div class="profile">
+
+        <div class="profile-avatar">🌸</div>
+
+        <div>
+            <h2 class="section-title">Liliana</h2>
+            <p class="section-subtitle">
+                The woman who somehow manages to be sweet, caring, charismatic
+                and a complete menace at the poker table.
+            </p>
+
+            <div class="facts">
+
+                <div class="fact">
+                    <strong>Favourite colour</strong>
+                    Baby pink
+                </div>
+
+                <div class="fact">
+                    <strong>Favourite number</strong>
+                    3
+                </div>
+
+                <div class="fact">
+                    <strong>Favourite animal</strong>
+                    Dolphins
+                </div>
+
+                <div class="fact">
+                    <strong>Food</strong>
+                    Sushi
+                </div>
+
+                <div class="fact">
+                    <strong>Birthday</strong>
+                    July 22
+                </div>
+
+                <div class="fact">
+                    <strong>Movie</strong>
+                    Me Before You
+                </div>
+
+                <div class="fact">
+                    <strong>Loves</strong>
+                    Sunflowers & roses
+                </div>
+
+                <div class="fact">
+                    <strong>Personality</strong>
+                    Sweet & charismatic
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+<!-- QUIZ -->
+
+<section id="quiz" class="section">
+
+<div class="panel">
+
+    <h2 class="section-title">❓ How Well Do You Know Liliana?</h2>
+    <p class="section-subtitle">Answer the questions and build your friendship score.</p>
+
+    <div id="quizContainer"></div>
+
+    <button class="btn gold" id="quizSubmit">CHECK ANSWERS</button>
+
+    <div class="message" id="quizMessage"></div>
+
+</div>
+
+</section>
+
+<!-- LETTER -->
+
+<section id="letter" class="section">
+
+<div class="panel">
+
+    <h2 class="section-title">💌 The Six-Year Letter</h2>
+
+    <div class="letter">
+
+        <p>Dear Liliana,</p>
+
+        <p>
+            Six years is a pretty crazy amount of time to have someone in your life.
+            Somehow, through all the chaos, conversations, jokes, random moments,
+            serious moments and everything in between, you became one of those people
+            who feels like they were always supposed to be there.
+        </p>
+
+        <p>
+            So obviously I couldn't just make you a normal birthday or friendship
+            website.
+        </p>
+
+        <p>
+            I had to make you an entire casino.
+        </p>
+
+        <p>
+            Because if anyone deserves a ridiculous amount of games, pink lights,
+            cards, dolphins, jackpots and completely unnecessary levels of drama,
+            it is you.
+        </p>
+
+        <p>
+            Thank you for six years of friendship.
+            Here's to all the memories we've already made and all the ones we
+            haven't made yet.
+        </p>
+
+        <p>
+            Love always,<br>
+            Bree ♡
+        </p>
+
+    </div>
 
 </div>
 
 </section>
 
 </div>
-
-
-<!-- ================= POKER ================= -->
-
-<div id="poker" class="page">
-
-<section class="section">
-
-<h2>♠️ Friendship Poker</h2>
-
-<p class="subtitle">
-Your cards aren't money. They're pieces of your friendship.
-Click five cards to build your hand.
-</p>
-
-<div class="poker-table">
-
-<div style="color:#d9f1df;">
-BESTIE TABLE
-</div>
-
-<div class="cards" id="pokerCards"></div>
-
-<div class="poker-message" id="pokerMessage">
-Choose your five friendship cards.
-</div>
-
-<button class="pull" id="dealButton">
-DEAL FRIENDSHIP HAND
-</button>
-
-</div>
-
-</section>
-
-</div>
-
-
-<!-- ================= PICK CARDS ================= -->
-
-<div id="cards" class="page">
-
-<section class="section">
-
-<h2>🃏 Pick Your Fortune</h2>
-
-<p class="subtitle">
-Liliana has three mystery cards. Only one can be chosen.
-What does friendship have waiting?
-</p>
-
-<div class="pick-cards">
-
-<button class="mystery" data-card="0">
-♠️
-<br>
-<small>ONE</small>
-</button>
-
-<button class="mystery" data-card="1">
-♥️
-<br>
-<small>TWO</small>
-</button>
-
-<button class="mystery" data-card="2">
-♦️
-<br>
-<small>THREE</small>
-</button>
-
-</div>
-
-<div id="cardResult" class="quiz-result">
-Choose your card...
-</div>
-
-</section>
-
-</div>
-
-
-<!-- ================= PRIZES ================= -->
-
-<div id="prizes" class="page">
-
-<section class="section">
-
-<h2>🎟️ Friendship Prize Booth</h2>
-
-<p class="subtitle">
-Use your friendship tokens to unlock things hidden around the casino.
-</p>
-
-<div class="prizes">
-
-<div class="prize">
-<h3>💗 100 Tokens</h3>
-<p>A random compliment from Bree.</p>
-<button data-cost="100" data-prize="compliment">
-Unlock</button>
-</div>
-
-<div class="prize">
-<h3>🌹 250 Tokens</h3>
-<p>A Liliana fact.</p>
-<button data-cost="250" data-prize="fact">
-Unlock</button>
-</div>
-
-<div class="prize">
-<h3>🐬 500 Tokens</h3>
-<p>A friendship memory.</p>
-<button data-cost="500" data-prize="memory">
-Unlock</button>
-</div>
-
-<div class="prize">
-<h3>📸 750 Tokens</h3>
-<p>A special photo slot.</p>
-<button data-cost="750" data-prize="photo">
-Unlock</button>
-</div>
-
-<div class="prize">
-<h3>💌 1000 Tokens</h3>
-<p>A secret message.</p>
-<button data-cost="1000" data-prize="secret">
-Unlock</button>
-</div>
-
-<div class="prize">
-<h3>👑 6000 Tokens</h3>
-<p>The six-year friendship finale.</p>
-<button data-cost="6000" data-prize="finale">
-Unlock</button>
-</div>
-
-</div>
-
-<div id="prizeResult" class="quiz-result"></div>
-
-</section>
-
-</div>
-
-
-<!-- ================= LILIANA ================= -->
-
-<div id="liliana" class="page">
-
-<section class="section">
-
-<h2>🎀 The Liliana File</h2>
-
-<p class="subtitle">
-Everything that makes Liliana... Liliana.
-</p>
-
-<div class="profile">
-
-<div class="fact">
-<div class="emoji">🎀</div>
-<b>Baby Pink</b>
-<small>Favourite colour</small>
-</div>
-
-<div class="fact">
-<div class="emoji">🍣</div>
-<b>Sushi</b>
-<small>Favourite food</small>
-</div>
-
-<div class="fact">
-<div class="emoji">🐬</div>
-<b>Dolphins</b>
-<small>Favourite animal</small>
-</div>
-
-<div class="fact">
-<div class="emoji">🌻</div>
-<b>Sunflowers</b>
-<small>Favourite flower</small>
-</div>
-
-<div class="fact">
-<div class="emoji">🌹</div>
-<b>Roses</b>
-<small>Also adored</small>
-</div>
-
-<div class="fact">
-<div class="emoji">3️⃣</div>
-<b>Three</b>
-<small>Favourite number</small>
-</div>
-
-<div class="fact">
-<div class="emoji">🎬</div>
-<b>Me Before You</b>
-<small>Favourite movie</small>
-</div>
-
-<div class="fact">
-<div class="emoji">🎵</div>
-<b>Sad Songs</b>
-<small>Emotional soundtrack</small>
-</div>
-
-<div class="fact">
-<div class="emoji">📖</div>
-<b>Poetry</b>
-<small>She loves it</small>
-</div>
-
-<div class="fact">
-<div class="emoji">♠️</div>
-<b>Poker</b>
-<small>She likes to play</small>
-</div>
-
-<div class="fact">
-<div class="emoji">;</div>
-<b>Semicolon</b>
-<small>Her tattoo</small>
-</div>
-
-<div class="fact">
-<div class="emoji">🧸</div>
-<b>Future Mum</b>
-<small>Dreams of a baby girl</small>
-</div>
-
-</div>
-
-<div class="section" style="margin-top:20px;background:#fff0f5;">
-
-<h2>🫶 Her Superpowers</h2>
-
-<p style="line-height:1.8;">
-<strong>Sweet.</strong>
-She has a genuinely soft side.
-
-<br><br>
-
-<strong>Caring.</strong>
-She cares deeply about the people around her.
-
-<br><br>
-
-<strong>Charismatic.</strong>
-There is something about her that naturally draws people in.
-
-<br><br>
-
-<strong>Empathetic.</strong>
-She understands and feels other people's emotions deeply.
-
-<br><br>
-
-<strong>Flirtatious.</strong>
-And then there is... that. 😂
-</p>
-
-</div>
-
-</section>
-
-</div>
-
-
-<!-- ================= SIX YEARS ================= -->
-
-<div id="years" class="page">
-
-<section class="section">
-
-<h2>🕰️ Six Years of Us</h2>
-
-<p class="subtitle">
-Six years deserves its own museum.
-Add memories below and build your friendship timeline.
-</p>
-
-<div class="timeline">
-
-<div class="memory">
-<strong>YEAR ONE 🌱</strong>
-<p>
-The beginning. The year everything started.
-</p>
-</div>
-
-<div class="memory">
-<strong>YEAR TWO 😂</strong>
-<p>
-The friendship chaos begins.
-</p>
-</div>
-
-<div class="memory">
-<strong>YEAR THREE 📸</strong>
-<p>
-More memories. More inside jokes.
-</p>
-</div>
-
-<div class="memory">
-<strong>YEAR FOUR 🫶</strong>
-<p>
-The years where you learn who really has your back.
-</p>
-</div>
-
-<div class="memory">
-<strong>YEAR FIVE ✨</strong>
-<p>
-Somehow there are even more stories.
-</p>
-</div>
-
-<div class="memory">
-<strong>YEAR SIX 💗</strong>
-<p>
-Six years later... still best friends.
-</p>
-</div>
-
-</div>
-
-<h2 style="margin-top:30px;">
-＋ Add Your Own Memory
-</h2>
-
-<textarea
-id="memoryInput"
-placeholder="Write something you never want either of you to forget..."
-maxlength="600">
-</textarea>
-
-<button class="action" id="addMemory">
-Add Memory ♡
-</button>
-
-<button class="action secondary" id="clearMemories">
-Clear Added Memories
-</button>
-
-<div id="customMemories" style="margin-top:15px;"></div>
-
-</section>
-
-</div>
-
-
-<!-- ================= QUIZ ================= -->
-
-<div id="quiz" class="page">
-
-<section class="section">
-
-<h2>🧠 How Well Do You Know Liliana?</h2>
-
-<p class="subtitle">
-Eight questions. One bestie. Let's see if you were paying attention.
-</p>
-
-<div id="quizBox">
-
-<div id="questionNumber"></div>
-
-<div class="quiz-question" id="question">
-Loading...
-</div>
-
-<div class="quiz-options" id="quizOptions"></div>
-
-<div class="quiz-result" id="quizResult"></div>
-
-<button class="action hidden" id="nextQuestion">
-Next Question →
-</button>
-
-</div>
-
-</section>
-
-</div>
-
-
-<!-- ================= LETTER ================= -->
-
-<div id="letter" class="page">
-
-<section class="section">
-
-<h2>💌 A Letter From Bree</h2>
-
-<p class="subtitle">
-The casino can be chaotic. This part isn't.
-</p>
-
-<div class="letter">
-
-Six years.
-
-Six whole years of friendship.
-
-When you have known someone for that long, it stops being about counting the years and starts being about remembering all the little things that filled them.
-
-The conversations.
-
-The laughter.
-
-The ridiculous moments.
-
-The difficult moments.
-
-The inside jokes that nobody else would understand.
-
-The memories that somehow became part of who we are.
-
-You are one of those people who has such a naturally caring heart. You are sweet, incredibly empathetic and somehow charismatic enough to make people feel comfortable around you.
-
-And yes... you are also ridiculously flirtatious. 😂
-
-But underneath all of that is someone who genuinely cares.
-
-I hope you never forget how special that is.
-
-Six years ago, neither of us could have known how many memories we'd eventually have together.
-
-And now here we are.
-
-Still besties.
-
-Still making memories.
-
-Still collecting stories.
-
-And hopefully still annoying each other for many years to come.
-
-So this little ridiculous casino is for you.
-
-Because if friendship were a game, I'd still choose you as my bestie every single time.
-
-<div class="signature">
-Love always,<br>
-Bree ♡
-</div>
-
-</div>
-
-</section>
-
-</div>
-
-
-</div>
-</div>
-
 
 <script>
+(() => {
 
-/* =========================================================
-   FRIENDSHIP CASINO
-========================================================= */
+"use strict";
 
-let tokens = 6000;
+/* =========================
+   STATE
+========================= */
 
-const tokenDisplay = document.getElementById("tokens");
+let tokens = Number(localStorage.getItem("lilianaTokens")) || 6000;
+let xp = Number(localStorage.getItem("lilianaXP")) || 0;
+let wins = Number(localStorage.getItem("lilianaWins")) || 0;
 
-function updateTokens() {
-  tokenDisplay.textContent = tokens;
+const achievements = JSON.parse(
+    localStorage.getItem("lilianaAchievements") || "{}"
+);
+
+function save() {
+    localStorage.setItem("lilianaTokens", tokens);
+    localStorage.setItem("lilianaXP", xp);
+    localStorage.setItem("lilianaWins", wins);
+    localStorage.setItem("lilianaAchievements", JSON.stringify(achievements));
+}
+
+function updateBalance() {
+    document.getElementById("tokenBalance").textContent =
+        Math.max(0, Math.floor(tokens)).toLocaleString();
+
+    document.getElementById("xp").textContent =
+        xp.toLocaleString();
+
+    let level = "Newbie";
+
+    if (xp >= 10000) level = "Six Years Strong";
+    else if (xp >= 6000) level = "Casino Queen";
+    else if (xp >= 3000) level = "High Roller";
+    else if (xp >= 1500) level = "Card Shark";
+    else if (xp >= 500) level = "Lucky Bestie";
+
+    document.getElementById("level").textContent = level;
+
+    updateAchievements();
+    save();
 }
 
 function addTokens(amount) {
-  tokens += amount;
-  updateTokens();
+    tokens += amount;
+    updateBalance();
 }
 
-function removeTokens(amount) {
-  if (tokens < amount) return false;
+function spendTokens(amount) {
+    if (tokens < amount) {
+        alert("You don't have enough Friendship Tokens!");
+        return false;
+    }
 
-  tokens -= amount;
-  updateTokens();
-
-  return true;
+    tokens -= amount;
+    updateBalance();
+    return true;
 }
 
+function addXP(amount) {
+    xp += amount;
+    updateBalance();
+}
 
-/* =========================================================
+function win(amount, xpAmount = 100) {
+    addTokens(amount);
+    addXP(xpAmount);
+    wins++;
+
+    achievements.first = true;
+
+    updateBalance();
+}
+
+function setMessage(id, text) {
+    document.getElementById(id).textContent = text;
+}
+
+/* =========================
    NAVIGATION
-========================================================= */
+========================= */
 
-const navButtons = document.querySelectorAll(".nav button");
-const pages = document.querySelectorAll(".page");
-
-navButtons.forEach(button => {
-
-  button.addEventListener("click", () => {
-
-    const target = button.dataset.page;
-
-    navButtons.forEach(b => b.classList.remove("active"));
-    button.classList.add("active");
-
-    pages.forEach(page => {
-      page.classList.remove("active");
-    });
-
-    document.getElementById(target).classList.add("active");
-
-  });
-
-});
-
-
-/* =========================================================
-   SLOT MACHINE
-========================================================= */
-
-const symbols = [
-  "🌹",
-  "🌻",
-  "🐬",
-  "🎀",
-  "🍣",
-  "♥️",
-  "♠️",
-  "3️⃣"
-];
-
-const reels = [
-  document.getElementById("reel1"),
-  document.getElementById("reel2"),
-  document.getElementById("reel3")
-];
-
-const spinButton = document.getElementById("spinButton");
-const slotResult = document.getElementById("slotResult");
-
-spinButton.addEventListener("click", () => {
-
-  if (tokens < 50) {
-
-    slotResult.textContent =
-      "You're out of friendship tokens! Play some games to earn more.";
-
-    return;
-  }
-
-  removeTokens(50);
-
-  spinButton.disabled = true;
-
-  reels.forEach(reel => {
-    reel.classList.add("spin");
-  });
-
-  setTimeout(() => {
-
-    const result = [
-      symbols[Math.floor(Math.random() * symbols.length)],
-      symbols[Math.floor(Math.random() * symbols.length)],
-      symbols[Math.floor(Math.random() * symbols.length)]
-    ];
-
-    reels.forEach((reel, i) => {
-
-      reel.classList.remove("spin");
-      reel.textContent = result[i];
-
-    });
-
-    let reward = 0;
-    let message = "";
-
-    if (
-      result[0] === "3️⃣" &&
-      result[1] === "3️⃣" &&
-      result[2] === "3️⃣"
-    ) {
-
-      reward = 3000;
-
-      message =
-        "💗 TRIPLE THREE JACKPOT! 💗<br>" +
-        "Of course Liliana's favourite number had to win.";
-
-    } else if (
-      result[0] === result[1] &&
-      result[1] === result[2]
-    ) {
-
-      reward = 1500;
-
-      message =
-        "🎰 THREE OF A KIND!<br>" +
-        "The friendship casino is feeling generous.";
-
-    } else if (
-      result[0] === result[1] ||
-      result[1] === result[2] ||
-      result[0] === result[2]
-    ) {
-
-      reward = 300;
-
-      message =
-        "✨ A PAIR!<br>" +
-        "Liliana got lucky.";
-
-    } else {
-
-      reward = 75;
-
-      message =
-        "♡ Friendship consolation prize!<br>" +
-        "You still won because you have six years of friendship.";
-
-    }
-
-    addTokens(reward);
-
-    slotResult.innerHTML =
-      message +
-      "<br><br>+" + reward + " friendship tokens";
-
-    spinButton.disabled = false;
-
-  }, 1400);
-
-});
-
-
-/* =========================================================
-   POKER
-========================================================= */
-
-const pokerDeck = [
-  ["♥️","LOVE"],
-  ["♦️","KINDNESS"],
-  ["♣️","CHAOS"],
-  ["♠️","TRUST"],
-  ["♥️","MEMORIES"],
-  ["♦️","LAUGHTER"],
-  ["♣️","LOYALTY"],
-  ["♠️","EMPATHY"],
-  ["♥️","POETRY"],
-  ["♦️","SUSHI"],
-  ["♣️","DOLPHIN"],
-  ["♠️","LUCK"]
-];
-
-let currentPokerHand = [];
-
-const pokerCards = document.getElementById("pokerCards");
-const pokerMessage = document.getElementById("pokerMessage");
-
-function dealPoker() {
-
-  currentPokerHand = [];
-
-  const shuffled = [...pokerDeck]
-    .sort(() => Math.random() - .5)
-    .slice(0,5);
-
-  pokerCards.innerHTML = "";
-
-  shuffled.forEach((card, index) => {
-
-    const div = document.createElement("div");
-
-    div.className =
-      "card " +
-      (card[0] === "♥️" || card[0] === "♦️" ? "red" : "");
-
-    div.innerHTML = `
-      <span>${card[0]}</span>
-      <span class="symbol">${card[0]}</span>
-      <strong>${card[1]}</strong>
-    `;
-
-    div.addEventListener("click", () => {
-
-      div.style.transform =
-        div.style.transform === "translateY(-15px)"
-          ? ""
-          : "translateY(-15px)";
-
-    });
-
-    pokerCards.appendChild(div);
-
-    currentPokerHand.push(card);
-
-  });
-
-  pokerMessage.textContent =
-    "Your friendship hand has been dealt. Click your cards and see what kind of bestie you have.";
-
-  addTokens(150);
-
-}
-
-document.getElementById("dealButton")
-  .addEventListener("click", dealPoker);
-
-
-/* =========================================================
-   MYSTERY CARDS
-========================================================= */
-
-const cardMessages = [
-
-  "🌹 You drew the Rose Card!<br><br>" +
-  "Liliana's soft side has been unlocked. " +
-  "She gets +500 friendship tokens.",
-
-  "🐬 You drew the Dolphin Card!<br><br>" +
-  "A playful friendship bonus! +750 tokens.",
-
-  "3️⃣ THE LUCKY THREE!<br><br>" +
-  "Her favourite number has chosen you.<br>" +
-  "+1500 friendship tokens."
-
-];
-
-document.querySelectorAll(".mystery").forEach(card => {
-
-  card.addEventListener("click", () => {
-
-    const index = Number(card.dataset.card);
-
-    document.getElementById("cardResult").innerHTML =
-      cardMessages[index];
-
-    if (index === 0) addTokens(500);
-    if (index === 1) addTokens(750);
-    if (index === 2) addTokens(1500);
-
-    document.querySelectorAll(".mystery")
-      .forEach(c => c.disabled = true);
-
-  });
-
-});
-
-
-/* =========================================================
-   PRIZES
-========================================================= */
-
-const prizeMessages = {
-
-  compliment:
-    "💗 Liliana, you are the kind of person who makes people feel cared for.",
-
-  fact:
-    "🌹 Liliana loves baby pink, sushi, dolphins, sunflowers, roses, poetry and sad songs.",
-
-  memory:
-    "🐬 Six years of friendship means there are enough memories to fill an entire museum.",
-
-  photo:
-    "📸 PHOTO SLOT UNLOCKED!<br><br>" +
-    "You can replace this with one of your favourite friendship photos.",
-
-  secret:
-    "💌 SECRET MESSAGE:<br><br>" +
-    "Some friendships are measured in years. " +
-    "Ours is measured in memories.",
-
-  finale:
-    "👑 SIX-YEAR JACKPOT!<br><br>" +
-    "Six years. Still best friends. " +
-    "That's the real prize."
-};
-
-document.querySelectorAll(".prize button").forEach(button => {
-
-  button.addEventListener("click", () => {
-
-    const cost = Number(button.dataset.cost);
-    const type = button.dataset.prize;
-
-    if (!removeTokens(cost)) {
-
-      document.getElementById("prizeResult").textContent =
-        "You don't have enough friendship tokens yet. ♡";
-
-      return;
-
-    }
-
-    button.disabled = true;
-    button.textContent = "UNLOCKED ✓";
-
-    document.getElementById("prizeResult").innerHTML =
-      prizeMessages[type];
-
-  });
-
-});
-
-
-/* =========================================================
-   SIX YEAR MEMORIES
-========================================================= */
-
-let customMemories = [];
-
-const memoryInput = document.getElementById("memoryInput");
-const customMemoriesBox =
-  document.getElementById("customMemories");
-
-document.getElementById("addMemory")
-  .addEventListener("click", () => {
-
-    const text = memoryInput.value.trim();
-
-    if (!text) return;
-
-    customMemories.push(text);
-
-    memoryInput.value = "";
-
-    renderMemories();
-
-    addTokens(100);
-
-  });
-
-function renderMemories() {
-
-  customMemoriesBox.innerHTML = "";
-
-  customMemories.forEach((memory, index) => {
-
-    const div = document.createElement("div");
-
-    div.className = "memory";
-
-    div.innerHTML = `
-      <strong>♡ MEMORY ${index + 1}</strong>
-      <p>${escapeHTML(memory)}</p>
-    `;
-
-    customMemoriesBox.appendChild(div);
-
-  });
-
-}
-
-document.getElementById("clearMemories")
-  .addEventListener("click", () => {
-
-    customMemories = [];
-
-    renderMemories();
-
-  });
-
-
-function escapeHTML(text) {
-
-  const div = document.createElement("div");
-
-  div.textContent = text;
-
-  return div.innerHTML;
-
-}
-
-
-/* =========================================================
-   QUIZ
-========================================================= */
-
-const questions = [
-
-  {
-    q: "What is Liliana's favourite colour?",
-    answers: ["Baby pink","Blue","Burgundy","Green"],
-    correct: 0
-  },
-
-  {
-    q: "What is Liliana's favourite number?",
-    answers: ["6","7","3","22"],
-    correct: 2
-  },
-
-  {
-    q: "What food does Liliana love?",
-    answers: ["Pizza","Sushi","Pasta","Burgers"],
-    correct: 1
-  },
-
-  {
-    q: "Which animal does she love?",
-    answers: ["Dolphins","Otters","Cats","Rabbits"],
-    correct: 0
-  },
-
-  {
-    q: "When is Liliana's birthday?",
-    answers: ["July 2","June 22","July 22","March 3"],
-    correct: 2
-  },
-
-  {
-    q: "What is her favourite movie?",
-    answers: [
-      "Titanic",
-      "Me Before You",
-      "The Notebook",
-      "Frozen"
-    ],
-    correct: 1
-  },
-
-  {
-    q: "What does Liliana love?",
-    answers: [
-      "Sad songs and poetry",
-      "Only action movies",
-      "Opera",
-      "Nothing emotional"
-    ],
-    correct: 0
-  },
-
-  {
-    q: "What does she hope to be one day?",
-    answers: [
-      "A pilot",
-      "A chef",
-      "A mum to a baby girl",
-      "A singer"
-    ],
-    correct: 2
-  }
-
-];
-
-let questionIndex = 0;
-let quizScore = 0;
-let quizAnswered = false;
-
-const questionNumber =
-  document.getElementById("questionNumber");
-
-const question =
-  document.getElementById("question");
-
-const quizOptions =
-  document.getElementById("quizOptions");
-
-const quizResult =
-  document.getElementById("quizResult");
-
-const nextQuestion =
-  document.getElementById("nextQuestion");
-
-
-function loadQuestion() {
-
-  quizAnswered = false;
-
-  const current = questions[questionIndex];
-
-  questionNumber.textContent =
-    `Question ${questionIndex + 1} of ${questions.length}`;
-
-  question.textContent = current.q;
-
-  quizOptions.innerHTML = "";
-
-  quizResult.textContent = "";
-
-  nextQuestion.classList.add("hidden");
-
-  current.answers.forEach((answer,index) => {
-
-    const button = document.createElement("button");
-
-    button.textContent = answer;
+document.querySelectorAll(".nav button").forEach(button => {
 
     button.addEventListener("click", () => {
 
-      if (quizAnswered) return;
+        const section = button.dataset.section;
 
-      quizAnswered = true;
+        document.querySelectorAll(".section").forEach(s =>
+            s.classList.remove("active")
+        );
 
-      if (index === current.correct) {
+        document.getElementById(section).classList.add("active");
 
-        quizScore++;
+        document.querySelectorAll(".nav button").forEach(b =>
+            b.classList.remove("active")
+        );
 
-        button.textContent = "✓ " + answer;
+        button.classList.add("active");
 
-        quizResult.textContent =
-          "Correct! 💗 +100 tokens";
-
-        addTokens(100);
-
-      } else {
-
-        button.textContent = "✗ " + answer;
-
-        quizOptions.children[current.correct]
-          .textContent =
-          "✓ " + current.answers[current.correct];
-
-        quizResult.textContent =
-          "Not quite! But Liliana would forgive you. 😂";
-
-      }
-
-      nextQuestion.classList.remove("hidden");
-
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
     });
-
-    quizOptions.appendChild(button);
-
-  });
-
-}
-
-nextQuestion.addEventListener("click", () => {
-
-  questionIndex++;
-
-  if (questionIndex >= questions.length) {
-
-    question.textContent =
-      "QUIZ COMPLETE!";
-
-    questionNumber.textContent = "";
-
-    quizOptions.innerHTML = "";
-
-    nextQuestion.classList.add("hidden");
-
-    quizResult.textContent =
-      `You scored ${quizScore}/${questions.length}! 💗`;
-
-    addTokens(500);
-
-    return;
-
-  }
-
-  loadQuestion();
 
 });
 
+document.querySelectorAll("[data-go]").forEach(card => {
 
-loadQuestion();
+    card.addEventListener("click", () => {
 
+        const target = card.dataset.go;
 
-/* =========================================================
-   SAVE STATE
-========================================================= */
+        document.querySelector(`[data-section="${target}"]`).click();
 
-function saveGame() {
+    });
 
-  const state = {
+});
 
-    tokens: tokens,
+/* =========================
+   SLOTS
+========================= */
 
-    memories: customMemories
+const symbols = [
+    "🌹",
+    "🐬",
+    "🌻",
+    "🍣",
+    "💗",
+    "🎀",
+    "3️⃣"
+];
 
-  };
+document.getElementById("spinSlots").addEventListener("click", () => {
 
-  localStorage.setItem(
-    "lilianaFriendshipCasino",
-    JSON.stringify(state)
-  );
+    if (!spendTokens(100)) return;
+
+    const reels = [
+        document.getElementById("reel1"),
+        document.getElementById("reel2"),
+        document.getElementById("reel3")
+    ];
+
+    reels.forEach(r => r.classList.add("spin"));
+
+    setMessage("slotMessage", "SPINNING... 🎰");
+
+    setTimeout(() => {
+
+        reels.forEach(r => r.classList.remove("spin"));
+
+        const result = reels.map(() =>
+            symbols[Math.floor(Math.random() * symbols.length)]
+        );
+
+        reels.forEach((r, i) => {
+            r.textContent = result[i];
+        });
+
+        let reward = 0;
+
+        if (result.every(x => x === "3️⃣")) {
+            reward = 3000;
+            achievements.three = true;
+
+            setMessage(
+                "slotMessage",
+                "🎉 LILIANA'S LUCKY THREE JACKPOT!!! +3000 🪙"
+            );
+
+            addXP(500);
+
+        } else if (result.every(x => x === "🌹")) {
+            reward = 500;
+
+        } else if (result.every(x => x === "🐬")) {
+            reward = 750;
+
+        } else if (result[0] === result[1] || result[1] === result[2]) {
+            reward = 150;
+        }
+
+        if (reward > 0) {
+
+            addTokens(reward);
+            addXP(100);
+
+            achievements.first = true;
+
+            if (!result.every(x => x === "3️⃣")) {
+                setMessage(
+                    "slotMessage",
+                    `Nice spin! You won ${reward} tokens! 🎉`
+                );
+            }
+
+        } else {
+
+            setMessage(
+                "slotMessage",
+                "No match this time... the casino survives another day 😭"
+            );
+
+        }
+
+        updateBalance();
+
+    }, 900);
+
+});
+
+/* =========================
+   CARD DECK
+========================= */
+
+const suits = ["♥", "♦", "♣", "♠"];
+const ranks = [
+    {name:"2", value:2},
+    {name:"3", value:3},
+    {name:"4", value:4},
+    {name:"5", value:5},
+    {name:"6", value:6},
+    {name:"7", value:7},
+    {name:"8", value:8},
+    {name:"9", value:9},
+    {name:"10", value:10},
+    {name:"J", value:11},
+    {name:"Q", value:12},
+    {name:"K", value:13},
+    {name:"A", value:14}
+];
+
+function makeDeck() {
+
+    const deck = [];
+
+    for (const suit of suits) {
+        for (const rank of ranks) {
+            deck.push({
+                suit,
+                name: rank.name,
+                value: rank.value
+            });
+        }
+    }
+
+    return deck.sort(() => Math.random() - .5);
+}
+
+function cardElement(card, back = false) {
+
+    const div = document.createElement("div");
+
+    div.className = "playing-card";
+
+    if (back) {
+        div.classList.add("card-back");
+        div.textContent = "♡";
+        return div;
+    }
+
+    div.textContent = card.name + card.suit;
+
+    if (card.suit === "♥" || card.suit === "♦") {
+        div.classList.add("red");
+    }
+
+    return div;
+}
+
+/* =========================
+   POKER
+========================= */
+
+let pokerDeck = [];
+let playerPoker = [];
+let computerPoker = [];
+let pokerHeld = [];
+
+function pokerRank(hand) {
+
+    const values = hand.map(c => c.value).sort((a,b) => b-a);
+
+    const counts = {};
+
+    values.forEach(v => {
+        counts[v] = (counts[v] || 0) + 1;
+    });
+
+    const groups = Object.values(counts).sort((a,b) => b-a);
+
+    const flush = hand.every(c => c.suit === hand[0].suit);
+
+    const unique = [...new Set(values)];
+
+    let straight = false;
+
+    if (unique.length === 5) {
+
+        straight =
+            unique[0] - unique[4] === 4 ||
+            JSON.stringify(unique) === JSON.stringify([14,5,4,3,2]);
+
+    }
+
+    if (flush && straight) return 8;
+    if (groups[0] === 4) return 7;
+    if (groups[0] === 3 && groups[1] === 2) return 6;
+    if (flush) return 5;
+    if (straight) return 4;
+    if (groups[0] === 3) return 3;
+    if (groups[0] === 2 && groups[1] === 2) return 2;
+    if (groups[0] === 2) return 1;
+
+    return 0;
+}
+
+const pokerNames = [
+    "High Card",
+    "Pair",
+    "Two Pair",
+    "Three of a Kind",
+    "Straight",
+    "Flush",
+    "Full House",
+    "Four of a Kind",
+    "Straight Flush"
+];
+
+function renderPoker() {
+
+    const pc = document.getElementById("playerCards");
+    const cc = document.getElementById("computerCards");
+
+    pc.innerHTML = "";
+    cc.innerHTML = "";
+
+    playerPoker.forEach((card, index) => {
+
+        const el = cardElement(card);
+
+        el.classList.add("hold-card");
+
+        if (pokerHeld[index]) {
+            el.classList.add("held");
+
+            const tag = document.createElement("span");
+            tag.className = "hold-tag";
+            tag.textContent = "HELD";
+            el.appendChild(tag);
+        }
+
+        el.addEventListener("click", () => {
+
+            if (!document.getElementById("pokerDraw").classList.contains("hidden")) {
+                pokerHeld[index] = !pokerHeld[index];
+                renderPoker();
+            }
+
+        });
+
+        pc.appendChild(el);
+
+    });
+
+    computerPoker.forEach(() => {
+        cc.appendChild(cardElement(null, true));
+    });
 
 }
 
-function loadGame() {
+document.getElementById("pokerDeal").addEventListener("click", () => {
 
-  const saved =
-    localStorage.getItem(
-      "lilianaFriendshipCasino"
+    if (!spendTokens(200)) return;
+
+    pokerDeck = makeDeck();
+
+    playerPoker = pokerDeck.splice(0,5);
+    computerPoker = pokerDeck.splice(0,5);
+
+    pokerHeld = [false,false,false,false,false];
+
+    renderPoker();
+
+    document.getElementById("pokerDraw").classList.remove("hidden");
+    document.getElementById("pokerDeal").classList.add("hidden");
+
+    setMessage(
+        "computerMessage",
+        "Computer: Hmm... let's see what you've got."
     );
 
-  if (!saved) return;
+    setMessage(
+        "pokerMessage",
+        "Choose the cards you want to HOLD, then press DRAW."
+    );
 
-  try {
+});
 
-    const state = JSON.parse(saved);
+document.getElementById("pokerDraw").addEventListener("click", () => {
 
-    if (typeof state.tokens === "number") {
+    for (let i = 0; i < 5; i++) {
 
-      tokens = state.tokens;
+        if (!pokerHeld[i]) {
+            playerPoker[i] = pokerDeck.shift();
+        }
 
     }
 
-    if (Array.isArray(state.memories)) {
+    /* Computer gets a simple strategic redraw */
 
-      customMemories = state.memories;
+    const computerRank = pokerRank(computerPoker);
+
+    if (computerRank < 2) {
+
+        const keep = [];
+
+        const counts = {};
+
+        computerPoker.forEach(c => {
+            counts[c.value] = (counts[c.value] || 0) + 1;
+        });
+
+        computerPoker.forEach((c, i) => {
+
+            if (counts[c.value] > 1) {
+                keep.push(i);
+            }
+
+        });
+
+        for (let i = 0; i < 5; i++) {
+
+            if (!keep.includes(i)) {
+                computerPoker[i] = pokerDeck.shift();
+            }
+
+        }
 
     }
 
-    updateTokens();
-    renderMemories();
+    renderPoker();
 
-  } catch(error) {
+    const playerRank = pokerRank(playerPoker);
+    const finalComputerRank = pokerRank(computerPoker);
 
-    console.log("Saved data could not be loaded.");
+    document.getElementById("computerCards").innerHTML = "";
 
-  }
+    computerPoker.forEach(card => {
+        document.getElementById("computerCards").appendChild(
+            cardElement(card)
+        );
+    });
+
+    let result;
+
+    if (playerRank > finalComputerRank) {
+
+        result =
+            `🎉 YOU WIN! ${pokerNames[playerRank]} beats ${pokerNames[finalComputerRank]}! +700 🪙`;
+
+        win(700, 250);
+        achievements.poker = true;
+
+    } else if (playerRank < finalComputerRank) {
+
+        result =
+            `Computer wins with ${pokerNames[finalComputerRank]}. You had ${pokerNames[playerRank]}.`;
+
+    } else {
+
+        result =
+            `It's a tie! Both have ${pokerNames[playerRank]}.`;
+
+        addTokens(250);
+    }
+
+    setMessage("pokerMessage", result);
+
+    setMessage(
+        "computerMessage",
+        finalComputerRank >= 5
+            ? "Computer: OH. THAT was not what I expected. 😳"
+            : "Computer: Not bad, bestie."
+    );
+
+    document.getElementById("pokerDraw").classList.add("hidden");
+    document.getElementById("pokerDeal").classList.remove("hidden");
+
+    updateBalance();
+
+});
+
+/* =========================
+   BLACKJACK
+========================= */
+
+let bjDeck = [];
+let bjPlayer = [];
+let bjDealer = [];
+
+function blackjackValue(hand) {
+
+    let total = 0;
+    let aces = 0;
+
+    hand.forEach(card => {
+
+        if (card.value >= 11) {
+            total += 10;
+        } else {
+            total += card.value;
+        }
+
+        if (card.name === "A") aces++;
+
+    });
+
+    while (aces > 0 && total + 10 <= 21) {
+        total += 10;
+        aces--;
+    }
+
+    return total;
+}
+
+function renderBJ(showDealer = false) {
+
+    const player = document.getElementById("bjPlayerCards");
+    const dealer = document.getElementById("dealerCards");
+
+    player.innerHTML = "";
+    dealer.innerHTML = "";
+
+    bjPlayer.forEach(card => player.appendChild(cardElement(card)));
+
+    bjDealer.forEach((card, i) => {
+
+        dealer.appendChild(
+            showDealer || i === 1
+                ? cardElement(card)
+                : cardElement(null, true)
+        );
+
+    });
+
+    document.getElementById("playerScore").textContent =
+        blackjackValue(bjPlayer);
+
+    document.getElementById("dealerScore").textContent =
+        showDealer ? blackjackValue(bjDealer) : "?";
 
 }
 
+function endBlackjack() {
 
-/* Automatically save */
+    const playerScore = blackjackValue(bjPlayer);
 
-setInterval(saveGame, 2000);
+    while (blackjackValue(bjDealer) < 17) {
+        bjDealer.push(bjDeck.shift());
+    }
 
-window.addEventListener("beforeunload", saveGame);
+    renderBJ(true);
 
-loadGame();
+    const dealerScore = blackjackValue(bjDealer);
 
+    if (playerScore > 21) {
 
+        setMessage("bjMessage", "Bust! 💥 The computer wins.");
+
+    } else if (dealerScore > 21 || playerScore > dealerScore) {
+
+        setMessage(
+            "bjMessage",
+            `🎉 YOU WIN! ${playerScore} vs ${dealerScore}. +500 🪙`
+        );
+
+        win(500, 200);
+        achievements.blackjack = true;
+
+    } else if (playerScore === dealerScore) {
+
+        setMessage("bjMessage", "Push! Nobody wins. +150 🪙");
+        addTokens(150);
+
+    } else {
+
+        setMessage(
+            "bjMessage",
+            `Computer wins ${dealerScore} to ${playerScore}.`
+        );
+
+    }
+
+    document.getElementById("bjHit").classList.add("hidden");
+    document.getElementById("bjStand").classList.add("hidden");
+    document.getElementById("bjDeal").classList.remove("hidden");
+
+    updateBalance();
+}
+
+document.getElementById("bjDeal").addEventListener("click", () => {
+
+    if (!spendTokens(150)) return;
+
+    bjDeck = makeDeck();
+
+    bjPlayer = [bjDeck.shift(), bjDeck.shift()];
+    bjDealer = [bjDeck.shift(), bjDeck.shift()];
+
+    renderBJ(false);
+
+    document.getElementById("bjDeal").classList.add("hidden");
+    document.getElementById("bjHit").classList.remove("hidden");
+    document.getElementById("bjStand").classList.remove("hidden");
+
+    setMessage("bjMessage", "Your move.");
+
+    if (blackjackValue(bjPlayer) === 21) {
+        endBlackjack();
+    }
+
+});
+
+document.getElementById("bjHit").addEventListener("click", () => {
+
+    bjPlayer.push(bjDeck.shift());
+
+    renderBJ(false);
+
+    if (blackjackValue(bjPlayer) >= 21) {
+        endBlackjack();
+    }
+
+});
+
+document.getElementById("bjStand").addEventListener("click", () => {
+    endBlackjack();
+});
+
+/* =========================
+   WHEEL
+========================= */
+
+let wheelRotation = 0;
+
+document.getElementById("spinWheel").addEventListener("click", () => {
+
+    if (!spendTokens(100)) return;
+
+    const wheel = document.getElementById("wheelGraphic");
+
+    const segment = Math.floor(Math.random() * 8);
+
+    const rewards = [
+        50, 100, 250, 500,
+        75, 150, 1000, 200
+    ];
+
+    wheelRotation += 1440 + (segment * 45);
+
+    wheel.style.transform =
+        `rotate(${wheelRotation}deg)`;
+
+    setMessage("wheelMessage", "The wheel is spinning... 🎡");
+
+    setTimeout(() => {
+
+        const reward = rewards[segment];
+
+        addTokens(reward);
+        addXP(80);
+
+        setMessage(
+            "wheelMessage",
+            `🎉 The wheel landed on ${reward} tokens!`
+        );
+
+    }, 3100);
+
+});
+
+/* =========================
+   DICE
+========================= */
+
+function rollDie() {
+    return Math.floor(Math.random() * 6) + 1;
+}
+
+document.getElementById("rollDice").addEventListener("click", () => {
+
+    if (!spendTokens(100)) return;
+
+    const dice = [
+        document.getElementById("yourDie1"),
+        document.getElementById("yourDie2"),
+        document.getElementById("cpuDie1"),
+        document.getElementById("cpuDie2")
+    ];
+
+    dice.forEach(d => d.classList.add("rolling"));
+
+    setMessage("diceMessage", "ROLLING... 🎲");
+
+    setTimeout(() => {
+
+        dice.forEach(d => d.classList.remove("rolling"));
+
+        const your1 = rollDie();
+        const your2 = rollDie();
+
+        const cpu1 = rollDie();
+        const cpu2 = rollDie();
+
+        document.getElementById("yourDie1").textContent = your1;
+        document.getElementById("yourDie2").textContent = your2;
+        document.getElementById("cpuDie1").textContent = cpu1;
+        document.getElementById("cpuDie2").textContent = cpu2;
+
+        const you = your1 + your2;
+        const cpu = cpu1 + cpu2;
+
+        if (you > cpu) {
+
+            win(400, 150);
+
+            setMessage(
+                "diceMessage",
+                `🎉 You win ${you} to ${cpu}! +400 🪙`
+            );
+
+        } else if (you === cpu) {
+
+            addTokens(150);
+
+            setMessage(
+                "diceMessage",
+                `DRAW! ${you} to ${cpu}. +150 🪙`
+            );
+
+        } else {
+
+            setMessage(
+                "diceMessage",
+                `Computer wins ${cpu} to ${you}.`
+            );
+
+        }
+
+    }, 900);
+
+});
+
+/* =========================
+   DOLPHIN DERBY
+========================= */
+
+let chosenDolphin = null;
+
+document.querySelectorAll(".dolphinPick").forEach(button => {
+
+    button.addEventListener("click", () => {
+
+        chosenDolphin = Number(button.dataset.dolphin);
+
+        document.querySelectorAll(".dolphinPick").forEach(b =>
+            b.classList.remove("gold")
+        );
+
+        button.classList.add("gold");
+
+        setMessage(
+            "raceMessage",
+            `You picked ${button.textContent.trim()}!`
+        );
+
+    });
+
+});
+
+document.getElementById("startRace").addEventListener("click", () => {
+
+    if (chosenDolphin === null) {
+
+        setMessage(
+            "raceMessage",
+            "Pick a dolphin first! 🐬"
+        );
+
+        return;
+    }
+
+    if (!spendTokens(150)) return;
+
+    const results = [];
+
+    for (let i = 0; i < 5; i++) {
+        results.push(55 + Math.random() * 40);
+    }
+
+    const winner = results.indexOf(Math.max(...results));
+
+    for (let i = 0; i < 5; i++) {
+
+        document.getElementById(`dolphin${i}`).style.left =
+            `${results[i]}%`;
+
+    }
+
+    setMessage("raceMessage", "THE RACE IS ON!!! 🐬🏁");
+
+    setTimeout(() => {
+
+        if (winner === chosenDolphin) {
+
+            win(750, 300);
+            achievements.dolphin = true;
+
+            setMessage(
+                "raceMessage",
+                "🐬🏆 YOUR DOLPHIN WON!!! +750 🪙"
+            );
+
+        } else {
+
+            setMessage(
+                "raceMessage",
+                `🐬 The winner was Dolphin ${winner + 1}!`
+            );
+
+        }
+
+    }, 3200);
+
+});
+
+/* =========================
+   FRIENDSHIP ROULETTE
+========================= */
+
+let rouletteActive = false;
+let rouletteSafe = [];
+let rouletteIndex = 0;
+
+function createRouletteCards() {
+
+    const container = document.getElementById("rouletteCards");
+
+    container.innerHTML = "";
+
+    for (let i = 0; i < 6; i++) {
+
+        const card = document.createElement("div");
+
+        card.className = "playing-card card-back card-choice";
+        card.textContent = "?";
+
+        card.addEventListener("click", () => {
+
+            if (!rouletteActive) return;
+
+            if (!rouletteSafe.includes(i)) {
+
+                card.classList.remove("card-back");
+                card.textContent = "💥";
+
+                rouletteActive = false;
+
+                setMessage(
+                    "rouletteMessage",
+                    "BOOM! 💥 Your turn ended. No tokens lost beyond the entry."
+                );
+
+                return;
+            }
+
+            card.classList.remove("card-back");
+            card.textContent = "🍀";
+
+            rouletteIndex++;
+
+            const reward = rouletteIndex * 150;
+
+            addTokens(reward);
+            addXP(50);
+
+            if (rouletteIndex >= 5) {
+
+                rouletteActive = false;
+
+                addTokens(1000);
+
+                setMessage(
+                    "rouletteMessage",
+                    "🏆 YOU SURVIVED ALL SIX! FRIENDSHIP JACKPOT +1000 🪙"
+                );
+
+            } else {
+
+                setMessage(
+                    "rouletteMessage",
+                    `SAFE! 🍀 +${reward} 🪙. Pick another chamber...`
+                );
+
+            }
+
+        });
+
+        container.appendChild(card);
+
+    }
+
+}
+
+createRouletteCards();
+
+document.getElementById("rouletteStart").addEventListener("click", () => {
+
+    if (!spendTokens(100)) return;
+
+    rouletteActive = true;
+    rouletteIndex = 0;
+
+    rouletteSafe = [0,1,2,3,4,5]
+        .sort(() => Math.random() - .5)
+        .slice(0,5);
+
+    createRouletteCards();
+
+    setMessage(
+        "rouletteMessage",
+        "Six chambers. One BOOM. Choose carefully..."
+    );
+
+});
+
+/* =========================
+   HIGH LOW
+========================= */
+
+let hlDeck = [];
+let hlCurrent = null;
+let hlStreak = 0;
+let hlMultiplier = 1;
+let hlActive = false;
+
+function updateHighLow() {
+
+    document.getElementById("hlStreak").textContent = hlStreak;
+    document.getElementById("hlMultiplier").textContent =
+        `${hlMultiplier}x`;
+
+}
+
+function startHighLow() {
+
+    if (!spendTokens(100)) return;
+
+    hlDeck = makeDeck();
+
+    hlCurrent = hlDeck.shift();
+
+    hlStreak = 0;
+    hlMultiplier = 1;
+    hlActive = true;
+
+    document.getElementById("hlCurrent").replaceWith(
+        cardElement(hlCurrent)
+    );
+
+    const current = document.querySelector("#hlCurrent");
+
+    if (current) current.id = "hlCurrent";
+
+    document.getElementById("hlNext").textContent = "?";
+
+    document.getElementById("hlStart").classList.add("hidden");
+    document.getElementById("hlHigh").classList.remove("hidden");
+    document.getElementById("hlLow").classList.remove("hidden");
+    document.getElementById("hlCash").classList.remove("hidden");
+
+    setMessage(
+        "hlMessage",
+        "Will the next card be HIGHER or LOWER?"
+    );
+
+    updateHighLow();
+
+}
+
+document.getElementById("hlStart").addEventListener("click", startHighLow);
+
+function highLowGuess(direction) {
+
+    if (!hlActive) return;
+
+    const next = hlDeck.shift();
+
+    document.getElementById("hlNext").replaceWith(
+        cardElement(next)
+    );
+
+    const nextEl = document.querySelector("#hlNext");
+
+    if (nextEl) nextEl.id = "hlNext";
+
+    const correct =
+        direction === "high"
+            ? next.value >= hlCurrent.value
+            : next.value <= hlCurrent.value;
+
+    if (correct) {
+
+        hlStreak++;
+        hlMultiplier = Math.min(10, hlMultiplier + 1);
+
+        const reward = 100 * hlMultiplier;
+
+        addTokens(reward);
+        addXP(75);
+
+        setMessage(
+            "hlMessage",
+            `CORRECT! 🎉 +${reward} 🪙`
+        );
+
+        hlCurrent = next;
+
+    } else {
+
+        hlActive = false;
+
+        setMessage(
+            "hlMessage",
+            "Wrong! 💔 Your streak ended."
+        );
+
+        document.getElementById("hlStart").classList.remove("hidden");
+        document.getElementById("hlHigh").classList.add("hidden");
+        document.getElementById("hlLow").classList.add("hidden");
+        document.getElementById("hlCash").classList.add("hidden");
+
+    }
+
+    updateHighLow();
+
+}
+
+document.getElementById("hlHigh").addEventListener(
+    "click",
+    () => highLowGuess("high")
+);
+
+document.getElementById("hlLow").addEventListener(
+    "click",
+    () => highLowGuess("low")
+);
+
+document.getElementById("hlCash").addEventListener("click", () => {
+
+    if (!hlActive) return;
+
+    const bonus = hlStreak * 250;
+
+    addTokens(bonus);
+    addXP(hlStreak * 30);
+
+    setMessage(
+        "hlMessage",
+        `💰 CASHED OUT! +${bonus} bonus tokens!`
+    );
+
+    hlActive = false;
+
+    document.getElementById("hlStart").classList.remove("hidden");
+    document.getElementById("hlHigh").classList.add("hidden");
+    document.getElementById("hlLow").classList.add("hidden");
+    document.getElementById("hlCash").classList.add("hidden");
+
+});
+
+/* =========================
+   VAULT
+========================= */
+
+document.getElementById("openVault").addEventListener("click", () => {
+
+    const code =
+        document.getElementById("vaultCode").value.trim();
+
+    if (code === "333") {
+
+        document.getElementById("lock1").textContent = "3";
+        document.getElementById("lock2").textContent = "3";
+        document.getElementById("lock3").textContent = "3";
+
+        addTokens(3000);
+        addXP(1000);
+
+        achievements.vault = true;
+
+        setMessage(
+            "vaultMessage",
+            "🔓 VAULT OPENED! +3000 🪙"
+        );
+
+        updateBalance();
+
+    } else {
+
+        setMessage(
+            "vaultMessage",
+            "The vault rejected that combination..."
+        );
+
+    }
+
+});
+
+/* =========================
+   ACHIEVEMENTS
+========================= */
+
+function updateAchievements() {
+
+    const map = {
+        first: "achFirst",
+        three: "achThree",
+        poker: "achPoker",
+        blackjack: "achBlackjack",
+        dolphin: "achDolphin",
+        vault: "achVault"
+    };
+
+    Object.entries(map).forEach(([key, id]) => {
+
+        document.getElementById(id)
+            .classList.toggle(
+                "unlocked",
+                Boolean(achievements[key])
+            );
+
+    });
+
+    document.getElementById("achSix")
+        .classList.toggle("unlocked", xp >= 6000);
+}
+
+/* =========================
+   QUIZ
+========================= */
+
+const quizQuestions = [
+
+    {
+        q: "What is Liliana's favourite colour?",
+        answers: ["Baby pink", "Blue", "Burgundy", "Green"],
+        correct: 0
+    },
+
+    {
+        q: "What is Liliana's favourite number?",
+        answers: ["7", "3", "9", "22"],
+        correct: 1
+    },
+
+    {
+        q: "Which animal does Liliana love?",
+        answers: ["Cats", "Dolphins", "Penguins", "Foxes"],
+        correct: 1
+    },
+
+    {
+        q: "What food does Liliana love?",
+        answers: ["Pizza", "Sushi", "Tacos", "Pasta"],
+        correct: 1
+    },
+
+    {
+        q: "When is Liliana's birthday?",
+        answers: ["July 22", "June 12", "August 3", "May 7"],
+        correct: 0
+    },
+
+    {
+        q: "What is Liliana's favourite movie?",
+        answers: [
+            "Titanic",
+            "Me Before You",
+            "The Notebook",
+            "Frozen"
+        ],
+        correct: 1
+    }
+
+];
+
+const quizContainer = document.getElementById("quizContainer");
+
+quizQuestions.forEach((question, index) => {
+
+    const wrapper = document.createElement("div");
+
+    wrapper.className = "panel";
+
+    wrapper.innerHTML =
+        `<strong>${index + 1}. ${question.q}</strong>`;
+
+    question.answers.forEach((answer, answerIndex) => {
+
+        const button = document.createElement("button");
+
+        button.type = "button";
+        button.className = "quiz-option";
+        button.textContent = answer;
+        button.dataset.question = index;
+        button.dataset.answer = answerIndex;
+
+        wrapper.appendChild(button);
+
+    });
+
+    quizContainer.appendChild(wrapper);
+
+});
+
+document.getElementById("quizSubmit").addEventListener("click", () => {
+
+    let score = 0;
+
+    document.querySelectorAll(".quiz-option").forEach(button => {
+
+        button.style.borderColor = "";
+
+    });
+
+    quizQuestions.forEach((question, index) => {
+
+        const selected = document.querySelector(
+            `.quiz-option[data-question="${index}"][data-selected="true"]`
+        );
+
+        if (selected &&
+            Number(selected.dataset.answer) === question.correct) {
+
+            score++;
+
+            selected.style.borderColor = "#ffd36a";
+
+        }
+
+    });
+
+    const reward = score * 200;
+
+    addTokens(reward);
+    addXP(score * 100);
+
+    setMessage(
+        "quizMessage",
+        `You scored ${score}/${quizQuestions.length}! +${reward} 🪙`
+    );
+
+});
+
+document.querySelectorAll(".quiz-option").forEach(button => {
+
+    button.addEventListener("click", () => {
+
+        const question = button.dataset.question;
+
+        document.querySelectorAll(
+            `.quiz-option[data-question="${question}"]`
+        ).forEach(b => {
+
+            delete b.dataset.selected;
+
+        });
+
+        button.dataset.selected = "true";
+
+    });
+
+});
+
+/* =========================
+   STARTUP
+========================= */
+
+updateBalance();
+
+})();
 </script>
 
 </body>
