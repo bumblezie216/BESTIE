@@ -1,1031 +1,4040 @@
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Liliana's Friendship Casino 💗</title>
 
-  <title>Liliana's Friendship Casino 💗</title>
+<style>
+:root{
+  --bg:#100713;
+  --panel:#211022;
+  --panel2:#2d1530;
+  --pink:#ff4fa3;
+  --pink2:#ff87c4;
+  --gold:#ffd76a;
+  --purple:#8b5cf6;
+  --blue:#51c7ff;
+  --green:#5de39b;
+  --red:#ff637d;
+  --text:#fff;
+  --muted:#cbb9ca;
+  --border:#63385f;
+}
 
-  <style>
+*{box-sizing:border-box}
 
-    /* ==========================================
-       1. CASINO THEME
-       ========================================== */
+html{scroll-behavior:smooth}
 
-    :root {
-      --pink: #ff4fa3;
-      --dark-pink: #b51f69;
-      --gold: #ffd76a;
-      --purple: #7c4dff;
-      --dark: #120817;
-      --panel: #211126;
-      --text: #fff;
-    }
+body{
+  margin:0;
+  min-height:100vh;
+  font-family:Arial,Helvetica,sans-serif;
+  color:var(--text);
+  background:
+    radial-gradient(circle at 50% -10%,#57244f 0,#241027 35%,var(--bg) 75%);
+}
 
-    * {
-      box-sizing: border-box;
-    }
+button,input{
+  font:inherit;
+}
 
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background:
-        radial-gradient(circle at top, #3b1645, #120817 70%);
-      color: var(--text);
-    }
+button{
+  cursor:pointer;
+}
 
-    button {
-      cursor: pointer;
-    }
+button:disabled{
+  opacity:.5;
+  cursor:not-allowed;
+}
 
+.topbar{
+  position:sticky;
+  top:0;
+  z-index:50;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  padding:13px 18px;
+  background:rgba(16,7,19,.95);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--border);
+}
 
-    /* ==========================================
-       2. TOP CASINO BAR
-       ========================================== */
+.brand{
+  font-size:20px;
+  font-weight:900;
+  white-space:nowrap;
+}
 
-    .top-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px;
-      background: #180b20;
-      border-bottom: 1px solid #63345f;
-    }
+.hud{
+  display:flex;
+  gap:7px;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+}
 
-    .casino-name {
-      font-size: 1.3rem;
-      font-weight: bold;
-    }
+.hudItem{
+  padding:7px 10px;
+  background:#261326;
+  border:1px solid #4d2c4a;
+  border-radius:12px;
+  font-size:13px;
+}
 
-    .stats {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
+.sound{
+  border:1px solid #65405f;
+  background:#2b172d;
+  color:white;
+  padding:8px 11px;
+  border-radius:10px;
+}
 
-    .stat {
-      background: #2b1531;
-      padding: 8px 12px;
-      border-radius: 12px;
-    }
+.container{
+  max-width:1200px;
+  margin:auto;
+  padding:25px 18px 60px;
+}
 
+.hero{
+  text-align:center;
+  padding:25px 10px 30px;
+}
 
-    /* ==========================================
-       3. MAIN CASINO FLOOR
-       ========================================== */
+.hero h1{
+  margin:0;
+  font-size:clamp(30px,6vw,55px);
+}
 
-    .casino-floor {
-      max-width: 1100px;
-      margin: auto;
-      padding: 25px;
-    }
+.hero p{
+  color:var(--muted);
+  margin:10px auto 20px;
+  max-width:650px;
+}
 
-    .welcome {
-      text-align: center;
-      margin-bottom: 25px;
-    }
+.levelbar{
+  max-width:500px;
+  margin:15px auto;
+}
 
-    .welcome h1 {
-      font-size: 2.5rem;
-      margin-bottom: 5px;
-    }
+.progress{
+  height:10px;
+  background:#170b1b;
+  border:1px solid #4e2d4b;
+  border-radius:20px;
+  overflow:hidden;
+}
 
-    .welcome p {
-      opacity: .75;
-    }
+.progressFill{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,var(--pink),var(--gold));
+  transition:width .4s;
+}
 
+.daily{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  border:1px solid #725335;
+  background:linear-gradient(135deg,#4b2d19,#302017);
+  color:white;
+  border-radius:15px;
+  padding:12px 18px;
+  font-weight:bold;
+}
 
-    /* ==========================================
-       4. INTERACTIVE CASINO ROOMS
-       ========================================== */
+.sectionTitle{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  margin:25px 0 12px;
+}
 
-    .rooms {
-      display: grid;
-      grid-template-columns:
-        repeat(auto-fit, minmax(180px, 1fr));
-      gap: 15px;
-    }
+.sectionTitle h2{
+  margin:0;
+}
 
-    .room {
-      min-height: 150px;
-      border: 1px solid #6d3a6c;
-      border-radius: 22px;
-      padding: 20px;
-      background: #25122d;
-      transition: .25s;
-    }
+.floor{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:15px;
+}
 
-    .room:hover {
-      transform: translateY(-5px);
-      border-color: var(--pink);
-    }
+.room{
+  min-height:170px;
+  text-align:left;
+  color:white;
+  padding:20px;
+  border-radius:22px;
+  border:1px solid var(--border);
+  background:
+    linear-gradient(145deg,#321532,#1b0d20);
+  transition:.2s;
+}
 
-    .room-icon {
-      font-size: 3rem;
-    }
+.room:hover{
+  transform:translateY(-4px);
+  border-color:var(--pink);
+}
 
-    .room-title {
-      font-size: 1.2rem;
-      font-weight: bold;
-    }
+.roomIcon{
+  font-size:42px;
+  margin-bottom:10px;
+}
 
+.room h3{
+  margin:0 0 7px;
+  font-size:20px;
+}
 
-    /* ==========================================
-       5. GAME ROOM
-       ========================================== */
+.room p{
+  color:var(--muted);
+  margin:0;
+  line-height:1.45;
+}
 
-    .game-room {
-      display: none;
-      margin-top: 25px;
-      padding: 25px;
-      background: #1b0c23;
-      border: 1px solid #713c70;
-      border-radius: 25px;
-    }
+.roomView{
+  display:none;
+  margin-top:25px;
+}
 
-    .game-room.active {
-      display: block;
-    }
+.roomView.active{
+  display:block;
+  animation:fade .25s ease;
+}
 
-    .back-button {
-      margin-bottom: 20px;
-    }
+@keyframes fade{
+  from{opacity:0;transform:translateY(8px)}
+  to{opacity:1;transform:none}
+}
 
+.roomHead{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  margin-bottom:15px;
+}
 
-    /* ==========================================
-       6. SLOT MACHINE
-       ========================================== */
+.roomHead h2{
+  margin:0;
+}
 
-    .slot-machine {
-      max-width: 650px;
-      margin: auto;
-      text-align: center;
-      padding: 25px;
-      background: #28102f;
-      border-radius: 25px;
-    }
+.back{
+  background:#2a162d;
+  color:white;
+  border:1px solid #63385f;
+  border-radius:12px;
+  padding:10px 14px;
+}
 
-    .reels {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      margin: 25px 0;
-    }
+.games{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:13px;
+}
 
-    .reel {
-      width: 100px;
-      height: 100px;
-      display: grid;
-      place-items: center;
-      background: white;
-      color: #222;
-      border-radius: 15px;
-      font-size: 3rem;
-    }
+.gameCard{
+  padding:17px;
+  border-radius:18px;
+  border:1px solid #51304f;
+  background:#201021;
+}
 
-    .spin-button {
-      padding: 15px 40px;
-      border: 0;
-      border-radius: 30px;
-      background: var(--pink);
-      color: white;
-      font-size: 1.2rem;
-      font-weight: bold;
-    }
+.gameCard h3{
+  margin:0 0 7px;
+}
 
+.gameCard p{
+  color:var(--muted);
+  font-size:14px;
+  min-height:38px;
+}
 
-    /* ==========================================
-       7. LUCKY WHEEL
-       ========================================== */
+.play{
+  width:100%;
+  border:0;
+  border-radius:12px;
+  padding:11px;
+  background:var(--pink);
+  color:white;
+  font-weight:bold;
+}
 
-    .wheel-area {
-      text-align: center;
-    }
+.panel{
+  background:#1b0d20;
+  border:1px solid var(--border);
+  border-radius:22px;
+  padding:22px;
+}
 
-    .wheel {
-      width: 280px;
-      height: 280px;
-      border-radius: 50%;
-      margin: 25px auto;
-      background:
-        conic-gradient(
-          #ff4fa3 0deg 45deg,
-          #ffd76a 45deg 90deg,
-          #7c4dff 90deg 135deg,
-          #55d6be 135deg 180deg,
-          #ff8c42 180deg 225deg,
-          #ff4fa3 225deg 270deg,
-          #ffd76a 270deg 315deg,
-          #7c4dff 315deg 360deg
-        );
-      border: 8px solid white;
-      transition: transform 3s ease-out;
-    }
+.gamePanel{
+  margin-top:15px;
+}
 
+.hidden{
+  display:none!important;
+}
 
-    /* ==========================================
-       8. FRIENDSHIP CATCH
-       ========================================== */
+.result{
+  min-height:25px;
+  margin-top:12px;
+  text-align:center;
+  font-weight:bold;
+  color:var(--gold);
+}
 
-    .ocean {
-      min-height: 400px;
-      position: relative;
-      overflow: hidden;
-      border-radius: 25px;
-      background:
-        linear-gradient(#174a70, #08243d);
-    }
+.bigGame{
+  max-width:700px;
+  margin:auto;
+  text-align:center;
+}
 
-    .creature {
-      position: absolute;
-      font-size: 3rem;
-      border: 0;
-      background: none;
-      animation: swim 5s infinite alternate ease-in-out;
-    }
+.slot{
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  margin:25px 0;
+}
 
-    @keyframes swim {
-      from {
-        transform: translateX(0);
-      }
+.reel{
+  width:105px;
+  height:105px;
+  display:grid;
+  place-items:center;
+  background:#fff;
+  color:#222;
+  border-radius:18px;
+  font-size:48px;
+  border:6px solid #d4a53d;
+  box-shadow:0 8px 0 #714d14;
+}
 
-      to {
-        transform: translateX(100px);
-      }
-    }
+.spin{
+  background:linear-gradient(#ff75ba,#db267d);
+  border:0;
+  color:white;
+  padding:14px 35px;
+  border-radius:30px;
+  font-weight:900;
+  font-size:18px;
+}
 
+.wheelWrap{
+  position:relative;
+  width:310px;
+  margin:20px auto;
+}
 
-    /* ==========================================
-       9. QUIZ
-       ========================================== */
+.pointer{
+  position:absolute;
+  top:-13px;
+  left:50%;
+  transform:translateX(-50%);
+  z-index:2;
+  font-size:32px;
+}
 
-    .quiz-option {
-      display: block;
-      width: 100%;
-      margin: 8px 0;
-      padding: 14px;
-      border-radius: 12px;
-      border: 1px solid #63345f;
-      background: #28132f;
-      color: white;
-      text-align: left;
-    }
+.wheel{
+  width:300px;
+  height:300px;
+  border-radius:50%;
+  border:8px solid white;
+  background:
+    conic-gradient(
+      #ff4fa3 0deg 45deg,
+      #ffd76a 45deg 90deg,
+      #8b5cf6 90deg 135deg,
+      #51c7ff 135deg 180deg,
+      #5de39b 180deg 225deg,
+      #ff637d 225deg 270deg,
+      #ff9b52 270deg 315deg,
+      #b96cff 315deg 360deg
+    );
+  transition:transform 3s cubic-bezier(.15,.7,.15,1);
+}
 
+.centerDot{
+  position:absolute;
+  width:52px;
+  height:52px;
+  border-radius:50%;
+  background:white;
+  color:#222;
+  display:grid;
+  place-items:center;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  font-weight:900;
+}
 
-    /* ==========================================
-       10. MOBILE
-       ========================================== */
+.actionRow{
+  display:flex;
+  flex-wrap:wrap;
+  gap:9px;
+  justify-content:center;
+}
 
-    @media (max-width: 600px) {
+.action{
+  border:0;
+  border-radius:12px;
+  padding:11px 16px;
+  background:var(--purple);
+  color:white;
+  font-weight:bold;
+}
 
-      .top-bar {
-        flex-direction: column;
-        gap: 12px;
-      }
+.action.gold{
+  background:#9b7216;
+}
 
-      .welcome h1 {
-        font-size: 1.8rem;
-      }
+.action.green{
+  background:#18784e;
+}
 
-      .rooms {
-        grid-template-columns: 1fr 1fr;
-      }
+.action.red{
+  background:#9d2942;
+}
 
-      .reel {
-        width: 75px;
-        height: 75px;
-      }
+input{
+  width:100%;
+  padding:13px;
+  border-radius:12px;
+  border:1px solid #694064;
+  background:#110812;
+  color:white;
+  outline:none;
+}
 
-    }
+input:focus{
+  border-color:var(--pink);
+}
 
-  </style>
+.cards{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:8px;
+  margin:15px 0;
+}
+
+.card{
+  width:55px;
+  height:78px;
+  border-radius:9px;
+  display:grid;
+  place-items:center;
+  background:#fff;
+  color:#111;
+  font-weight:bold;
+  font-size:19px;
+  border:2px solid #ddd;
+}
+
+.card.red{
+  color:#d51e3c;
+}
+
+.creatureArea{
+  min-height:430px;
+  position:relative;
+  overflow:hidden;
+  border-radius:22px;
+  background:
+    radial-gradient(circle at 30% 25%,#267aa3,#0b314e 50%,#061c31);
+  border:1px solid #28658b;
+}
+
+.bubble{
+  position:absolute;
+  border-radius:50%;
+  border:1px solid rgba(255,255,255,.4);
+  width:14px;
+  height:14px;
+  opacity:.6;
+}
+
+.creature{
+  position:absolute;
+  border:0;
+  background:none;
+  font-size:45px;
+  animation:float 4s ease-in-out infinite alternate;
+}
+
+@keyframes float{
+  to{transform:translate(25px,15px)}
+}
+
+.collection{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:15px;
+}
+
+.creatureBadge{
+  padding:8px 10px;
+  border-radius:12px;
+  background:#29152f;
+  border:1px solid #573458;
+}
+
+.question{
+  font-size:19px;
+  font-weight:bold;
+  margin-bottom:12px;
+}
+
+.answers{
+  display:grid;
+  gap:8px;
+}
+
+.answer{
+  text-align:left;
+  border:1px solid #5b3557;
+  background:#28132d;
+  color:white;
+  border-radius:12px;
+  padding:13px;
+}
+
+.answer:hover{
+  border-color:var(--pink);
+}
+
+.timeline{
+  display:grid;
+  gap:10px;
+}
+
+.year{
+  border-left:4px solid var(--pink);
+  padding:15px;
+  background:#25122a;
+  border-radius:0 14px 14px 0;
+}
+
+.achievements{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+  gap:10px;
+}
+
+.achievement{
+  padding:15px;
+  border-radius:15px;
+  border:1px solid #543252;
+  background:#241127;
+}
+
+.achievement.locked{
+  opacity:.4;
+}
+
+.achievement strong{
+  display:block;
+  margin-bottom:5px;
+}
+
+.vault{
+  max-width:500px;
+  margin:auto;
+  text-align:center;
+}
+
+.codeInput{
+  text-align:center;
+  font-size:26px;
+  letter-spacing:8px;
+}
+
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:25px;
+  transform:translateX(-50%);
+  z-index:100;
+  background:#2b132f;
+  border:1px solid var(--pink);
+  padding:13px 18px;
+  border-radius:14px;
+  box-shadow:0 8px 30px rgba(0,0,0,.5);
+  display:none;
+}
+
+.toast.show{
+  display:block;
+  animation:toast .25s;
+}
+
+@keyframes toast{
+  from{opacity:0;transform:translate(-50%,10px)}
+  to{opacity:1;transform:translate(-50%,0)}
+}
+
+footer{
+  text-align:center;
+  color:#897589;
+  padding:35px 15px;
+}
+
+@media(max-width:650px){
+
+  .topbar{
+    position:relative;
+    align-items:flex-start;
+    flex-direction:column;
+  }
+
+  .hud{
+    justify-content:flex-start;
+  }
+
+  .container{
+    padding:15px 12px 40px;
+  }
+
+  .floor{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .room{
+    min-height:155px;
+    padding:15px;
+  }
+
+  .roomIcon{
+    font-size:34px;
+  }
+
+  .slot{
+    gap:5px;
+  }
+
+  .reel{
+    width:80px;
+    height:85px;
+    font-size:37px;
+  }
+
+  .wheelWrap,
+  .wheel{
+    width:270px;
+    height:270px;
+  }
+
+}
+
+@media(max-width:400px){
+
+  .floor{
+    grid-template-columns:1fr;
+  }
+
+  .reel{
+    width:72px;
+    height:78px;
+  }
+
+}
+</style>
 </head>
-
 
 <body>
 
-  <!-- ==========================================
-       TOP BAR
-       ========================================== -->
+<header class="topbar">
 
-  <header class="top-bar">
+  <div class="brand">💗 Liliana's Friendship Casino</div>
 
-    <div class="casino-name">
-      💗 Liliana's Friendship Casino
+  <div class="hud">
+    <div class="hudItem">💰 <span id="tokens">1,000</span></div>
+    <div class="hudItem">⭐ Lv.<span id="level">1</span></div>
+    <div class="hudItem">🔥 <span id="streak">0</span></div>
+    <div class="hudItem">🏆 <span id="wins">0</span></div>
+    <button class="sound" id="soundBtn">🔊</button>
+  </div>
+
+</header>
+
+<main class="container">
+
+<section class="hero">
+
+  <h1>🎰 Liliana's Friendship Casino</h1>
+
+  <p>
+    Six years of friendship turned into one ridiculous casino.
+    Play games, collect tokens, unlock secrets and become
+    Friendship Royalty.
+  </p>
+
+  <div class="levelbar">
+
+    <div>
+      Level <span id="heroLevel">1</span>
+      · <span id="xp">0</span> XP
     </div>
 
-    <div class="stats">
-
-      <div class="stat">
-        💰 <span id="tokens">1000</span>
-      </div>
-
-      <div class="stat">
-        ⭐ Level <span id="level">1</span>
-      </div>
-
-      <div class="stat">
-        🔥 <span id="streak">0</span>
-      </div>
-
+    <div class="progress">
+      <div class="progressFill" id="xpBar"></div>
     </div>
 
-  </header>
+  </div>
+
+  <button class="daily" id="dailyBtn">
+    🎁 Claim Daily Friendship Bonus
+  </button>
+
+</section>
 
 
-  <!-- ==========================================
-       MAIN CASINO
-       ========================================== -->
+<div class="sectionTitle">
+  <h2>🎟️ Casino Floor</h2>
+</div>
 
-  <main class="casino-floor">
+<section class="floor">
 
-    <section class="welcome">
+  <button class="room" data-room="slotsRoom">
+    <div class="roomIcon">🎰</div>
+    <h3>Slots Room</h3>
+    <p>Buffalo, Pink Palace, Dolphin Riches, Fancy 7s and the Mega Jackpot.</p>
+  </button>
 
-      <h1>🎰 Welcome to Liliana's Casino</h1>
+  <button class="room" data-room="cardsRoom">
+    <div class="roomIcon">♠️</div>
+    <h3>Card Room</h3>
+    <p>Poker, Blackjack, Baccarat, War, Gin Rummy and Texas Hold'em.</p>
+  </button>
 
-      <p>
-        Six years of friendship.
-        One ridiculous amount of tokens.
-      </p>
+  <button class="room" data-room="luckyRoom">
+    <div class="roomIcon">🎡</div>
+    <h3>Lucky Lounge</h3>
+    <p>Lucky Wheel, Friendship Roulette, Craps, Hi-Lo, Coin Flip and Plinko.</p>
+  </button>
 
-    </section>
+  <button class="room" data-room="racesRoom">
+    <div class="roomIcon">🏇</div>
+    <h3>Derby Track</h3>
+    <p>Pick your racer and watch the friendship derby.</p>
+  </button>
+
+  <button class="room" data-room="prizeRoom">
+    <div class="roomIcon">🎁</div>
+    <h3>Prize Arcade</h3>
+    <p>Mystery Boxes, Scratch Cards, Gem Heist, Darts and more.</p>
+  </button>
+
+  <button class="room" data-room="catchRoom">
+    <div class="roomIcon">🐬</div>
+    <h3>Friendship Catch</h3>
+    <p>Catch creatures and build your collection.</p>
+  </button>
+
+  <button class="room" data-room="lilianaRoom">
+    <div class="roomIcon">💗</div>
+    <h3>Liliana's Corner</h3>
+    <p>Quiz, personality test, six-year timeline and friendship letter.</p>
+  </button>
+
+  <button class="room" data-room="vipRoom">
+    <div class="roomIcon">🔐</div>
+    <h3>VIP Vault</h3>
+    <p>Find the six-digit friendship code and unlock the vault.</p>
+  </button>
+
+</section>
 
 
-    <!-- ========================================
-         CASINO ROOMS
-         ======================================== -->
+<!-- SLOTS -->
 
-    <section class="rooms">
+<section class="roomView" id="slotsRoom">
 
-      <button class="room" data-room="slots">
+<div class="roomHead">
+<h2>🎰 Slots Room</h2>
+<button class="back">← Casino Floor</button>
+</div>
 
-        <div class="room-icon">🎰</div>
+<div class="games">
 
-        <div class="room-title">
-          Slots Room
+<div class="gameCard">
+<h3>🐃 Buffalo Stampede</h3>
+<p>Classic friendship buffalo slot.</p>
+<button class="play" data-slot="buffalo">PLAY</button>
+</div>
+
+<div class="gameCard">
+<h3>💗 Pink Palace</h3>
+<p>Sweet pink themed slot machine.</p>
+<button class="play" data-slot="pink">PLAY</button>
+</div>
+
+<div class="gameCard">
+<h3>🐬 Dolphin Riches</h3>
+<p>Dive into a dolphin themed spin.</p>
+<button class="play" data-slot="dolphin">PLAY</button>
+</div>
+
+<div class="gameCard">
+<h3>7️⃣ Fancy 7s</h3>
+<p>Lucky sevens friendship slot.</p>
+<button class="play" data-slot="sevens">PLAY</button>
+</div>
+
+<div class="gameCard">
+<h3>💎 Mega Jackpot</h3>
+<p>The giant 1,000,000 token jackpot.</p>
+<button class="play" data-slot="mega">PLAY</button>
+</div>
+
+</div>
+
+<div class="panel gamePanel hidden" id="slotPanel">
+
+<div class="bigGame">
+
+<h2 id="slotTitle">🎰 Slot Machine</h2>
+
+<p>
+Prize pool:
+<strong id="slotJackpot">10,000</strong> 💰
+</p>
+
+<div class="slot">
+
+<div class="reel" id="r1">💎</div>
+<div class="reel" id="r2">💎</div>
+<div class="reel" id="r3">💎</div>
+
+</div>
+
+<button class="spin" id="slotSpin">SPIN 🎰</button>
+
+<div class="result" id="slotResult"></div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- CARDS -->
+
+<section class="roomView" id="cardsRoom">
+
+<div class="roomHead">
+<h2>♠️ Card Room</h2>
+<button class="back">← Casino Floor</button>
+</div>
+
+<div class="games">
+
+<div class="gameCard">
+<h3>♠️ Poker vs Computer</h3>
+<p>Draw five cards and compare your hand.</p>
+<button class="play" data-cardgame="poker">PLAY</button>
+</div>
+
+<div class="gameCard">
+<h3>♣️ Blackjack</h3>
+<p>Hit, stand or double down.</p>
+<button class="play" data-cardgame="blackjack">PLAY</button>
+</div>
+
+<div class="gameCard">
+<h3>♦️ Baccarat</h3>
+<p>Choose Player, Banker or Tie.</p>
+<button class="play" data-cardgame="baccarat">PLAY</button>
+</div>
+
+<div class="gameCard">
+<h3>🃏 War</h3>
+<p>Higher card wins.</p>
+<button class="play" data-cardgame="war">PLAY</button>
+</div>
+
+<div class="gameCard">
+<h3>🃏 Gin Rummy</h3>
+<p>Build the better hand.</p>
+<button class="play" data-cardgame="gin">PLAY</button>
+</div>
+
+<div class="gameCard">
+<h3>♠️ Texas Hold'em</h3>
+<p>Choose whether your hand is strong enough.</p>
+<button class="play" data-cardgame="holdem">PLAY</button>
+</div>
+
+</div>
+
+<div class="panel gamePanel hidden" id="cardPanel">
+
+<h2 id="cardTitle"></h2>
+<div id="cardContent"></div>
+<div class="result" id="cardResult"></div>
+
+</div>
+
+</section>
+
+
+<!-- LUCKY -->
+
+<section class="roomView" id="luckyRoom">
+
+<div class="roomHead">
+<h2>🎡 Lucky Lounge</h2>
+<button class="back">← Casino Floor</button>
+</div>
+
+<div class="games">
+
+<div class="gameCard">
+<h3>🎡 Lucky Wheel</h3>
+<p>Spin for up to 10,000 tokens.</p>
+<button class="play" data-lucky="wheel">PLAY</button>
+</div>
+
+<div class="gameCard">
+<h3>🔴 Friendship Roulette</h3>
+<p>Pick red, black or green.</p>
+<button class="play" data-lucky="roulette">PLAY</button>
+</div>
+
+<div class="gameCard">
+<h3>🎲 Craps</h3>
+<p>Roll two dice and chase a lucky total.</p>
+<button class="play" data-lucky="craps">PLAY</button>
+</div>
+
+<div class="gameCard">
+<h3>📈 Hi-Lo</h3>
+<p>Predict whether the next number is higher or lower.</p>
+<button class="play" data-lucky="hilo">PLAY</button>
+</div>
+
+<div class="gameCard">
+<h3>🪙 Coin Flip</h3>
+<p>Call heads or tails.</p>
+<button class="play" data-lucky="coin">PLAY</button>
+</div>
+
+<div class="gameCard">
+<h3>🟣 Plinko</h3>
+<p>Drop your token through the pegs.</p>
+<button class="play" data-lucky="plinko">PLAY</button>
+</div>
+
+</div>
+
+<div class="panel gamePanel hidden" id="luckyPanel">
+
+<div class="bigGame" id="luckyContent"></div>
+
+</div>
+
+</section>
+
+
+<!-- RACES -->
+
+<section class="roomView" id="racesRoom">
+
+<div class="roomHead">
+<h2>🏇 Derby Track</h2>
+<button class="back">← Casino Floor</button>
+</div>
+
+<div class="games">
+
+<div class="gameCard">
+<h3>🏇 Horse Derby</h3>
+<p>Choose your horse and race.</p>
+<button class="play" data-race="horse">RACE</button>
+</div>
+
+<div class="gameCard">
+<h3>🐬 Dolphin Derby</h3>
+<p>Pick a dolphin and watch them swim.</p>
+<button class="play" data-race="dolphin">RACE</button>
+</div>
+
+</div>
+
+<div class="panel gamePanel hidden" id="racePanel">
+
+<div class="bigGame">
+
+<h2 id="raceTitle"></h2>
+
+<div id="raceContent"></div>
+
+<div class="result" id="raceResult"></div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- PRIZES -->
+
+<section class="roomView" id="prizeRoom">
+
+<div class="roomHead">
+<h2>🎁 Prize Arcade</h2>
+<button class="back">← Casino Floor</button>
+</div>
+
+<div class="games">
+
+<div class="gameCard">
+<h3>🎁 Mystery Boxes</h3>
+<p>Open a mystery reward.</p>
+<button class="play" data-mini="box">OPEN</button>
+</div>
+
+<div class="gameCard">
+<h3>🪙 Three Cups</h3>
+<p>Find the hidden token.</p>
+<button class="play" data-mini="cups">PLAY</button>
+</div>
+
+<div class="gameCard">
+<h3>💗 Heart Scratch Card</h3>
+<p>Scratch your virtual friendship card.</p>
+<button class="play" data-mini="scratch">SCRATCH</button>
+</div>
+
+<div class="gameCard">
+<h3>🎯 Lucky Darts</h3>
+<p>Hit the target.</p>
+<button class="play" data-mini="darts">THROW</button>
+</div>
+
+<div class="gameCard">
+<h3>💎 Gem Heist</h3>
+<p>Pick a vault and hope you find gems.</p>
+<button class="play" data-mini="gems">HEIST</button>
+</div>
+
+<div class="gameCard">
+<h3>🎁 Lucky Envelopes</h3>
+<p>Choose one mysterious envelope.</p>
+<button class="play" data-mini="envelopes">OPEN</button>
+</div>
+
+<div class="gameCard">
+<h3>🔢 Lucky Number</h3>
+<p>Guess the lucky number.</p>
+<button class="play" data-mini="number">GUESS</button>
+</div>
+
+<div class="gameCard">
+<h3>🐠 Ocean Treasure</h3>
+<p>Dive for hidden treasure.</p>
+<button class="play" data-mini="treasure">DIVE</button>
+</div>
+
+</div>
+
+<div class="panel gamePanel hidden" id="miniPanel">
+
+<div class="bigGame">
+
+<h2 id="miniTitle"></h2>
+
+<div id="miniContent"></div>
+
+<div class="result" id="miniResult"></div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- CATCH -->
+
+<section class="roomView" id="catchRoom">
+
+<div class="roomHead">
+<h2>🐬 Friendship Catch</h2>
+<button class="back">← Casino Floor</button>
+</div>
+
+<div class="panel">
+
+<p>
+Catch the creatures swimming around the friendship ocean.
+Some creatures are much rarer than others.
+</p>
+
+<div class="creatureArea" id="creatureArea">
+
+<div class="bubble" style="left:10%;top:20%"></div>
+<div class="bubble" style="left:70%;top:25%"></div>
+<div class="bubble" style="left:45%;top:75%"></div>
+<div class="bubble" style="left:85%;top:65%"></div>
+
+<button class="creature" style="left:12%;top:35%" data-creature="Dolphini">🐬</button>
+<button class="creature" style="left:65%;top:15%" data-creature="Rosibun">🌹🐰</button>
+<button class="creature" style="left:40%;top:60%" data-creature="Sunnyflo">🌻</button>
+<button class="creature" style="left:75%;top:65%" data-creature="Pinkyroo">🦘💗</button>
+<button class="creature" style="left:20%;top:75%" data-creature="Fluttera">🦋</button>
+<button class="creature" style="left:50%;top:25%" data-creature="Shellby">🐚</button>
+<button class="creature" style="left:82%;top:40%" data-creature="Lunaboo">🌙</button>
+
+</div>
+
+<h3>🐾 Your Collection</h3>
+
+<div class="collection" id="collection"></div>
+
+</div>
+
+</section>
+
+
+<!-- LILIANA -->
+
+<section class="roomView" id="lilianaRoom">
+
+<div class="roomHead">
+<h2>💗 Liliana's Corner</h2>
+<button class="back">← Casino Floor</button>
+</div>
+
+<div class="games">
+
+<div class="gameCard">
+<h3>🧠 Liliana Quiz</h3>
+<p>Answer questions and earn Friendship Tokens.</p>
+<button class="play" id="startQuiz">START QUIZ</button>
+</div>
+
+<div class="gameCard">
+<h3>🌸 Personality Test</h3>
+<p>Discover which Liliana energy you get.</p>
+<button class="play" id="personality">TAKE TEST</button>
+</div>
+
+<div class="gameCard">
+<h3>📖 Six Years Together</h3>
+<p>Explore the friendship timeline.</p>
+<button class="play" id="timelineBtn">OPEN</button>
+</div>
+
+<div class="gameCard">
+<h3>💌 Friendship Letter</h3>
+<p>A little message celebrating six years.</p>
+<button class="play" id="letterBtn">OPEN</button>
+</div>
+
+</div>
+
+<div class="panel gamePanel" id="lilianaPanel">
+
+<div id="lilianaContent">
+
+<h2>💗 Liliana's Corner</h2>
+
+<p>
+Choose something above to explore this part of the casino.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- VIP -->
+
+<section class="roomView" id="vipRoom">
+
+<div class="roomHead">
+<h2>🔐 VIP Friendship Vault</h2>
+<button class="back">← Casino Floor</button>
+</div>
+
+<div class="panel vault">
+
+<h2>💎 Six-Year Friendship Vault</h2>
+
+<p>
+Six digits. Six years. One secret.
+</p>
+
+<input
+  class="codeInput"
+  id="vaultCode"
+  maxlength="6"
+  inputmode="numeric"
+  placeholder="••••••"
+>
+
+<br><br>
+
+<button class="play" id="vaultButton">
+UNLOCK VAULT 🔐
+</button>
+
+<div class="result" id="vaultResult"></div>
+
+</div>
+
+</section>
+
+
+<!-- ACHIEVEMENTS -->
+
+<section>
+
+<div class="sectionTitle">
+<h2>🏆 Achievements</h2>
+</div>
+
+<div class="achievements" id="achievements"></div>
+
+</section>
+
+</main>
+
+
+<footer>
+💗 Six years of friendship · Liliana's Friendship Casino 💗
+</footer>
+
+<div class="toast" id="toast"></div>
+
+
+<script>
+
+/* =====================================================
+   STATE
+===================================================== */
+
+const DEFAULT_STATE = {
+  tokens:1000,
+  xp:0,
+  streak:0,
+  wins:0,
+  played:0,
+  biggest:0,
+  sound:true,
+  lastDaily:"",
+  vaultOpened:false,
+  caught:[],
+  achievements:[],
+  quizBest:0
+};
+
+let S = loadState();
+
+function loadState(){
+
+  try{
+
+    const saved =
+      JSON.parse(localStorage.getItem("lilianaCasino"));
+
+    return {
+      ...DEFAULT_STATE,
+      ...(saved || {})
+    };
+
+  }catch(e){
+
+    return {...DEFAULT_STATE};
+
+  }
+
+}
+
+function save(){
+
+  localStorage.setItem(
+    "lilianaCasino",
+    JSON.stringify(S)
+  );
+
+}
+
+function format(n){
+
+  return Number(n || 0).toLocaleString();
+
+}
+
+
+/* =====================================================
+   AUDIO
+===================================================== */
+
+let audioCtx = null;
+
+function sound(type="click"){
+
+  if(!S.sound) return;
+
+  try{
+
+    audioCtx =
+      audioCtx ||
+      new (window.AudioContext ||
+      window.webkitAudioContext)();
+
+    const osc =
+      audioCtx.createOscillator();
+
+    const gain =
+      audioCtx.createGain();
+
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+
+    const tones = {
+      click:420,
+      win:760,
+      jackpot:980,
+      lose:170,
+      spin:300
+    };
+
+    osc.frequency.value =
+      tones[type] || 420;
+
+    osc.type =
+      type==="win" || type==="jackpot"
+      ? "sine"
+      : "triangle";
+
+    gain.gain.setValueAtTime(
+      .0001,
+      audioCtx.currentTime
+    );
+
+    gain.gain.exponentialRampToValueAtTime(
+      .08,
+      audioCtx.currentTime+.02
+    );
+
+    gain.gain.exponentialRampToValueAtTime(
+      .0001,
+      audioCtx.currentTime+.25
+    );
+
+    osc.start();
+
+    osc.stop(
+      audioCtx.currentTime+.26
+    );
+
+  }catch(e){}
+
+}
+
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+let toastTimer;
+
+function toast(message){
+
+  const el =
+    document.getElementById("toast");
+
+  el.textContent = message;
+
+  el.classList.add("show");
+
+  clearTimeout(toastTimer);
+
+  toastTimer =
+    setTimeout(
+      ()=>el.classList.remove("show"),
+      2500
+    );
+
+}
+
+
+/* =====================================================
+   TOKEN / XP SYSTEM
+===================================================== */
+
+function add(amount,win=false){
+
+  S.tokens += amount;
+
+  if(S.tokens < 0)
+    S.tokens = 0;
+
+  S.played++;
+
+  const xpGain =
+    Math.max(
+      5,
+      Math.min(
+        100,
+        Math.abs(amount)
+      )
+    );
+
+  S.xp += xpGain;
+
+  if(win){
+
+    S.wins++;
+
+    S.streak++;
+
+  }
+
+  if(amount > S.biggest)
+    S.biggest = amount;
+
+  update();
+
+  save();
+
+}
+
+
+function level(){
+
+  return Math.floor(
+    S.xp / 1000
+  ) + 1;
+
+}
+
+
+function update(){
+
+  const lv = level();
+
+  document.getElementById("tokens")
+    .textContent = format(S.tokens);
+
+  document.getElementById("level")
+    .textContent = lv;
+
+  document.getElementById("heroLevel")
+    .textContent = lv;
+
+  document.getElementById("xp")
+    .textContent = format(S.xp);
+
+  document.getElementById("streak")
+    .textContent = S.streak;
+
+  document.getElementById("wins")
+    .textContent = S.wins;
+
+  const progress =
+    S.xp % 1000;
+
+  document.getElementById("xpBar")
+    .style.width =
+    progress / 10 + "%";
+
+  renderAchievements();
+
+}
+
+
+/* =====================================================
+   ACHIEVEMENTS
+===================================================== */
+
+const achievementList = [
+
+  ["first","🌸 First Spin","Play your first game."],
+  ["winner","🏆 First Win","Win your first game."],
+  ["rich","💰 10K Club","Reach 10,000 tokens."],
+  ["million","💎 Million Token Club","Win the Mega Jackpot."],
+  ["collector","🐬 Collector","Catch 5 creatures."],
+  ["quiz","🧠 Liliana Expert","Score 20/20 on the quiz."],
+  ["vault","🔐 Vault Keeper","Open the friendship vault."],
+  ["ten","🎰 Casino Regular","Play 10 games."],
+  ["level10","👑 Friendship Royalty","Reach level 10."]
+];
+
+
+function achievement(id){
+
+  if(!S.achievements.includes(id)){
+
+    S.achievements.push(id);
+
+    save();
+
+    const item =
+      achievementList.find(
+        x=>x[0]===id
+      );
+
+    if(item)
+      toast("🏆 Achievement unlocked: "+item[1]);
+
+  }
+
+}
+
+
+function renderAchievements(){
+
+  const el =
+    document.getElementById("achievements");
+
+  el.innerHTML =
+    achievementList.map(a=>{
+
+      const unlocked =
+        S.achievements.includes(a[0]);
+
+      return `
+        <div class="achievement ${unlocked?"":"locked"}">
+          <strong>${a[1]}</strong>
+          <span>${a[2]}</span>
         </div>
+      `;
 
-        <p>
-          Buffalo, Dolphin Riches,
-          Pink Palace & Mega Jackpot
-        </p>
+    }).join("");
 
+  if(S.played>=1)
+    achievement("first");
+
+  if(S.wins>=1)
+    achievement("winner");
+
+  if(S.tokens>=10000)
+    achievement("rich");
+
+  if(S.caught.length>=5)
+    achievement("collector");
+
+  if(S.played>=10)
+    achievement("ten");
+
+  if(level()>=10)
+    achievement("level10");
+
+}
+
+
+/* =====================================================
+   ROOM NAVIGATION
+===================================================== */
+
+const rooms =
+  document.querySelectorAll(".room");
+
+const views =
+  document.querySelectorAll(".roomView");
+
+function openRoom(id){
+
+  views.forEach(v =>
+    v.classList.remove("active")
+  );
+
+  const target =
+    document.getElementById(id);
+
+  if(target){
+
+    target.classList.add("active");
+
+    target.scrollIntoView({
+      behavior:"smooth",
+      block:"start"
+    });
+
+  }
+
+}
+
+rooms.forEach(room=>{
+
+  room.addEventListener(
+    "click",
+    ()=>{
+
+      sound();
+
+      openRoom(
+        room.dataset.room
+      );
+
+    }
+  );
+
+});
+
+document
+  .querySelectorAll(".back")
+  .forEach(btn=>{
+
+    btn.addEventListener(
+      "click",
+      ()=>{
+
+        views.forEach(v =>
+          v.classList.remove("active")
+        );
+
+        window.scrollTo({
+          top:0,
+          behavior:"smooth"
+        });
+
+        sound();
+
+      }
+    );
+
+  });
+
+
+/* =====================================================
+   SOUND BUTTON
+===================================================== */
+
+document
+  .getElementById("soundBtn")
+  .addEventListener(
+    "click",
+    ()=>{
+
+      S.sound = !S.sound;
+
+      document.getElementById(
+        "soundBtn"
+      ).textContent =
+        S.sound ? "🔊" : "🔇";
+
+      save();
+
+    }
+  );
+
+
+/* =====================================================
+   DAILY BONUS
+===================================================== */
+
+function today(){
+
+  const d = new Date();
+
+  return [
+    d.getFullYear(),
+    d.getMonth()+1,
+    d.getDate()
+  ].join("-");
+
+}
+
+document
+  .getElementById("dailyBtn")
+  .addEventListener(
+    "click",
+    ()=>{
+
+      if(S.lastDaily===today()){
+
+        toast("🎁 You already claimed today's bonus!");
+
+        return;
+
+      }
+
+      S.lastDaily=today();
+
+      add(500,true);
+
+      toast("🎁 Daily Bonus: +500 tokens!");
+
+    }
+  );
+
+
+/* =====================================================
+   SLOT MACHINES
+===================================================== */
+
+const slotData = {
+
+  buffalo:{
+    title:"🐃 Buffalo Stampede",
+    jackpot:5000,
+    symbols:["🐃","🌹","💰","7️⃣","💎"]
+  },
+
+  pink:{
+    title:"💗 Pink Palace",
+    jackpot:7500,
+    symbols:["💗","💋","🌸","👑","💎"]
+  },
+
+  dolphin:{
+    title:"🐬 Dolphin Riches",
+    jackpot:8000,
+    symbols:["🐬","🌊","🐚","🐠","💎"]
+  },
+
+  sevens:{
+    title:"7️⃣ Fancy 7s",
+    jackpot:10000,
+    symbols:["7️⃣","7️⃣","🍒","⭐","💎"]
+  },
+
+  mega:{
+    title:"💎 MEGA JACKPOT",
+    jackpot:1000000,
+    symbols:["💎","💎","7️⃣","👑","💗"]
+  }
+
+};
+
+let currentSlot="buffalo";
+
+document
+  .querySelectorAll("[data-slot]")
+  .forEach(btn=>{
+
+    btn.addEventListener(
+      "click",
+      ()=>{
+
+        currentSlot =
+          btn.dataset.slot;
+
+        const data =
+          slotData[currentSlot];
+
+        document.getElementById(
+          "slotPanel"
+        ).classList.remove("hidden");
+
+        document.getElementById(
+          "slotTitle"
+        ).textContent =
+          data.title;
+
+        document.getElementById(
+          "slotJackpot"
+        ).textContent =
+          format(data.jackpot);
+
+        document.getElementById(
+          "slotResult"
+        ).textContent =
+          "Ready to spin.";
+
+        document.getElementById(
+          "slotPanel"
+        ).scrollIntoView({
+          behavior:"smooth"
+        });
+
+      }
+    );
+
+  });
+
+
+document
+  .getElementById("slotSpin")
+  .addEventListener(
+    "click",
+    ()=>{
+
+      if(S.tokens<20){
+
+        toast("You need at least 20 tokens.");
+
+        return;
+
+      }
+
+      const data =
+        slotData[currentSlot];
+
+      sound("spin");
+
+      const r = [
+        data.symbols[
+          Math.floor(
+            Math.random()*data.symbols.length
+          )
+        ],
+        data.symbols[
+          Math.floor(
+            Math.random()*data.symbols.length
+          )
+        ],
+        data.symbols[
+          Math.floor(
+            Math.random()*data.symbols.length
+          )
+        ]
+      ];
+
+      const reels =
+        [
+          document.getElementById("r1"),
+          document.getElementById("r2"),
+          document.getElementById("r3")
+        ];
+
+      let count=0;
+
+      const interval =
+        setInterval(()=>{
+
+          reels.forEach(x=>{
+            x.textContent =
+              data.symbols[
+                Math.floor(
+                  Math.random()*
+                  data.symbols.length
+                )
+              ];
+          });
+
+          count++;
+
+          if(count>=12){
+
+            clearInterval(interval);
+
+            reels[0].textContent=r[0];
+            reels[1].textContent=r[1];
+            reels[2].textContent=r[2];
+
+            if(
+              r[0]===r[1] &&
+              r[1]===r[2]
+            ){
+
+              const prize =
+                data.jackpot;
+
+              add(prize,true);
+
+              if(
+                currentSlot==="mega" &&
+                r[0]==="💎"
+              ){
+
+                achievement("million");
+
+                document.getElementById(
+                  "slotResult"
+                ).textContent =
+                  "💎💎💎 MEGA JACKPOT! +1,000,000 TOKENS!";
+
+                sound("jackpot");
+
+              }else{
+
+                document.getElementById(
+                  "slotResult"
+                ).textContent =
+                  `🎉 JACKPOT! +${format(prize)} TOKENS!`;
+
+                sound("win");
+
+              }
+
+            }else{
+
+              add(-20);
+
+              document.getElementById(
+                "slotResult"
+              ).textContent =
+                "No match. -20 tokens.";
+
+              sound("lose");
+
+            }
+
+          }
+
+        },90);
+
+    }
+  );
+
+
+/* =====================================================
+   CARD UTILITIES
+===================================================== */
+
+const suits=["♠","♥","♦","♣"];
+
+const ranks=[
+  "2","3","4","5","6","7","8",
+  "9","10","J","Q","K","A"
+];
+
+function randomCard(){
+
+  return {
+    rank:
+      ranks[
+        Math.floor(
+          Math.random()*ranks.length
+        )
+      ],
+    suit:
+      suits[
+        Math.floor(
+          Math.random()*suits.length
+        )
+      ]
+  };
+
+}
+
+function cardValue(card){
+
+  if(["J","Q","K"].includes(card.rank))
+    return 10;
+
+  if(card.rank==="A")
+    return 11;
+
+  return Number(card.rank);
+
+}
+
+function cardHTML(card){
+
+  const red =
+    card.suit==="♥" ||
+    card.suit==="♦";
+
+  return `
+    <div class="card ${red?"red":""}">
+      ${card.rank}${card.suit}
+    </div>
+  `;
+
+}
+
+
+/* =====================================================
+   CARD GAMES
+===================================================== */
+
+document
+  .querySelectorAll("[data-cardgame]")
+  .forEach(btn=>{
+
+    btn.addEventListener(
+      "click",
+      ()=>{
+
+        const game =
+          btn.dataset.cardgame;
+
+        const panel =
+          document.getElementById("cardPanel");
+
+        panel.classList.remove("hidden");
+
+        playCardGame(game);
+
+        panel.scrollIntoView({
+          behavior:"smooth"
+        });
+
+      }
+    );
+
+  });
+
+
+function playCardGame(game){
+
+  const title =
+    document.getElementById("cardTitle");
+
+  const content =
+    document.getElementById("cardContent");
+
+  const result =
+    document.getElementById("cardResult");
+
+  result.textContent="";
+
+  if(game==="poker"){
+
+    title.textContent =
+      "♠️ Poker vs Computer";
+
+    const player =
+      Array.from(
+        {length:5},
+        randomCard
+      );
+
+    const computer =
+      Array.from(
+        {length:5},
+        randomCard
+      );
+
+    const pScore =
+      player.reduce(
+        (s,c)=>s+cardValue(c),0
+      );
+
+    const cScore =
+      computer.reduce(
+        (s,c)=>s+cardValue(c),0
+      );
+
+    content.innerHTML=`
+      <p>Your hand</p>
+      <div class="cards">
+        ${player.map(cardHTML).join("")}
+      </div>
+
+      <p>Computer hand</p>
+      <div class="cards">
+        ${computer.map(cardHTML).join("")}
+      </div>
+
+      <button class="action" id="cardAgain">
+        DEAL AGAIN
       </button>
+    `;
 
+    if(pScore>=cScore){
 
-      <button class="room" data-room="cards">
+      add(250,true);
 
-        <div class="room-icon">♠️</div>
+      result.textContent =
+        `🏆 You win! +250 tokens`;
 
-        <div class="room-title">
-          Card Room
-        </div>
+      sound("win");
 
-        <p>
-          Poker, Blackjack,
-          Baccarat, War & Gin Rummy
-        </p>
+    }else{
 
-      </button>
+      add(-30);
 
+      result.textContent =
+        `The computer wins. -30 tokens`;
 
-      <button class="room" data-room="lucky">
+      sound("lose");
 
-        <div class="room-icon">🎡</div>
+    }
 
-        <div class="room-title">
-          Lucky Lounge
-        </div>
+  }
 
-        <p>
-          Wheel, Roulette,
-          Craps & Plinko
-        </p>
+  else if(game==="blackjack"){
 
-      </button>
+    title.textContent="♣️ Blackjack";
 
+    let player=[
+      randomCard(),
+      randomCard()
+    ];
 
-      <button class="room" data-room="races">
+    let dealer=[
+      randomCard(),
+      randomCard()
+    ];
 
-        <div class="room-icon">🏇</div>
+    const total =
+      cardsTotal(player);
 
-        <div class="room-title">
-          Derby Track
-        </div>
+    const dTotal =
+      cardsTotal(dealer);
 
-        <p>
-          Horse Derby &
-          Dolphin Derby
-        </p>
+    content.innerHTML=`
 
-      </button>
+      <p>Your hand: ${total}</p>
 
+      <div class="cards">
+        ${player.map(cardHTML).join("")}
+      </div>
 
-      <button class="room" data-room="catch">
+      <p>Dealer: ${dTotal}</p>
 
-        <div class="room-icon">🐬</div>
+      <div class="cards">
+        ${dealer.map(cardHTML).join("")}
+      </div>
 
-        <div class="room-title">
-          Friendship Catch
-        </div>
+      <div class="actionRow">
 
-        <p>
-          Catch and collect
-          friendship creatures
-        </p>
-
-      </button>
-
-
-      <button class="room" data-room="prizes">
-
-        <div class="room-icon">🎁</div>
-
-        <div class="room-title">
-          Prize Arcade
-        </div>
-
-        <p>
-          Mystery Boxes,
-          Scratch Cards & more
-        </p>
-
-      </button>
-
-
-      <button class="room" data-room="liliana">
-
-        <div class="room-icon">💗</div>
-
-        <div class="room-title">
-          Liliana's Corner
-        </div>
-
-        <p>
-          Quiz, Personality Test,
-          Memories & Letter
-        </p>
-
-      </button>
-
-
-      <button class="room" data-room="vault">
-
-        <div class="room-icon">🔐</div>
-
-        <div class="room-title">
-          VIP Vault
-        </div>
-
-        <p>
-          Six-year friendship
-          secret
-        </p>
-
-      </button>
-
-    </section>
-
-
-    <!-- ========================================
-         SLOTS ROOM
-         ======================================== -->
-
-    <section
-      id="slots"
-      class="game-room">
-
-      <button class="back-button">
-        ← Back to Casino
-      </button>
-
-      <h2>🎰 Slots Room</h2>
-
-      <div class="slot-machine">
-
-        <h3>
-          💎 MEGA JACKPOT
-        </h3>
-
-        <p>
-          JACKPOT:
-          <strong>1,000,000 💰</strong>
-        </p>
-
-        <div class="reels">
-
-          <div class="reel" id="reel1">
-            💎
-          </div>
-
-          <div class="reel" id="reel2">
-            💎
-          </div>
-
-          <div class="reel" id="reel3">
-            💎
-          </div>
-
-        </div>
-
-        <button
-          class="spin-button"
-          id="megaSpin">
-
-          SPIN 🎰
-
+        <button class="action" id="hitBtn">
+          HIT
         </button>
 
-        <p id="slotResult"></p>
+        <button class="action green" id="standBtn">
+          STAND
+        </button>
+
+        <button class="action gold" id="doubleBtn">
+          DOUBLE DOWN
+        </button>
 
       </div>
 
-    </section>
+    `;
 
+    const finish = ()=>{
 
-    <!-- ========================================
-         LUCKY WHEEL
-         ======================================== -->
+      const p =
+        cardsTotal(player);
 
-    <section
-      id="lucky"
-      class="game-room">
+      const d =
+        cardsTotal(dealer);
 
-      <button class="back-button">
-        ← Back to Casino
-      </button>
+      if(p>21){
 
-      <h2>🎡 Lucky Lounge</h2>
+        add(-40);
 
-      <div class="wheel-area">
+        result.textContent =
+          "💥 Bust! -40 tokens";
 
-        <div
-          class="wheel"
-          id="wheel">
-        </div>
+        sound("lose");
 
-        <button
-          class="spin-button"
-          id="wheelSpin">
+      }
+      else if(d>21 || p>d){
 
-          SPIN THE WHEEL
+        add(150,true);
 
-        </button>
+        result.textContent =
+          "🏆 Blackjack win! +150";
 
-        <p id="wheelResult"></p>
+        sound("win");
 
-      </div>
+      }
+      else if(p===d){
 
-    </section>
+        result.textContent =
+          "🤝 Push! No tokens lost.";
 
+      }
+      else{
 
-    <!-- ========================================
-         FRIENDSHIP CATCH
-         ======================================== -->
+        add(-40);
 
-    <section
-      id="catch"
-      class="game-room">
+        result.textContent =
+          "Dealer wins. -40 tokens";
 
-      <button class="back-button">
-        ← Back to Casino
-      </button>
+        sound("lose");
 
-      <h2>🐬 Friendship Catch</h2>
-
-      <p>
-        Catch creatures and build
-        Liliana's Friendship Aquarium.
-      </p>
-
-      <div class="ocean">
-
-        <button
-          class="creature"
-          style="left:15%;top:30%"
-          data-creature="Dolphini">
-
-          🐬
-
-        </button>
-
-        <button
-          class="creature"
-          style="left:65%;top:20%"
-          data-creature="Rosibun">
-
-          🌹🐰
-
-        </button>
-
-        <button
-          class="creature"
-          style="left:40%;top:65%"
-          data-creature="Sunnyflo">
-
-          🌻
-
-        </button>
-
-        <button
-          class="creature"
-          style="left:75%;top:65%"
-          data-creature="Pinkyroo">
-
-          🦘💗
-
-        </button>
-
-      </div>
-
-      <p id="catchResult"></p>
-
-    </section>
-
-
-    <!-- ========================================
-         LILIANA'S CORNER
-         ======================================== -->
-
-    <section
-      id="liliana"
-      class="game-room">
-
-      <button class="back-button">
-        ← Back to Casino
-      </button>
-
-      <h2>💗 Liliana's Corner</h2>
-
-      <button class="room">
-        🧠 Take Liliana's Quiz
-      </button>
-
-      <button class="room">
-        🌸 Personality Test
-      </button>
-
-      <button class="room">
-        📖 Six Years of Friendship
-      </button>
-
-      <button class="room">
-        💌 Open Friendship Letter
-      </button>
-
-    </section>
-
-
-    <!-- ========================================
-         VIP VAULT
-         ======================================== -->
-
-    <section
-      id="vault"
-      class="game-room">
-
-      <button class="back-button">
-        ← Back to Casino
-      </button>
-
-      <h2>🔐 VIP Friendship Vault</h2>
-
-      <p>
-        Six digits.
-        Six years.
-        One secret.
-      </p>
-
-      <input
-        id="vaultCode"
-        maxlength="6"
-        inputmode="numeric"
-        placeholder="••••••">
-
-      <button id="vaultButton">
-        UNLOCK
-      </button>
-
-      <p id="vaultResult"></p>
-
-    </section>
-
-  </main>
-
-
-  <script>
-
-    /* ==========================================
-       GAME STATE
-       ========================================== */
-
-    const state = {
-
-      tokens: 1000,
-
-      xp: 0,
-
-      level: 1,
-
-      streak: 0,
-
-      wins: 0,
-
-      played: 0,
-
-      caught: [],
-
-      achievements: []
+      }
 
     };
 
+    document
+      .getElementById("hitBtn")
+      .onclick=()=>{
 
-    /* ==========================================
-       UPDATE HUD
-       ========================================== */
+        player.push(randomCard());
 
-    function updateHUD() {
+        content.querySelector("p").textContent =
+          "Your hand: "+
+          cardsTotal(player);
 
-      document.getElementById("tokens")
-        .textContent = state.tokens;
+        content.querySelector(".cards")
+          .innerHTML =
+          player.map(cardHTML).join("");
 
-      document.getElementById("level")
-        .textContent = state.level;
+        if(cardsTotal(player)>=21)
+          finish();
 
-      document.getElementById("streak")
-        .textContent = state.streak;
-
-    }
-
-
-    /* ==========================================
-       TOKEN SYSTEM
-       ========================================== */
-
-    function addTokens(amount) {
-
-      state.tokens += amount;
-
-      if (state.tokens < 0) {
-        state.tokens = 0;
-      }
-
-      state.xp += Math.max(1, Math.abs(amount));
-
-      updateHUD();
-
-    }
-
-
-    /* ==========================================
-       ROOM NAVIGATION
-       ========================================== */
-
-    const rooms =
-      document.querySelectorAll(".room");
-
-    const gameRooms =
-      document.querySelectorAll(".game-room");
-
-
-    rooms.forEach(room => {
-
-      room.addEventListener("click", () => {
-
-        const target =
-          room.dataset.room;
-
-        gameRooms.forEach(game => {
-          game.classList.remove("active");
-        });
-
-        const selected =
-          document.getElementById(target);
-
-        if (selected) {
-          selected.classList.add("active");
-
-          selected.scrollIntoView({
-            behavior: "smooth"
-          });
-        }
-
-      });
-
-    });
-
-
-    /* ==========================================
-       BACK BUTTONS
-       ========================================== */
+      };
 
     document
-      .querySelectorAll(".back-button")
-      .forEach(button => {
-
-        button.addEventListener("click", () => {
-
-          gameRooms.forEach(game => {
-            game.classList.remove("active");
-          });
-
-          window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-          });
-
-        });
-
-      });
-
-
-    /* ==========================================
-       MEGA JACKPOT
-       ========================================== */
+      .getElementById("standBtn")
+      .onclick=finish;
 
     document
-      .getElementById("megaSpin")
-      .addEventListener("click", () => {
+      .getElementById("doubleBtn")
+      .onclick=()=>{
 
-        const reels = [
-          "💎",
-          "🍒",
-          "7️⃣",
-          "💗",
-          "🐬"
-        ];
+        if(S.tokens<80){
 
-        const result = [
-          reels[Math.floor(Math.random() * reels.length)],
-          reels[Math.floor(Math.random() * reels.length)],
-          reels[Math.floor(Math.random() * reels.length)]
-        ];
+          toast("Not enough tokens.");
 
-        document.getElementById("reel1")
-          .textContent = result[0];
-
-        document.getElementById("reel2")
-          .textContent = result[1];
-
-        document.getElementById("reel3")
-          .textContent = result[2];
-
-        if (
-          result[0] === "💎" &&
-          result[1] === "💎" &&
-          result[2] === "💎"
-        ) {
-
-          addTokens(1000000);
-
-          document.getElementById("slotResult")
-            .textContent =
-            "💎💎💎 MEGA JACKPOT! +1,000,000 TOKENS!";
-
-        } else {
-
-          addTokens(-20);
-
-          document.getElementById("slotResult")
-            .textContent =
-            "No jackpot this time. Try again!";
+          return;
 
         }
 
+        player.push(randomCard());
+
+        finish();
+
+      };
+
+  }
+
+  else if(game==="baccarat"){
+
+    title.textContent="♦️ Baccarat";
+
+    content.innerHTML=`
+
+      <p>Choose your side.</p>
+
+      <div class="actionRow">
+
+        <button class="action" data-bac="Player">
+          PLAYER
+        </button>
+
+        <button class="action gold" data-bac="Banker">
+          BANKER
+        </button>
+
+        <button class="action green" data-bac="Tie">
+          TIE
+        </button>
+
+      </div>
+
+    `;
+
+    content
+      .querySelectorAll("[data-bac]")
+      .forEach(b=>{
+
+        b.onclick=()=>{
+
+          const choice =
+            b.dataset.bac;
+
+          const outcomes=[
+            "Player",
+            "Banker",
+            "Tie"
+          ];
+
+          const outcome =
+            outcomes[
+              Math.floor(
+                Math.random()*3
+              )
+            ];
+
+          if(choice===outcome){
+
+            add(
+              outcome==="Tie"
+              ? 500
+              : 200,
+              true
+            );
+
+            result.textContent =
+              `🎉 ${outcome} wins!`;
+
+            sound("win");
+
+          }else{
+
+            add(-30);
+
+            result.textContent =
+              `Dealer result: ${outcome}`;
+
+            sound("lose");
+
+          }
+
+        };
+
       });
 
+  }
 
-    /* ==========================================
-       LUCKY WHEEL
-       ========================================== */
+  else if(game==="war"){
 
-    let wheelRotation = 0;
+    title.textContent="🃏 War";
 
-    const prizes = [
-      50,
-      100,
-      250,
-      500,
-      1000,
-      2500,
-      5000,
-      10000
-    ];
+    const player=randomCard();
+    const computer=randomCard();
 
+    const pv=cardValue(player);
+    const cv=cardValue(computer);
+
+    content.innerHTML=`
+      <div class="cards">
+        ${cardHTML(player)}
+        ${cardHTML(computer)}
+      </div>
+
+      <button class="action" id="warAgain">
+        PLAY WAR
+      </button>
+    `;
+
+    if(pv>cv){
+
+      add(100,true);
+
+      result.textContent =
+        "🏆 Your card wins! +100";
+
+      sound("win");
+
+    }else if(pv<cv){
+
+      add(-20);
+
+      result.textContent =
+        "Computer wins. -20";
+
+      sound("lose");
+
+    }else{
+
+      add(50,true);
+
+      result.textContent =
+        "⚔️ WAR! +50";
+
+    }
+
+  }
+
+  else if(game==="gin"){
+
+    title.textContent="🃏 Gin Rummy";
+
+    const hand =
+      Array.from(
+        {length:10},
+        randomCard
+      );
+
+    const score =
+      hand.reduce(
+        (s,c)=>s+cardValue(c),
+        0
+      );
+
+    content.innerHTML=`
+
+      <p>Your 10-card hand</p>
+
+      <div class="cards">
+        ${hand.map(cardHTML).join("")}
+      </div>
+
+      <p>
+        Meld score: ${score}
+      </p>
+
+      <button
+        class="action"
+        id="ginBtn">
+
+        KNOCK
+
+      </button>
+
+    `;
+
+    document
+      .getElementById("ginBtn")
+      .onclick=()=>{
+
+        if(score>=60){
+
+          add(300,true);
+
+          result.textContent =
+            "🎉 Great meld! +300";
+
+          sound("win");
+
+        }else{
+
+          add(40,true);
+
+          result.textContent =
+            "Nice hand! +40";
+
+        }
+
+      };
+
+  }
+
+  else if(game==="holdem"){
+
+    title.textContent="♠️ Texas Hold'em";
+
+    const hand =
+      Array.from(
+        {length:2},
+        randomCard
+      );
+
+    const board =
+      Array.from(
+        {length:5},
+        randomCard
+      );
+
+    const score =
+      [...hand,...board]
+        .reduce(
+          (s,c)=>s+cardValue(c),
+          0
+        );
+
+    content.innerHTML=`
+
+      <p>Your hand</p>
+
+      <div class="cards">
+        ${hand.map(cardHTML).join("")}
+      </div>
+
+      <p>Community cards</p>
+
+      <div class="cards">
+        ${board.map(cardHTML).join("")}
+      </div>
+
+      <button
+        class="action"
+        id="holdemBtn">
+
+        REVEAL RESULT
+
+      </button>
+
+    `;
+
+    document
+      .getElementById("holdemBtn")
+      .onclick=()=>{
+
+        if(score>=55){
+
+          add(250,true);
+
+          result.textContent =
+            "🔥 Strong Hold'em hand! +250";
+
+          sound("win");
+
+        }else{
+
+          add(-30);
+
+          result.textContent =
+            "The table beats you. -30";
+
+          sound("lose");
+
+        }
+
+      };
+
+  }
+
+}
+
+
+function cardsTotal(cards){
+
+  let total=0;
+  let aces=0;
+
+  cards.forEach(card=>{
+
+    total+=cardValue(card);
+
+    if(card.rank==="A")
+      aces++;
+
+  });
+
+  while(total>21 && aces>0){
+
+    total-=10;
+    aces--;
+
+  }
+
+  return total;
+
+}
+
+
+/* =====================================================
+   LUCKY GAMES
+===================================================== */
+
+document
+  .querySelectorAll("[data-lucky]")
+  .forEach(btn=>{
+
+    btn.onclick=()=>{
+
+      const game =
+        btn.dataset.lucky;
+
+      const panel =
+        document.getElementById("luckyPanel");
+
+      const content =
+        document.getElementById("luckyContent");
+
+      panel.classList.remove("hidden");
+
+      luckyGame(game,content);
+
+      panel.scrollIntoView({
+        behavior:"smooth"
+      });
+
+    };
+
+  });
+
+
+function luckyGame(game,content){
+
+  if(game==="wheel"){
+
+    content.innerHTML=`
+
+      <h2>🎡 Lucky Wheel</h2>
+
+      <div class="wheelWrap">
+
+        <div class="pointer">▼</div>
+
+        <div class="wheel" id="wheel"></div>
+
+        <div class="centerDot">💗</div>
+
+      </div>
+
+      <button class="spin" id="wheelSpin">
+        SPIN
+      </button>
+
+      <div class="result" id="wheelResult"></div>
+    `;
+
+    let rotation=0;
 
     document
       .getElementById("wheelSpin")
-      .addEventListener("click", () => {
+      .onclick=()=>{
 
-        const wheel =
-          document.getElementById("wheel");
+        const prizes=[
+          50,100,250,500,
+          1000,2500,5000,10000
+        ];
 
         const prize =
           prizes[
             Math.floor(
-              Math.random() * prizes.length
+              Math.random()*prizes.length
             )
           ];
 
-        wheelRotation +=
-          1440 + Math.random() * 720;
+        rotation +=
+          1440 +
+          Math.floor(
+            Math.random()*720
+          );
 
-        wheel.style.transform =
-          `rotate(${wheelRotation}deg)`;
+        document.getElementById("wheel")
+          .style.transform=
+          `rotate(${rotation}deg)`;
 
-        setTimeout(() => {
+        sound("spin");
 
-          addTokens(prize);
+        setTimeout(()=>{
 
-          document
-            .getElementById("wheelResult")
-            .textContent =
-            `🎉 You won ${prize} tokens!`;
+          add(prize,true);
 
-        }, 3000);
+          document.getElementById(
+            "wheelResult"
+          ).textContent=
+            `🎉 You won ${format(prize)} tokens!`;
 
-      });
+          sound("win");
 
+        },3000);
 
-    /* ==========================================
-       FRIENDSHIP CATCH
-       ========================================== */
+      };
 
-    document
-      .querySelectorAll(".creature")
-      .forEach(creature => {
+  }
 
-        creature.addEventListener("click", () => {
+  else if(game==="roulette"){
 
-          const name =
-            creature.dataset.creature;
+    content.innerHTML=`
 
-          const caught =
-            Math.random() < .7;
+      <h2>🔴⚫ Friendship Roulette</h2>
 
-          if (caught) {
+      <div class="actionRow">
 
-            state.caught.push(name);
+        <button class="action red" data-choice="red">
+          🔴 RED
+        </button>
 
-            addTokens(150);
+        <button class="action" data-choice="black">
+          ⚫ BLACK
+        </button>
 
-            creature.style.display = "none";
+        <button class="action green" data-choice="green">
+          🟢 GREEN
+        </button>
 
-            document
-              .getElementById("catchResult")
-              .textContent =
-              `✨ You caught ${name}! +150 tokens!`;
+      </div>
 
-          } else {
+      <div class="result" id="rouletteResult"></div>
+    `;
 
-            document
-              .getElementById("catchResult")
-              .textContent =
-              `${name} escaped! 🐬`;
+    content
+      .querySelectorAll("[data-choice]")
+      .forEach(btn=>{
+
+        btn.onclick=()=>{
+
+          const choices=[
+            "red",
+            "black",
+            "green"
+          ];
+
+          const result =
+            choices[
+              Math.floor(
+                Math.random()*3
+              )
+            ];
+
+          if(btn.dataset.choice===result){
+
+            const prize =
+              result==="green"
+              ? 1000
+              : 150;
+
+            add(prize,true);
+
+            document.getElementById(
+              "rouletteResult"
+            ).textContent=
+              `🎉 ${result.toUpperCase()}! +${prize}`;
+
+            sound("win");
+
+          }else{
+
+            add(-30);
+
+            document.getElementById(
+              "rouletteResult"
+            ).textContent=
+              `The wheel landed ${result}. -30`;
+
+            sound("lose");
 
           }
 
-        });
+        };
 
       });
 
+  }
 
-    /* ==========================================
-       VIP VAULT
-       ========================================== */
+  else if(game==="craps"){
+
+    content.innerHTML=`
+
+      <h2>🎲 Craps</h2>
+
+      <button class="action" id="rollDice">
+        ROLL DICE
+      </button>
+
+      <div class="result" id="diceResult"></div>
+
+    `;
 
     document
-      .getElementById("vaultButton")
-      .addEventListener("click", () => {
+      .getElementById("rollDice")
+      .onclick=()=>{
 
-        const code =
-          document
-            .getElementById("vaultCode")
-            .value;
+        const a =
+          Math.floor(Math.random()*6)+1;
 
-        if (code === "060722") {
+        const b =
+          Math.floor(Math.random()*6)+1;
 
-          addTokens(10000);
+        const total=a+b;
 
-          document
-            .getElementById("vaultResult")
-            .textContent =
-            "🔓 VAULT OPENED! +10,000 TOKENS!";
+        if(
+          total===7 ||
+          total===11
+        ){
 
-        } else {
+          add(200,true);
 
-          document
-            .getElementById("vaultResult")
-            .textContent =
-            "❌ Incorrect code.";
+          diceResult.textContent=
+            `🎉 ${a}+${b} = ${total}. +200`;
+
+          sound("win");
+
+        }else{
+
+          add(-20);
+
+          diceResult.textContent=
+            `${a}+${b} = ${total}. -20`;
+
+          sound("lose");
 
         }
 
+      };
+
+  }
+
+  else if(game==="hilo"){
+
+    let current =
+      Math.floor(
+        Math.random()*13
+      )+1;
+
+    content.innerHTML=`
+
+      <h2>📈 Hi-Lo</h2>
+
+      <h3>
+        Current card: ${current}
+      </h3>
+
+      <div class="actionRow">
+
+        <button class="action" data-hilo="higher">
+          HIGHER
+        </button>
+
+        <button class="action gold" data-hilo="lower">
+          LOWER
+        </button>
+
+      </div>
+
+      <div class="result" id="hiloResult"></div>
+    `;
+
+    content
+      .querySelectorAll("[data-hilo]")
+      .forEach(btn=>{
+
+        btn.onclick=()=>{
+
+          const next =
+            Math.floor(
+              Math.random()*13
+            )+1;
+
+          const prediction =
+            btn.dataset.hilo;
+
+          const won =
+            prediction==="higher"
+            ? next>current
+            : next<current;
+
+          if(won){
+
+            add(120,true);
+
+            hiloResult.textContent=
+              `🎉 Next card: ${next}. +120`;
+
+            sound("win");
+
+          }else{
+
+            add(-25);
+
+            hiloResult.textContent=
+              `Next card: ${next}. -25`;
+
+            sound("lose");
+
+          }
+
+          current=next;
+
+        };
+
       });
 
+  }
 
-    updateHUD();
+  else if(game==="coin"){
 
-  </script>
+    content.innerHTML=`
+
+      <h2>🪙 Coin Flip</h2>
+
+      <div class="actionRow">
+
+        <button class="action" data-coin="Heads">
+          HEADS
+        </button>
+
+        <button class="action gold" data-coin="Tails">
+          TAILS
+        </button>
+
+      </div>
+
+      <div class="result" id="coinResult"></div>
+
+    `;
+
+    content
+      .querySelectorAll("[data-coin]")
+      .forEach(btn=>{
+
+        btn.onclick=()=>{
+
+          const result =
+            Math.random()<.5
+            ? "Heads"
+            : "Tails";
+
+          if(btn.dataset.coin===result){
+
+            add(100,true);
+
+            coinResult.textContent=
+              `🪙 ${result}! +100`;
+
+            sound("win");
+
+          }else{
+
+            add(-20);
+
+            coinResult.textContent=
+              `🪙 ${result}. -20`;
+
+            sound("lose");
+
+          }
+
+        };
+
+      });
+
+  }
+
+  else if(game==="plinko"){
+
+    content.innerHTML=`
+
+      <h2>🟣 Plinko</h2>
+
+      <p>
+        Drop the token and see where it lands.
+      </p>
+
+      <button class="action" id="plinkoBtn">
+        DROP TOKEN
+      </button>
+
+      <div class="result" id="plinkoResult"></div>
+    `;
+
+    document
+      .getElementById("plinkoBtn")
+      .onclick=()=>{
+
+        const prizes=[
+          0,50,100,250,
+          500,1000,2500
+        ];
+
+        const prize =
+          prizes[
+            Math.floor(
+              Math.random()*prizes.length
+            )
+          ];
+
+        if(prize===0){
+
+          add(-20);
+
+          plinkoResult.textContent=
+            "The token fell into the 0 pocket. -20";
+
+        }else{
+
+          add(prize,true);
+
+          plinkoResult.textContent=
+            `🟣 Plinko landed on ${prize}!`;
+
+          sound("win");
+
+        }
+
+      };
+
+  }
+
+}
+
+
+/* =====================================================
+   RACES
+===================================================== */
+
+document
+  .querySelectorAll("[data-race]")
+  .forEach(btn=>{
+
+    btn.onclick=()=>{
+
+      const type =
+        btn.dataset.race;
+
+      const panel =
+        document.getElementById("racePanel");
+
+      panel.classList.remove("hidden");
+
+      race(type);
+
+      panel.scrollIntoView({
+        behavior:"smooth"
+      });
+
+    };
+
+  });
+
+
+function race(type){
+
+  const names =
+    type==="horse"
+    ? ["Thunder","Rose","Lucky","Rocket"]
+    : ["Dolphini","Splash","Pearl","Wave"];
+
+  document.getElementById(
+    "raceTitle"
+  ).textContent =
+    type==="horse"
+    ? "🏇 Horse Derby"
+    : "🐬 Dolphin Derby";
+
+  document.getElementById(
+    "raceContent"
+  ).innerHTML=`
+
+    <p>Choose your racer.</p>
+
+    <div class="actionRow">
+
+      ${names.map((n,i)=>`
+
+        <button
+          class="action"
+          data-racer="${i}">
+
+          ${type==="horse"?"🏇":"🐬"}
+          ${n}
+
+        </button>
+
+      `).join("")}
+
+    </div>
+
+  `;
+
+  document
+    .querySelectorAll("[data-racer]")
+    .forEach(btn=>{
+
+      btn.onclick=()=>{
+
+        const chosen =
+          Number(btn.dataset.racer);
+
+        const winner =
+          Math.floor(
+            Math.random()*names.length
+          );
+
+        if(chosen===winner){
+
+          add(500,true);
+
+          document.getElementById(
+            "raceResult"
+          ).textContent =
+            `🏆 ${names[winner]} wins! +500`;
+
+          sound("win");
+
+        }else{
+
+          add(-30);
+
+          document.getElementById(
+            "raceResult"
+          ).textContent =
+            `🏁 ${names[winner]} wins. -30`;
+
+          sound("lose");
+
+        }
+
+      };
+
+    });
+
+}
+
+
+/* =====================================================
+   MINI GAMES
+===================================================== */
+
+document
+  .querySelectorAll("[data-mini]")
+  .forEach(btn=>{
+
+    btn.onclick=()=>{
+
+      const game =
+        btn.dataset.mini;
+
+      const panel =
+        document.getElementById("miniPanel");
+
+      panel.classList.remove("hidden");
+
+      miniGame(game);
+
+      panel.scrollIntoView({
+        behavior:"smooth"
+      });
+
+    };
+
+  });
+
+
+function miniGame(game){
+
+  const title =
+    document.getElementById("miniTitle");
+
+  const content =
+    document.getElementById("miniContent");
+
+  const result =
+    document.getElementById("miniResult");
+
+  result.textContent="";
+
+  if(game==="box"){
+
+    title.textContent="🎁 Mystery Boxes";
+
+    content.innerHTML=`
+
+      <div class="actionRow">
+
+        <button class="action" data-box="1">
+          🎁 Box 1
+        </button>
+
+        <button class="action" data-box="2">
+          🎁 Box 2
+        </button>
+
+        <button class="action" data-box="3">
+          🎁 Box 3
+        </button>
+
+      </div>
+    `;
+
+    content
+      .querySelectorAll("[data-box]")
+      .forEach(btn=>{
+
+        btn.onclick=()=>{
+
+          const prizes=[
+            50,100,250,500,1000
+          ];
+
+          const prize =
+            prizes[
+              Math.floor(
+                Math.random()*prizes.length
+              )
+            ];
+
+          add(prize,true);
+
+          result.textContent=
+            `🎁 You found ${prize} tokens!`;
+
+          sound("win");
+
+        };
+
+      });
+
+  }
+
+  else if(game==="cups"){
+
+    title.textContent="🪙 Three Cups";
+
+    content.innerHTML=`
+
+      <p>
+        One cup hides the friendship token.
+      </p>
+
+      <div class="actionRow">
+
+        ${[1,2,3].map(i=>`
+          <button
+            class="action"
+            data-cup="${i}">
+            🥤 Cup ${i}
+          </button>
+        `).join("")}
+
+      </div>
+    `;
+
+    content
+      .querySelectorAll("[data-cup]")
+      .forEach(btn=>{
+
+        btn.onclick=()=>{
+
+          const winner =
+            Math.floor(
+              Math.random()*3
+            )+1;
+
+          if(Number(btn.dataset.cup)===winner){
+
+            add(300,true);
+
+            result.textContent=
+              "🪙 You found it! +300";
+
+            sound("win");
+
+          }else{
+
+            add(-20);
+
+            result.textContent=
+              `Empty cup! It was under cup ${winner}.`;
+
+            sound("lose");
+
+          }
+
+        };
+
+      });
+
+  }
+
+  else if(game==="scratch"){
+
+    title.textContent="💗 Heart Scratch Card";
+
+    content.innerHTML=`
+
+      <button class="action" id="scratchBtn">
+        💗 SCRATCH
+      </button>
+
+    `;
+
+    scratchBtn.onclick=()=>{
+
+      const prize =
+        Math.floor(
+          Math.random()*6
+        )*100;
+
+      if(prize===0){
+
+        add(-10);
+
+        result.textContent=
+          "💔 Nothing this time.";
+
+      }else{
+
+        add(prize,true);
+
+        result.textContent=
+          `💗 You scratched ${prize} tokens!`;
+
+        sound("win");
+
+      }
+
+    };
+
+  }
+
+  else if(game==="darts"){
+
+    title.textContent="🎯 Lucky Darts";
+
+    content.innerHTML=`
+
+      <button class="action" id="dartBtn">
+        🎯 THROW DART
+      </button>
+
+    `;
+
+    dartBtn.onclick=()=>{
+
+      const score =
+        Math.floor(
+          Math.random()*100
+        )+1;
+
+      const prize =
+        score>=90
+        ? 500
+        : score>=70
+        ? 200
+        : score>=40
+        ? 75
+        : 0;
+
+      if(prize){
+
+        add(prize,true);
+
+        result.textContent=
+          `🎯 Score ${score}! +${prize}`;
+
+        sound("win");
+
+      }else{
+
+        add(-20);
+
+        result.textContent=
+          `🎯 Score ${score}. -20`;
+
+      }
+
+    };
+
+  }
+
+  else if(game==="gems"){
+
+    title.textContent="💎 Gem Heist";
+
+    content.innerHTML=`
+
+      <p>Choose a vault.</p>
+
+      <div class="actionRow">
+
+        ${[1,2,3,4].map(i=>`
+          <button
+            class="action"
+            data-gem="${i}">
+            💎 Vault ${i}
+          </button>
+        `).join("")}
+
+      </div>
+    `;
+
+    content
+      .querySelectorAll("[data-gem]")
+      .forEach(btn=>{
+
+        btn.onclick=()=>{
+
+          const prize =
+            [100,250,500,1000]
+            [
+              Math.floor(
+                Math.random()*4
+              )
+            ];
+
+          add(prize,true);
+
+          result.textContent=
+            `💎 Heist successful! +${prize}`;
+
+          sound("win");
+
+        };
+
+      });
+
+  }
+
+  else if(game==="envelopes"){
+
+    title.textContent="🎁 Lucky Envelopes";
+
+    content.innerHTML=`
+
+      <div class="actionRow">
+
+        ${["A","B","C","D"].map(x=>`
+          <button
+            class="action"
+            data-envelope="${x}">
+            ✉️ ${x}
+          </button>
+        `).join("")}
+
+      </div>
+    `;
+
+    content
+      .querySelectorAll("[data-envelope]")
+      .forEach(btn=>{
+
+        btn.onclick=()=>{
+
+          const prize =
+            [
+              100,250,500,1000
+            ][
+              Math.floor(
+                Math.random()*4
+              )
+            ];
+
+          add(prize,true);
+
+          result.textContent=
+            `✉️ Envelope ${btn.dataset.envelope}: +${prize}`;
+
+          sound("win");
+
+        };
+
+      });
+
+  }
+
+  else if(game==="number"){
+
+    title.textContent="🔢 Lucky Number";
+
+    content.innerHTML=`
+
+      <p>Guess a number from 1 to 10.</p>
+
+      <input
+        id="numberGuess"
+        type="number"
+        min="1"
+        max="10"
+        placeholder="1-10">
+
+      <br><br>
+
+      <button
+        class="action"
+        id="guessBtn">
+        GUESS
+      </button>
+
+    `;
+
+    guessBtn.onclick=()=>{
+
+      const guess =
+        Number(numberGuess.value);
+
+      if(
+        !Number.isInteger(guess) ||
+        guess<1 ||
+        guess>10
+      ){
+
+        toast("Enter a number from 1 to 10.");
+
+        return;
+
+      }
+
+      const lucky =
+        Math.floor(
+          Math.random()*10
+        )+1;
+
+      if(guess===lucky){
+
+        add(1000,true);
+
+        result.textContent=
+          `🎉 Correct! The number was ${lucky}. +1000`;
+
+        sound("win");
+
+      }else{
+
+        add(-25);
+
+        result.textContent=
+          `The number was ${lucky}. -25`;
+
+        sound("lose");
+
+      }
+
+    };
+
+  }
+
+  else if(game==="treasure"){
+
+    title.textContent="🐠 Ocean Treasure";
+
+    content.innerHTML=`
+
+      <p>Choose one treasure spot.</p>
+
+      <div class="actionRow">
+
+        ${[1,2,3,4,5].map(i=>`
+          <button
+            class="action"
+            data-treasure="${i}">
+            🐠 Spot ${i}
+          </button>
+        `).join("")}
+
+      </div>
+    `;
+
+    content
+      .querySelectorAll("[data-treasure]")
+      .forEach(btn=>{
+
+        btn.onclick=()=>{
+
+          const prize =
+            [
+              50,100,250,500,1500
+            ][
+              Math.floor(
+                Math.random()*5
+              )
+            ];
+
+          add(prize,true);
+
+          result.textContent=
+            `🌊 Treasure found! +${prize}`;
+
+          sound("win");
+
+        };
+
+      });
+
+  }
+
+}
+
+
+/* =====================================================
+   FRIENDSHIP CATCH
+===================================================== */
+
+const creatureInfo = {
+
+  Dolphini:["🐬","Common",100],
+  Rosibun:["🌹🐰","Uncommon",150],
+  Sunnyflo:["🌻","Common",100],
+  Pinkyroo:["🦘💗","Rare",300],
+  Fluttera:["🦋","Rare",300],
+  Shellby:["🐚","Epic",500],
+  Lunaboo:["🌙","Legendary",1000]
+
+};
+
+document
+  .querySelectorAll(".creature")
+  .forEach(btn=>{
+
+    btn.onclick=()=>{
+
+      const name =
+        btn.dataset.creature;
+
+      const info =
+        creatureInfo[name];
+
+      const chance =
+        info[1]==="Legendary"
+        ? .25
+        : info[1]==="Epic"
+        ? .45
+        : info[1]==="Rare"
+        ? .65
+        : .82;
+
+      if(Math.random()<chance){
+
+        if(!S.caught.includes(name))
+          S.caught.push(name);
+
+        add(info[2],true);
+
+        btn.style.display="none";
+
+        renderCollection();
+
+        toast(
+          `✨ You caught ${name}! +${info[2]} tokens`
+        );
+
+        sound("win");
+
+        if(S.caught.length>=5)
+          achievement("collector");
+
+      }else{
+
+        toast(`${name} escaped! 🐬`);
+
+        sound("lose");
+
+      }
+
+      save();
+
+    };
+
+  });
+
+
+function renderCollection(){
+
+  const el =
+    document.getElementById("collection");
+
+  if(!S.caught.length){
+
+    el.innerHTML =
+      `<div class="creatureBadge">
+        No creatures caught yet.
+      </div>`;
+
+    return;
+
+  }
+
+  el.innerHTML =
+    S.caught.map(name=>{
+
+      const info =
+        creatureInfo[name];
+
+      return `
+        <div class="creatureBadge">
+          ${info[0]}
+          ${name}
+          · ${info[1]}
+        </div>
+      `;
+
+    }).join("");
+
+}
+
+
+/* =====================================================
+   QUIZ
+===================================================== */
+
+const quiz = [
+
+  ["What is Liliana's favourite colour?",["Baby pink","Blue","Green","Purple"],0],
+
+  ["What food does Liliana love?",["Pizza","Sushi","Tacos","Pasta"],1],
+
+  ["What animal does Liliana love?",["Dolphins","Lions","Penguins","Koalas"],0],
+
+  ["What is Liliana's favourite number?",["3","7","13","22"],0],
+
+  ["What is Liliana's birthday?",["July 2","July 12","July 22","August 22"],2],
+
+  ["What is Liliana's star sign?",["Cancer","Leo","Virgo","Gemini"],1],
+
+  ["How many nieces does Liliana have?",["0","1","2","3"],1],
+
+  ["How many nephews does Liliana have?",["2","3","4","5"],2],
+
+  ["How many tattoos does Liliana have?",["1","2","3","4"],0],
+
+  ["What colour are Liliana's eyes?",["Blue","Brown","Green","Hazel"],2],
+
+  ["How many piercings does Liliana have?",["2","3","4","5"],2],
+
+  ["What are Liliana's dogs called?",["Aayla & Arlo","Luna & Milo","Bella & Max","Coco & Leo"],0],
+
+  ["How many siblings does Liliana have?",["3","4","5","6"],2],
+
+  ["What is Liliana afraid of?",["Heights","Drowning","Thunder","Dogs"],1],
+
+  ["What does Liliana study at university?",["Psychology","Law","Medicine","Art"],0],
+
+  ["What movie does Liliana love?",["Titanic","Me Before You","Frozen","The Notebook"],1],
+
+  ["What does Liliana one day want to be?",["A singer","A mum to a baby girl","A pilot","A chef"],1],
+
+  ["What does Liliana like?",["Poetry","Only sports","Only horror movies","None"],0],
+
+  ["What kind of personality does Liliana have?",["Empathetic","Cold","Shy","Serious"],0],
+
+  ["How long have Bree and Liliana been best friends?",["2 years","4 years","6 years","10 years"],2]
+
+];
+
+let quizIndex=0;
+let quizScore=0;
+
+document
+  .getElementById("startQuiz")
+  .onclick=()=>{
+
+    quizIndex=0;
+    quizScore=0;
+
+    showQuiz();
+
+    document
+      .getElementById("lilianaPanel")
+      .scrollIntoView({
+        behavior:"smooth"
+      });
+
+  };
+
+
+function showQuiz(){
+
+  const content =
+    document.getElementById("lilianaContent");
+
+  if(quizIndex>=quiz.length){
+
+    S.quizBest =
+      Math.max(
+        S.quizBest,
+        quizScore
+      );
+
+    const reward =
+      quizScore===20
+      ? 5000
+      : quizScore*100;
+
+    add(reward,true);
+
+    if(quizScore===20)
+      achievement("quiz");
+
+    content.innerHTML=`
+
+      <h2>🎉 Quiz Complete!</h2>
+
+      <p>
+        You scored
+        <strong>${quizScore}/20</strong>.
+      </p>
+
+      <p>
+        💰 Reward:
+        <strong>+${format(reward)}</strong>
+      </p>
+
+      <button class="action" id="restartQuiz">
+        PLAY AGAIN
+      </button>
+
+    `;
+
+    sound(
+      quizScore===20
+      ? "jackpot"
+      : "win"
+    );
+
+    document
+      .getElementById("restartQuiz")
+      .onclick=()=>{
+
+        quizIndex=0;
+        quizScore=0;
+        showQuiz();
+
+      };
+
+    return;
+
+  }
+
+  const q =
+    quiz[quizIndex];
+
+  content.innerHTML=`
+
+    <div class="question">
+      ${quizIndex+1}/20 · ${q[0]}
+    </div>
+
+    <div class="answers">
+
+      ${q[1].map(
+        (answer,i)=>`
+
+          <button
+            class="answer"
+            data-answer="${i}">
+
+            ${answer}
+
+          </button>
+
+        `
+      ).join("")}
+
+    </div>
+
+  `;
+
+  content
+    .querySelectorAll("[data-answer]")
+    .forEach(btn=>{
+
+      btn.onclick=()=>{
+
+        if(
+          Number(btn.dataset.answer)
+          ===q[2]
+        ){
+
+          quizScore++;
+
+          sound("win");
+
+        }else{
+
+          sound("lose");
+
+        }
+
+        quizIndex++;
+
+        showQuiz();
+
+      };
+
+    });
+
+}
+
+
+/* =====================================================
+   PERSONALITY
+===================================================== */
+
+document
+  .getElementById("personality")
+  .onclick=()=>{
+
+    const results=[
+
+      ["🌸 The Soft Liliana",
+       "Sweet, caring and deeply empathetic."],
+
+      ["💋 The Flirty Liliana",
+       "Charismatic, playful and impossible to ignore."],
+
+      ["🎰 The Gambler Liliana",
+       "Risk taker, poker face and casino queen."],
+
+      ["🐬 The Dreamer Liliana",
+       "Romantic, thoughtful and full of dreams."],
+
+      ["👑 The Main Character Liliana",
+       "Confident, magnetic and absolutely unforgettable."]
+
+    ];
+
+    const result =
+      results[
+        Math.floor(
+          Math.random()*results.length
+        )
+      ];
+
+    add(300,true);
+
+    document.getElementById(
+      "lilianaContent"
+    ).innerHTML=`
+
+      <h2>${result[0]}</h2>
+
+      <p>
+        ${result[1]}
+      </p>
+
+      <p>
+        💰 +300 Friendship Tokens
+      </p>
+
+    `;
+
+    sound("win");
+
+  };
+
+
+/* =====================================================
+   TIMELINE
+===================================================== */
+
+document
+  .getElementById("timelineBtn")
+  .onclick=()=>{
+
+    document.getElementById(
+      "lilianaContent"
+    ).innerHTML=`
+
+      <h2>📖 Six Years of Friendship</h2>
+
+      <div class="timeline">
+
+        <div class="year">
+          <strong>Year 1 🌸</strong>
+          <p>
+            The beginning of the friendship.
+          </p>
+        </div>
+
+        <div class="year">
+          <strong>Year 2 💗</strong>
+          <p>
+            More memories, more chaos and more laughs.
+          </p>
+        </div>
+
+        <div class="year">
+          <strong>Year 3 🌻</strong>
+          <p>
+            The friendship keeps growing.
+          </p>
+        </div>
+
+        <div class="year">
+          <strong>Year 4 🦋</strong>
+          <p>
+            Six years starts feeling inevitable.
+          </p>
+        </div>
+
+        <div class="year">
+          <strong>Year 5 💎</strong>
+          <p>
+            Still here. Still best friends.
+          </p>
+        </div>
+
+        <div class="year">
+          <strong>Year 6 👑</strong>
+          <p>
+            Six years down. Many more memories to come.
+          </p>
+        </div>
+
+      </div>
+
+    `;
+
+  };
+
+
+/* =====================================================
+   LETTER
+===================================================== */
+
+document
+  .getElementById("letterBtn")
+  .onclick=()=>{
+
+    document.getElementById(
+      "lilianaContent"
+    ).innerHTML=`
+
+      <div class="panel">
+
+        <h2>💌 To My Best Friend</h2>
+
+        <p>
+          Six years is a lot of memories, laughs,
+          chaos, conversations and moments that
+          somehow became part of who we are.
+        </p>
+
+        <p>
+          Through every version of life, one thing
+          has stayed the same: you're my best friend.
+        </p>
+
+        <p>
+          So this ridiculous little casino is basically
+          six years of friendship turned into tokens,
+          games and questionable financial decisions. 😂
+        </p>
+
+        <p>
+          Here's to everything we've already lived
+          through and everything still waiting for us.
+        </p>
+
+        <p>
+          💗 Happy six years, bestie.
+        </p>
+
+      </div>
+
+    `;
+
+  };
+
+
+/* =====================================================
+   VAULT
+===================================================== */
+
+document
+  .getElementById("vaultButton")
+  .onclick=()=>{
+
+    const input =
+      document.getElementById("vaultCode");
+
+    const code =
+      input.value.trim();
+
+    const result =
+      document.getElementById("vaultResult");
+
+    if(code==="060722"){
+
+      if(S.vaultOpened){
+
+        result.textContent =
+          "🔓 The vault is already open.";
+
+        return;
+
+      }
+
+      S.vaultOpened=true;
+
+      add(10000,true);
+
+      achievement("vault");
+
+      result.textContent =
+        "🔓 VAULT OPENED! +10,000 TOKENS!";
+
+      sound("jackpot");
+
+      save();
+
+    }else{
+
+      result.textContent =
+        "❌ Incorrect six-digit code.";
+
+      sound("lose");
+
+    }
+
+  };
+
+
+/* =====================================================
+   INITIALISE
+===================================================== */
+
+renderCollection();
+update();
+
+if(S.sound===false){
+
+  document.getElementById(
+    "soundBtn"
+  ).textContent="🔇";
+
+}
+
+</script>
 
 </body>
 </html>
