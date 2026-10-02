@@ -35,13 +35,13 @@ body{
   font-family:Arial,Helvetica,sans-serif;
   color:var(--text);
 
-  /* BABY PINK / PINK BACKGROUND */
+  /* DARKER PINK BACKGROUND */
   background:
     radial-gradient(
       circle at 50% -10%,
-      #fff0f7 0,
-      #ffd1e5 35%,
-      #ff8fbd 75%
+      #ffc1dc 0,
+      #ff78ad 35%,
+      #f04f91 75%
     );
 }
 
@@ -1068,7 +1068,6 @@ footer{
 
 <body>
 
-
 <header class="topbar">
 
   <div class="brand">
@@ -1329,9 +1328,7 @@ footer{
 </section>
 
 
-<!-- ==========================================
-     SLOTS ROOM
-========================================== -->
+<!-- SLOTS -->
 
 <section
   class="roomView"
@@ -1524,9 +1521,7 @@ footer{
 </section>
 
 
-<!-- ==========================================
-     CARD ROOM
-========================================== -->
+<!-- CARD ROOM -->
 
 <section
   class="roomView"
@@ -1695,9 +1690,7 @@ footer{
 </section>
 
 
-<!-- ==========================================
-     LUCKY LOUNGE
-========================================== -->
+<!-- LUCKY LOUNGE -->
 
 <section
   class="roomView"
@@ -1862,9 +1855,7 @@ footer{
 </section>
 
 
-<!-- ==========================================
-     RACES
-========================================== -->
+<!-- DERBY -->
 
 <section
   class="roomView"
@@ -1953,9 +1944,7 @@ footer{
 </section>
 
 
-<!-- ==========================================
-     PRIZE ARCADE
-========================================== -->
+<!-- PRIZE ARCADE -->
 
 <section
   class="roomView"
@@ -1978,6 +1967,7 @@ footer{
 
 
 <div class="gameCard">
+
   <h3>🎁 Mystery Boxes</h3>
   <p>Open a mystery reward.</p>
 
@@ -1986,10 +1976,12 @@ footer{
     data-mini="box">
     OPEN
   </button>
+
 </div>
 
 
 <div class="gameCard">
+
   <h3>🪙 Three Cups</h3>
   <p>Find the hidden token.</p>
 
@@ -1998,10 +1990,12 @@ footer{
     data-mini="cups">
     PLAY
   </button>
+
 </div>
 
 
 <div class="gameCard">
+
   <h3>💗 Heart Scratch Card</h3>
   <p>Scratch your virtual friendship card.</p>
 
@@ -2010,10 +2004,12 @@ footer{
     data-mini="scratch">
     SCRATCH
   </button>
+
 </div>
 
 
 <div class="gameCard">
+
   <h3>🎯 Lucky Darts</h3>
   <p>Hit the target.</p>
 
@@ -2022,10 +2018,12 @@ footer{
     data-mini="darts">
     THROW
   </button>
+
 </div>
 
 
 <div class="gameCard">
+
   <h3>💎 Gem Heist</h3>
   <p>Pick a vault and find gems.</p>
 
@@ -2034,10 +2032,12 @@ footer{
     data-mini="gems">
     HEIST
   </button>
+
 </div>
 
 
 <div class="gameCard">
+
   <h3>🎁 Lucky Envelopes</h3>
   <p>Choose a mysterious envelope.</p>
 
@@ -2046,10 +2046,12 @@ footer{
     data-mini="envelopes">
     OPEN
   </button>
+
 </div>
 
 
 <div class="gameCard">
+
   <h3>🔢 Lucky Number</h3>
   <p>Guess the lucky number.</p>
 
@@ -2058,10 +2060,12 @@ footer{
     data-mini="number">
     GUESS
   </button>
+
 </div>
 
 
 <div class="gameCard">
+
   <h3>🐠 Ocean Treasure</h3>
   <p>Dive for hidden treasure.</p>
 
@@ -2070,6 +2074,7 @@ footer{
     data-mini="treasure">
     DIVE
   </button>
+
 </div>
 
 
@@ -2098,9 +2103,7 @@ footer{
 </section>
 
 
-<!-- ==========================================
-     FRIENDSHIP CATCH
-========================================== -->
+<!-- FRIENDSHIP CATCH -->
 
 <section
   class="roomView"
@@ -2229,9 +2232,7 @@ footer{
 </section>
 
 
-<!-- ==========================================
-     LILIANA'S CORNER
-========================================== -->
+<!-- LILIANA'S CORNER -->
 
 <section
   class="roomView"
@@ -2362,9 +2363,7 @@ footer{
 </section>
 
 
-<!-- ==========================================
-     VIP VAULT
-========================================== -->
+<!-- VIP VAULT -->
 
 <section
   class="roomView"
@@ -2426,9 +2425,7 @@ footer{
 </section>
 
 
-<!-- ==========================================
-     ACHIEVEMENTS
-========================================== -->
+<!-- ACHIEVEMENTS -->
 
 <section>
 
@@ -2464,10 +2461,6 @@ footer{
 
 
 <script>
-
-/* =====================================================
-   STATE
-===================================================== */
 
 const DEFAULT_STATE = {
 
@@ -2547,9 +2540,7 @@ function format(n){
 }
 
 
-/* =====================================================
-   AUDIO
-===================================================== */
+/* AUDIO */
 
 let audioCtx=null;
 
@@ -2633,15 +2624,12 @@ function sound(type="click"){
       audioCtx.currentTime+.26
     );
 
-
   }catch(e){}
 
 }
 
 
-/* =====================================================
-   TOAST
-===================================================== */
+/* TOAST */
 
 let toastTimer;
 
@@ -2678,9 +2666,7 @@ function toast(message){
 }
 
 
-/* =====================================================
-   TOKEN / XP SYSTEM
-===================================================== */
+/* TOKEN / XP */
 
 function add(amount,win=false){
 
@@ -2790,9 +2776,7 @@ function update(){
 }
 
 
-/* =====================================================
-   ACHIEVEMENTS
-===================================================== */
+/* ACHIEVEMENTS */
 
 const achievementList=[
 
@@ -2949,9 +2933,7 @@ function renderAchievements(){
 }
 
 
-/* =====================================================
-   ROOM NAVIGATION
-===================================================== */
+/* ROOM NAVIGATION */
 
 const rooms =
   document.querySelectorAll(
@@ -3042,9 +3024,7 @@ document
   });
 
 
-/* =====================================================
-   SOUND BUTTON
-===================================================== */
+/* SOUND BUTTON */
 
 document
   .getElementById("soundBtn")
@@ -3069,9 +3049,7 @@ document
   );
 
 
-/* =====================================================
-   DAILY BONUS
-===================================================== */
+/* DAILY BONUS */
 
 function today(){
 
@@ -3128,9 +3106,7 @@ document
   );
 
 
-/* =====================================================
-   SLOT MACHINES
-===================================================== */
+/* SLOT MACHINES */
 
 const slotData={
 
@@ -3442,9 +3418,7 @@ document
   );
 
 
-/* =====================================================
-   CARD UTILITIES
-===================================================== */
+/* CARD UTILITIES */
 
 const suits=[
   "♠",
@@ -3542,9 +3516,7 @@ function cardHTML(card){
 }
 
 
-/* =====================================================
-   CARD GAMES
-===================================================== */
+/* CARD GAMES */
 
 document
   .querySelectorAll(
@@ -3647,38 +3619,22 @@ function playCardGame(game){
 
     content.innerHTML=`
 
-      <p>
-        Your hand
-      </p>
+      <p>Your hand</p>
 
       <div class="cards">
-
-        ${player
-          .map(cardHTML)
-          .join("")}
-
+        ${player.map(cardHTML).join("")}
       </div>
 
-
-      <p>
-        Computer hand
-      </p>
+      <p>Computer hand</p>
 
       <div class="cards">
-
-        ${computer
-          .map(cardHTML)
-          .join("")}
-
+        ${computer.map(cardHTML).join("")}
       </div>
-
 
       <button
         class="action"
         id="cardAgain">
-
         DEAL AGAIN
-
       </button>
 
     `;
@@ -3721,91 +3677,55 @@ function playCardGame(game){
 
 
     let player=[
-
       randomCard(),
       randomCard()
-
     ];
 
 
     let dealer=[
-
       randomCard(),
       randomCard()
-
     ];
-
-
-    const total =
-      cardsTotal(
-        player
-      );
-
-
-    const dTotal =
-      cardsTotal(
-        dealer
-      );
 
 
     content.innerHTML=`
 
       <p>
         Your hand:
-        ${total}
+        ${cardsTotal(player)}
       </p>
 
-
       <div class="cards">
-
-        ${player
-          .map(cardHTML)
-          .join("")}
-
+        ${player.map(cardHTML).join("")}
       </div>
-
 
       <p>
         Dealer:
-        ${dTotal}
+        ${cardsTotal(dealer)}
       </p>
 
-
       <div class="cards">
-
-        ${dealer
-          .map(cardHTML)
-          .join("")}
-
+        ${dealer.map(cardHTML).join("")}
       </div>
-
 
       <div class="actionRow">
 
         <button
           class="action"
           id="hitBtn">
-
           HIT
-
         </button>
-
 
         <button
           class="action green"
           id="standBtn">
-
           STAND
-
         </button>
-
 
         <button
           class="action gold"
           id="doubleBtn">
-
           DOUBLE DOWN
-
         </button>
 
       </div>
@@ -3816,15 +3736,11 @@ function playCardGame(game){
     const finish=()=>{
 
       const p =
-        cardsTotal(
-          player
-        );
+        cardsTotal(player);
 
 
       const d =
-        cardsTotal(
-          dealer
-        );
+        cardsTotal(dealer);
 
 
       if(p>21){
@@ -3966,33 +3882,24 @@ function playCardGame(game){
         Choose your side.
       </p>
 
-
       <div class="actionRow">
 
         <button
           class="action"
           data-bac="Player">
-
           PLAYER
-
         </button>
-
 
         <button
           class="action gold"
           data-bac="Banker">
-
           BANKER
-
         </button>
-
 
         <button
           class="action green"
           data-bac="Tie">
-
           TIE
-
         </button>
 
       </div>
@@ -4097,15 +4004,6 @@ function playCardGame(game){
 
       </div>
 
-
-      <button
-        class="action"
-        id="warAgain">
-
-        PLAY WAR
-
-      </button>
-
     `;
 
 
@@ -4181,7 +4079,6 @@ function playCardGame(game){
         Your 10-card hand
       </p>
 
-
       <div class="cards">
 
         ${hand
@@ -4190,19 +4087,15 @@ function playCardGame(game){
 
       </div>
 
-
       <p>
         Meld score:
         ${score}
       </p>
 
-
       <button
         class="action"
         id="ginBtn">
-
         KNOCK
-
       </button>
 
     `;
@@ -4283,7 +4176,6 @@ function playCardGame(game){
         Your hand
       </p>
 
-
       <div class="cards">
 
         ${hand
@@ -4292,11 +4184,9 @@ function playCardGame(game){
 
       </div>
 
-
       <p>
         Community cards
       </p>
-
 
       <div class="cards">
 
@@ -4306,13 +4196,10 @@ function playCardGame(game){
 
       </div>
 
-
       <button
         class="action"
         id="holdemBtn">
-
         REVEAL RESULT
-
       </button>
 
     `;
@@ -4396,9 +4283,7 @@ function cardsTotal(cards){
 }
 
 
-/* =====================================================
-   LUCKY GAMES
-===================================================== */
+/* LUCKY GAMES */
 
 document
   .querySelectorAll(
@@ -4453,19 +4338,16 @@ function luckyGame(
         🎡 Lucky Wheel
       </h2>
 
-
       <div class="wheelWrap">
 
         <div class="pointer">
           ▼
         </div>
 
-
         <div
           class="wheel"
           id="wheel">
         </div>
-
 
         <div class="centerDot">
           💗
@@ -4473,15 +4355,11 @@ function luckyGame(
 
       </div>
 
-
       <button
         class="spin"
         id="wheelSpin">
-
         SPIN
-
       </button>
-
 
       <div
         class="result"
@@ -4501,7 +4379,6 @@ function luckyGame(
       .onclick=()=>{
 
         const prizes=[
-
           50,
           100,
           250,
@@ -4510,7 +4387,6 @@ function luckyGame(
           2500,
           5000,
           10000
-
         ];
 
 
@@ -4569,47 +4445,35 @@ function luckyGame(
   }
 
 
-  else if(
-    game==="roulette"
-  ){
+  else if(game==="roulette"){
 
     content.innerHTML=`
 
       <h2>
-        🔴⚫ Friendship Roulette
+        🔴 Friendship Roulette
       </h2>
-
 
       <div class="actionRow">
 
         <button
           class="action red"
           data-choice="red">
-
           🔴 RED
-
         </button>
-
 
         <button
           class="action"
           data-choice="black">
-
           ⚫ BLACK
-
         </button>
-
 
         <button
           class="action green"
           data-choice="green">
-
           🟢 GREEN
-
         </button>
 
       </div>
-
 
       <div
         class="result"
@@ -4634,7 +4498,7 @@ function luckyGame(
           ];
 
 
-          const result =
+          const outcome =
             choices[
               Math.floor(
                 Math.random()*3
@@ -4644,11 +4508,11 @@ function luckyGame(
 
           if(
             btn.dataset.choice===
-            result
+            outcome
           ){
 
             const prize =
-              result==="green"
+              outcome==="green"
               ? 1000
               : 150;
 
@@ -4664,7 +4528,7 @@ function luckyGame(
                 "rouletteResult"
               )
               .textContent=
-                `🎉 ${result.toUpperCase()}! +${prize}`;
+                `🎉 ${outcome.toUpperCase()}! +${prize}`;
 
 
             sound("win");
@@ -4679,7 +4543,7 @@ function luckyGame(
                 "rouletteResult"
               )
               .textContent=
-                `The wheel landed ${result}. -30`;
+                `The wheel landed ${outcome}. -30`;
 
 
             sound("lose");
@@ -4693,9 +4557,7 @@ function luckyGame(
   }
 
 
-  else if(
-    game==="craps"
-  ){
+  else if(game==="craps"){
 
     content.innerHTML=`
 
@@ -4703,15 +4565,11 @@ function luckyGame(
         🎲 Craps
       </h2>
 
-
       <button
         class="action"
         id="rollDice">
-
         ROLL DICE
-
       </button>
-
 
       <div
         class="result"
@@ -4754,7 +4612,9 @@ function luckyGame(
           );
 
 
-          diceResult.textContent=
+          document.getElementById(
+            "diceResult"
+          ).textContent=
             `🎉 ${a}+${b} = ${total}. +200`;
 
 
@@ -4765,7 +4625,9 @@ function luckyGame(
           add(-20);
 
 
-          diceResult.textContent=
+          document.getElementById(
+            "diceResult"
+          ).textContent=
             `${a}+${b} = ${total}. -20`;
 
 
@@ -4778,9 +4640,7 @@ function luckyGame(
   }
 
 
-  else if(
-    game==="hilo"
-  ){
+  else if(game==="hilo"){
 
     let current =
       Math.floor(
@@ -4794,34 +4654,26 @@ function luckyGame(
         📈 Hi-Lo
       </h2>
 
-
       <h3>
         Current card:
         ${current}
       </h3>
-
 
       <div class="actionRow">
 
         <button
           class="action"
           data-hilo="higher">
-
           HIGHER
-
         </button>
-
 
         <button
           class="action gold"
           data-hilo="lower">
-
           LOWER
-
         </button>
 
       </div>
-
 
       <div
         class="result"
@@ -4863,7 +4715,9 @@ function luckyGame(
             );
 
 
-            hiloResult.textContent=
+            document.getElementById(
+              "hiloResult"
+            ).textContent=
               `🎉 Next card: ${next}. +120`;
 
 
@@ -4874,7 +4728,9 @@ function luckyGame(
             add(-25);
 
 
-            hiloResult.textContent=
+            document.getElementById(
+              "hiloResult"
+            ).textContent=
               `Next card: ${next}. -25`;
 
 
@@ -4892,9 +4748,7 @@ function luckyGame(
   }
 
 
-  else if(
-    game==="coin"
-  ){
+  else if(game==="coin"){
 
     content.innerHTML=`
 
@@ -4902,28 +4756,21 @@ function luckyGame(
         🪙 Coin Flip
       </h2>
 
-
       <div class="actionRow">
 
         <button
           class="action"
           data-coin="Heads">
-
           HEADS
-
         </button>
-
 
         <button
           class="action gold"
           data-coin="Tails">
-
           TAILS
-
         </button>
 
       </div>
-
 
       <div
         class="result"
@@ -4941,7 +4788,7 @@ function luckyGame(
 
         btn.onclick=()=>{
 
-          const result =
+          const outcome =
             Math.random()<.5
             ? "Heads"
             : "Tails";
@@ -4949,7 +4796,7 @@ function luckyGame(
 
           if(
             btn.dataset.coin===
-            result
+            outcome
           ){
 
             add(
@@ -4958,8 +4805,10 @@ function luckyGame(
             );
 
 
-            coinResult.textContent=
-              `🪙 ${result}! +100`;
+            document.getElementById(
+              "coinResult"
+            ).textContent=
+              `🪙 ${outcome}! +100`;
 
 
             sound("win");
@@ -4969,8 +4818,10 @@ function luckyGame(
             add(-20);
 
 
-            coinResult.textContent=
-              `🪙 ${result}. -20`;
+            document.getElementById(
+              "coinResult"
+            ).textContent=
+              `🪙 ${outcome}. -20`;
 
 
             sound("lose");
@@ -4984,9 +4835,7 @@ function luckyGame(
   }
 
 
-  else if(
-    game==="plinko"
-  ){
+  else if(game==="plinko"){
 
     content.innerHTML=`
 
@@ -4994,20 +4843,15 @@ function luckyGame(
         🟣 Plinko
       </h2>
 
-
       <p>
         Drop the token and see where it lands.
       </p>
 
-
       <button
         class="action"
         id="plinkoBtn">
-
         DROP TOKEN
-
       </button>
-
 
       <div
         class="result"
@@ -5024,7 +4868,6 @@ function luckyGame(
       .onclick=()=>{
 
         const prizes=[
-
           0,
           50,
           100,
@@ -5032,7 +4875,6 @@ function luckyGame(
           500,
           1000,
           2500
-
         ];
 
 
@@ -5050,7 +4892,9 @@ function luckyGame(
           add(-20);
 
 
-          plinkoResult.textContent=
+          document.getElementById(
+            "plinkoResult"
+          ).textContent=
             "The token fell into the 0 pocket. -20";
 
         }else{
@@ -5061,7 +4905,9 @@ function luckyGame(
           );
 
 
-          plinkoResult.textContent=
+          document.getElementById(
+            "plinkoResult"
+          ).textContent=
             `🟣 Plinko landed on ${prize}!`;
 
 
@@ -5076,9 +4922,7 @@ function luckyGame(
 }
 
 
-/* =====================================================
-   RACES
-===================================================== */
+/* RACES */
 
 document
   .querySelectorAll(
@@ -5150,7 +4994,6 @@ function race(type){
     <p>
       Choose your racer.
     </p>
-
 
     <div class="actionRow">
 
@@ -5240,9 +5083,7 @@ function race(type){
 }
 
 
-/* =====================================================
-   MINI GAMES
-===================================================== */
+/* MINI GAMES */
 
 document
   .querySelectorAll(
@@ -5312,31 +5153,19 @@ function miniGame(game){
 
       <div class="actionRow">
 
-        <button
-          class="action"
-          data-box="1">
+        ${[1,2,3].map(
+          i=>`
 
-          🎁 Box 1
+            <button
+              class="action"
+              data-box="${i}">
 
-        </button>
+              🎁 Box ${i}
 
+            </button>
 
-        <button
-          class="action"
-          data-box="2">
-
-          🎁 Box 2
-
-        </button>
-
-
-        <button
-          class="action"
-          data-box="3">
-
-          🎁 Box 3
-
-        </button>
+          `
+        ).join("")}
 
       </div>
 
@@ -5388,9 +5217,7 @@ function miniGame(game){
   }
 
 
-  else if(
-    game==="cups"
-  ){
+  else if(game==="cups"){
 
     title.textContent=
       "🪙 Three Cups";
@@ -5401,7 +5228,6 @@ function miniGame(game){
       <p>
         One cup hides the friendship token.
       </p>
-
 
       <div class="actionRow">
 
@@ -5476,9 +5302,7 @@ function miniGame(game){
   }
 
 
-  else if(
-    game==="scratch"
-  ){
+  else if(game==="scratch"){
 
     title.textContent=
       "💗 Heart Scratch Card";
@@ -5497,46 +5321,48 @@ function miniGame(game){
     `;
 
 
-    scratchBtn.onclick=()=>{
+    document
+      .getElementById(
+        "scratchBtn"
+      )
+      .onclick=()=>{
 
-      const prize =
-        Math.floor(
-          Math.random()*6
-        )*100;
-
-
-      if(prize===0){
-
-        add(-10);
-
-
-        result.textContent=
-          "💔 Nothing this time.";
-
-      }else{
-
-        add(
-          prize,
-          true
-        );
+        const prize =
+          Math.floor(
+            Math.random()*6
+          )*100;
 
 
-        result.textContent=
-          `💗 You scratched ${prize} tokens!`;
+        if(prize===0){
+
+          add(-10);
 
 
-        sound("win");
+          result.textContent=
+            "💔 Nothing this time.";
 
-      }
+        }else{
 
-    };
+          add(
+            prize,
+            true
+          );
+
+
+          result.textContent=
+            `💗 You scratched ${prize} tokens!`;
+
+
+          sound("win");
+
+        }
+
+      };
 
   }
 
 
-  else if(
-    game==="darts"
-  ){
+  else if(game==="darts"){
 
     title.textContent=
       "🎯 Lucky Darts";
@@ -5555,56 +5381,58 @@ function miniGame(game){
     `;
 
 
-    dartBtn.onclick=()=>{
+    document
+      .getElementById(
+        "dartBtn"
+      )
+      .onclick=()=>{
 
-      const score =
-        Math.floor(
-          Math.random()*100
-        )+1;
-
-
-      const prize =
-        score>=90
-        ? 500
-        : score>=70
-        ? 200
-        : score>=40
-        ? 75
-        : 0;
+        const score =
+          Math.floor(
+            Math.random()*100
+          )+1;
 
 
-      if(prize){
-
-        add(
-          prize,
-          true
-        );
-
-
-        result.textContent=
-          `🎯 Score ${score}! +${prize}`;
+        const prize =
+          score>=90
+          ? 500
+          : score>=70
+          ? 200
+          : score>=40
+          ? 75
+          : 0;
 
 
-        sound("win");
+        if(prize){
 
-      }else{
+          add(
+            prize,
+            true
+          );
 
-        add(-20);
+
+          result.textContent=
+            `🎯 Score ${score}! +${prize}`;
 
 
-        result.textContent=
-          `🎯 Score ${score}. -20`;
+          sound("win");
 
-      }
+        }else{
 
-    };
+          add(-20);
+
+
+          result.textContent=
+            `🎯 Score ${score}. -20`;
+
+        }
+
+      };
 
   }
 
 
-  else if(
-    game==="gems"
-  ){
+  else if(game==="gems"){
 
     title.textContent=
       "💎 Gem Heist";
@@ -5615,7 +5443,6 @@ function miniGame(game){
       <p>
         Choose a vault.
       </p>
-
 
       <div class="actionRow">
 
@@ -5678,9 +5505,7 @@ function miniGame(game){
   }
 
 
-  else if(
-    game==="envelopes"
-  ){
+  else if(game==="envelopes"){
 
     title.textContent=
       "🎁 Lucky Envelopes";
@@ -5754,9 +5579,7 @@ function miniGame(game){
   }
 
 
-  else if(
-    game==="number"
-  ){
+  else if(game==="number"){
 
     title.textContent=
       "🔢 Lucky Number";
@@ -5768,7 +5591,6 @@ function miniGame(game){
         Guess a number from 1 to 10.
       </p>
 
-
       <input
         id="numberGuess"
         type="number"
@@ -5777,87 +5599,87 @@ function miniGame(game){
         placeholder="1-10"
       >
 
-
       <br><br>
-
 
       <button
         class="action"
         id="guessBtn">
-
         GUESS
-
       </button>
 
     `;
 
 
-    guessBtn.onclick=()=>{
+    document
+      .getElementById(
+        "guessBtn"
+      )
+      .onclick=()=>{
 
-      const guess =
-        Number(
-          numberGuess.value
-        );
-
-
-      if(
-        !Number.isInteger(guess) ||
-        guess<1 ||
-        guess>10
-      ){
-
-        toast(
-          "Enter a number from 1 to 10."
-        );
-
-        return;
-
-      }
+        const guess =
+          Number(
+            document.getElementById(
+              "numberGuess"
+            ).value
+          );
 
 
-      const lucky =
-        Math.floor(
-          Math.random()*10
-        )+1;
+        if(
+          !Number.isInteger(guess) ||
+          guess<1 ||
+          guess>10
+        ){
+
+          toast(
+            "Enter a number from 1 to 10."
+          );
+
+          return;
+
+        }
 
 
-      if(
-        guess===lucky
-      ){
-
-        add(
-          1000,
-          true
-        );
+        const lucky =
+          Math.floor(
+            Math.random()*10
+          )+1;
 
 
-        result.textContent=
-          `🎉 Correct! The number was ${lucky}. +1000`;
+        if(
+          guess===lucky
+        ){
+
+          add(
+            1000,
+            true
+          );
 
 
-        sound("win");
-
-      }else{
-
-        add(-25);
+          result.textContent=
+            `🎉 Correct! The number was ${lucky}. +1000`;
 
 
-        result.textContent=
-          `The number was ${lucky}. -25`;
+          sound("win");
+
+        }else{
+
+          add(-25);
 
 
-        sound("lose");
+          result.textContent=
+            `The number was ${lucky}. -25`;
 
-      }
 
-    };
+          sound("lose");
+
+        }
+
+      };
 
   }
 
 
-  else if(
-    game==="treasure"
-  ){
+  else if(game==="treasure"){
 
     title.textContent=
       "🐠 Ocean Treasure";
@@ -5868,7 +5690,6 @@ function miniGame(game){
       <p>
         Choose one treasure spot.
       </p>
-
 
       <div class="actionRow">
 
@@ -5940,9 +5761,7 @@ function miniGame(game){
 }
 
 
-/* =====================================================
-   FRIENDSHIP CATCH
-===================================================== */
+/* FRIENDSHIP CATCH */
 
 const creatureInfo={
 
@@ -6126,9 +5945,7 @@ function renderCollection(){
 }
 
 
-/* =====================================================
-   QUIZ
-===================================================== */
+/* QUIZ */
 
 const quiz=[
 
@@ -6429,14 +6246,12 @@ function showQuiz(){
         🎉 Quiz Complete!
       </h2>
 
-
       <p>
         You scored
         <strong>
           ${quizScore}/20
         </strong>.
       </p>
-
 
       <p>
         💰 Reward:
@@ -6445,13 +6260,10 @@ function showQuiz(){
         </strong>
       </p>
 
-
       <button
         class="action"
         id="restartQuiz">
-
         PLAY AGAIN
-
       </button>
 
     `;
@@ -6498,7 +6310,6 @@ function showQuiz(){
       ${q[0]}
 
     </div>
-
 
     <div class="answers">
 
@@ -6560,9 +6371,7 @@ function showQuiz(){
 }
 
 
-/* =====================================================
-   PERSONALITY TEST
-===================================================== */
+/* PERSONALITY TEST */
 
 document
   .getElementById(
@@ -6623,11 +6432,9 @@ document
         ${result[0]}
       </h2>
 
-
       <p>
         ${result[1]}
       </p>
-
 
       <p>
         💰 +300 Friendship Tokens
@@ -6641,9 +6448,7 @@ document
   };
 
 
-/* =====================================================
-   TIMELINE
-===================================================== */
+/* TIMELINE */
 
 document
   .getElementById(
@@ -6659,87 +6464,61 @@ document
         📖 Six Years of Friendship
       </h2>
 
-
       <div class="timeline">
 
-
         <div class="year">
-
           <strong>
             Year 1 🌸
           </strong>
-
           <p>
             The beginning of the friendship.
           </p>
-
         </div>
 
-
         <div class="year">
-
           <strong>
             Year 2 💗
           </strong>
-
           <p>
             More memories, more chaos and more laughs.
           </p>
-
         </div>
 
-
         <div class="year">
-
           <strong>
             Year 3 🌻
           </strong>
-
           <p>
             The friendship keeps growing.
           </p>
-
         </div>
 
-
         <div class="year">
-
           <strong>
             Year 4 🦋
           </strong>
-
           <p>
             Six years starts feeling inevitable.
           </p>
-
         </div>
 
-
         <div class="year">
-
           <strong>
             Year 5 💎
           </strong>
-
           <p>
             Still here. Still best friends.
           </p>
-
         </div>
 
-
         <div class="year">
-
           <strong>
             Year 6 👑
           </strong>
-
           <p>
             Six years down. Many more memories to come.
           </p>
-
         </div>
-
 
       </div>
 
@@ -6748,9 +6527,7 @@ document
   };
 
 
-/* =====================================================
-   FRIENDSHIP LETTER
-===================================================== */
+/* FRIENDSHIP LETTER */
 
 document
   .getElementById(
@@ -6768,7 +6545,6 @@ document
           💌 To My Best Friend
         </h2>
 
-
         <p>
           Six years is a lot of memories,
           laughs, chaos, conversations and
@@ -6776,13 +6552,11 @@ document
           of who we are.
         </p>
 
-
         <p>
           Through every version of life,
           one thing has stayed the same:
           you're my best friend.
         </p>
-
 
         <p>
           So this ridiculous little casino
@@ -6791,13 +6565,11 @@ document
           questionable financial decisions. 😂
         </p>
 
-
         <p>
           Here's to everything we've already
           lived through and everything still
           waiting for us.
         </p>
-
 
         <p>
           💗 Happy six years, bestie.
@@ -6810,9 +6582,7 @@ document
   };
 
 
-/* =====================================================
-   VIP VAULT
-===================================================== */
+/* VIP VAULT */
 
 document
   .getElementById(
@@ -6886,9 +6656,7 @@ document
   };
 
 
-/* =====================================================
-   INITIALISE
-===================================================== */
+/* INITIALISE */
 
 renderCollection();
 
